@@ -1,0 +1,62 @@
+@startuml
+title Create Item
+
+actor Client
+participant APIGateway
+participant Lambda
+participant CreateItemService
+participant ItemRepository
+participant ServiceUtility
+database Database
+
+Client -> APIGateway : POST / Item
+activate Client
+APIGateway -> Lambda
+activate Lambda
+Lambda -> CreateItemService :  handleRequest(CreateItemController, Context)
+activate CreateItemService
+CreateItemService -> ServiceUtility : isValid(String)
+activate ServiceUtility
+
+alt if name invalid
+    CreateItemService <-- ServiceUtility : false
+    Lambda <-- CreateItemService : throw InvalidAttributeException
+    APIGateway <-- Lambda
+    Client <-- APIGateway : 4xx Response
+else otherwise, continue
+end
+
+CreateItemService -> ServiceUtility : generateId()
+CreateItemService <-- ServiceUtility : new Item ID
+deactivate ServiceUtility
+
+CreateItemService -> CreateItemService : populate Item object
+
+CreateItemService -> ItemRepository : saveItem(Item)
+activate ItemRepository
+
+ItemRepository -> Database : GET Request
+
+alt if name Is In Use
+    ItemRepository <-- Database : false
+    CreateItemService <-- ItemRepository : false
+    Lambda <-- CreateItemService : throw NameAlreadyInUseException
+    APIGateway <-- Lambda
+    Client <-- APIGateway : 4xx Response
+else otherwise, continue
+end
+
+ItemRepository -> Database : POST Request
+
+deactivate ItemRepository
+
+
+
+Lambda <-- CreateItemService : item Created
+deactivate CreateItemService
+APIGateway <-- Lambda
+deactivate Lambda
+Client <-- APIGateway : 200 Response
+deactivate Client
+
+@enduml

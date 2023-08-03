@@ -1,0 +1,48 @@
+@startuml
+title Get Item
+
+actor Client
+participant APIGateway
+participant Lambda
+participant GetItem
+participant ItemDao
+participant Converter
+database Database
+
+Client -> APIGateway : POST / Item
+activate Client
+APIGateway -> Lambda
+activate Lambda
+Lambda -> GetItem :  handleRequest(CreateItemRequest, Context)
+activate GetItem
+GetItem -> ItemDao : getItem(name)
+activate ItemDao
+ItemDao -> Database : get item
+
+alt if name invalid
+    GetItem <-- Database : false
+    Lambda <-- GetItem : throw ItemNotFoundException
+    APIGateway <-- Lambda
+    Client <-- APIGateway : 4xx Response
+else otherwise, continue
+end
+
+ItemDao <- Database : Item
+
+GetItem <-- ItemDao : Item
+deactivate ItemDao
+
+GetItem -> Converter : constructItem(Item)
+activate Converter
+
+GetItem <-- Converter : ItemModel(Item)
+deactivate Converter
+
+Lambda <-- GetItem : CreateItemResult
+deactivate GetItem
+APIGateway <-- Lambda
+deactivate Lambda
+Client <-- APIGateway : 200 Response
+deactivate Client
+
+@enduml

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="playlist.js" defer></script>
+    <title>IM - Find by Availability</title>
+  </head>
+  <body>
+    <table id="availability-table">
+    </table>
+    <div class="card">
+      <h2>Find an item by availability</h2>
+      <form class="card-content" id="find-by-availability-form">
+          <p class="form-field">
+            <label for="availability">Choose an option:</label>
+
+            <select id="cars">
+              <option value="available">Available</option>
+              <option value="unavailable">Unvailable</option>
+            </select>
+          </p>
+          <input type="submit" id="add-album-track">
+      </form>
+    </div>
+    <div>
+      <a href="index.html">Homepage</a>
+    </div>
+  </body>
+</html>

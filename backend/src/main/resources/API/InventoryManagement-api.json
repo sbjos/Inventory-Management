@@ -1,0 +1,555 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Inventory Management",
+    "description": "Inventory Management API allows users to manage their inventories with the \npossibility of adding, modifying or deleting inventory items. It also provide \nthe ability to filter by item name, category, availability.",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/inventory/add-item/": {
+      "post": {
+        "description": "Add an item to the inventory",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "available",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "quantity",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          {
+            "name": "location",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "items": {
+                    "$ref": "#/components/schemas/ItemUpdate"
+                  },
+                  "example": {
+                    "message": "Item Added Successfully"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid Input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "items": {
+                    "$ref": "#/components/schemas/Error"
+                  },
+                  "example": {
+                    "code": 400,
+                    "message": "Invalid Input"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "items": {
+                    "$ref": "#/components/schemas/Error"
+                  },
+                  "example": {
+                    "code": 500,
+                    "message": "Server Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/inventory/delete-item/": {
+      "delete": {
+        "description": "Delete an item from the inventory",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "items": {
+                    "$ref": "#/components/schemas/ItemUpdate"
+                  },
+                  "example": {
+                    "message": "Item Deleted Successfully"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Item Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "items": {
+                    "$ref": "#/components/schemas/Error"
+                  },
+                  "example": {
+                    "code": "400,",
+                    "message": "Item Not Found"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "items": {
+                    "$ref": "#/components/schemas/Error"
+                  },
+                  "example": {
+                    "code": "500,",
+                    "message": "Server Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/inventory/item/{name}": {
+      "get": {
+        "description": "Get an item from the inventory",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ItemUpdate"
+                  },
+                  "example": {
+                    "name": "name",
+                    "id": "id",
+                    "category": "category",
+                    "available": "true",
+                    "quantity": 1,
+                    "location": "a12"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Item Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "items": {
+                    "$ref": "#/components/schemas/Error"
+                  },
+                  "example": {
+                    "code": "400,",
+                    "message": "Item Not Found"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "items": {
+                    "$ref": "#/components/schemas/Error"
+                  },
+                  "example": {
+                    "code": "500,",
+                    "message": "Server Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/inventory/category/{category}": {
+      "get": {
+        "description": "Get a list of items from the inventory based on category",
+        "parameters": [
+          {
+            "name": "category",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "items": {
+                    "$ref": "#/components/schemas/ItemList"
+                  },
+                  "example": {
+                    "name": "name",
+                    "id": "id",
+                    "category": "category",
+                    "available": "true",
+                    "quantity": 1,
+                    "location": "a12"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Item Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "items": {
+                    "$ref": "#/components/schemas/Error"
+                  },
+                  "example": {
+                    "code": 400,
+                    "message": "Item Not Found"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "items": {
+                    "$ref": "#/components/schemas/Error"
+                  },
+                  "example": {
+                    "code": 500,
+                    "message": "Server Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/inventory/available/{available}": {
+      "get": {
+        "description": "Get a list of item from the inventory based on availability",
+        "parameters": [
+          {
+            "name": "available",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "items": {
+                    "$ref": "#/components/schemas/ItemList"
+                  },
+                  "example": {
+                    "name": "name",
+                    "id": "id",
+                    "category": "category",
+                    "available": "true",
+                    "quantity": 1,
+                    "location": "a12"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Item Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "items": {
+                    "$ref": "#/components/schemas/Error"
+                  },
+                  "example": {
+                    "code": 400,
+                    "message": "Item Not Found"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "items": {
+                    "$ref": "#/components/schemas/Error"
+                  },
+                  "example": {
+                    "code": 500,
+                    "message": "Server Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/inventory/item/updateitem": {
+      "put": {
+        "description": "Update an item from the inventory.",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "ID"
+            }
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "available",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "quantity",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          {
+            "name": "location",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "items": {
+                    "$ref": "#/components/schemas/ItemUpdate"
+                  },
+                  "example": {
+                    "message": "Item Updated successfully"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Item Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "items": {
+                    "$ref": "#/components/schemas/Error"
+                  },
+                  "example": {
+                    "code": 400,
+                    "message": "Item Not Found"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "items": {
+                    "$ref": "#/components/schemas/Error"
+                  },
+                  "example": {
+                    "code": 500,
+                    "message": "Server Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ItemUpdate": {
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "ItemList": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "available": {
+            "type": "boolean"
+          },
+          "quantity": {
+            "type": "integer"
+          },
+          "location": {
+            "type": "string"
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

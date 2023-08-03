@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="playlist.js" defer></script>
+    <title>IM - Find Item</title>
+  </head>
+  <body>
+    <table id="album-track-table">
+    </table>
+    <div class="card">
+      <h2>Find an item by name or ID</h2>
+      <form class="card-content" id="add-album-track-form">
+          <p class="form-field">
+            <label>Item Name
+              <input type="text" id="find-by-name" autofocus>
+            </label>
+          </p>
+          <p class="form-field">
+            <label>Item ID
+              <input type="number" id="find-by-id">
+            </label>
+          </p>
+          <input type="submit" id="add-album-track">
+      </form>
+    </div>
+    <div>
+      <a href="index.html">Homepage</a>
+    </div>
+  </body>
+</html>

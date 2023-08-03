@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="3ecbdb82-9cea-4e96-a7ed-682a078805e5" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../.idea/Inventory-Management.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/configuration/DaoModule.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/configuration/DynamoDBConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/configuration/InventoryManagementAppComponent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/controller/Controller.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/controller/CreateItemController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/controller/DeleteItemController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/controller/GetItemController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/controller/UpdateItemController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/dao/CategoryDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/dao/ItemDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/exception/CategoryAlreadyExistException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/exception/CategoryNotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/exception/InvalidAttributeException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/exception/InventoryNotEmptyException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/exception/InventoryNotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/exception/ItemAlreadyExistException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/exception/ItemNotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/exception/ListEmptyException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/handler/CreateCategoryHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/handler/CreateItemHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/handler/DeleteCategoryHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/handler/DeleteItemHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/handler/GetItemHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/handler/UpdateItemHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/model/CategoryModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/model/ItemModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/result/CategoryResult.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/result/ItemResult.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/service/CreateCategoryService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/service/CreateItemService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/service/DeleteCategoryService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/service/DeleteItemService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/service/GetItemService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/service/UpdateItemService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/table/Category.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/table/Item.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/utility/ModelConverter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/utility/ServiceUtility.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/API/InventoryManagement-api.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/API/InventoryManagement-api.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Diagrams/CreateItem.puml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Diagrams/DeleteItem.puml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Diagrams/GetItem.puml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Diagrams/Other/CreateWarehouse(To Review).puml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Diagrams/Other/DeleteWarehouse(To Review).puml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Diagrams/Other/GetWarehouse.puml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Documentation/Design_Document.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Documentation/Rubric.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/cloudformation/InventoryManagement.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/inventorymanagement/test/TestHelper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/inventorymanagement/test/dao/CategoryDaoTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/inventorymanagement/test/dao/ItemDaoTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/inventorymanagement/test/service/CreateCategoryServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/inventorymanagement/test/service/CreateItemServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/inventorymanagement/test/service/DeleteCategoryServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/inventorymanagement/test/service/DeleteItemServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/inventorymanagement/test/service/GetItemServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/inventorymanagement/test/service/UpdateItemServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/API/InventoryManagement-api.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/InventoryManagement-api.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/css/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/html/TEST.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/html/additem.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/html/getitem.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/html/getitembyavailability.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/html/getitembycategory.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/html/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/js/additem.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/js/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gradle/wrapper/gradle-wrapper.jar" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2TOeJXZn9vQUUeNWFH6b390qhdO" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "C:/Users/sebas/Java-Projects/Inventory-Management"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\sebas\Java-Projects\Inventory-Management\src\main\resources" />
+      <recent name="C:\Users\sebas\Java-Projects\Inventory-Management\src\test\java" />
+      <recent name="C:\Users\sebas\Java-Projects\Inventory-Management\src\main\java" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\sebas\Java-Projects\Inventory-Management\src\main\java" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Tests in 'com.inventorymanagement.test'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;com.inventorymanagement.test.*&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <ForceTestExec>true</ForceTestExec>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.Tests in 'com.inventorymanagement.test'" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3ecbdb82-9cea-4e96-a7ed-682a078805e5" name="Changes" comment="" />
+      <created>1690918484713</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1690918484713</updated>
+    </task>
+    <servers />
+  </component>
+</project>

@@ -1,0 +1,43 @@
+Resources:
+  InventoryManagementTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: "IM-Item"
+      PointInTimeRecoverySpecification:
+        PointInTimeRecoveryEnabled: true
+      AttributeDefinitions:
+        - AttributeName: "name"
+          AttributeType: "S"
+        - AttributeName: "id"
+          AttributeType: "S"
+        - AttributeName: "category"
+          AttributeType: "S"
+        - AttributeName: "available"
+          AttributeType: "B"
+      KeySchema:
+        - AttributeName: "name"
+          KeyType: "HASH"
+      BillingMode: PAY_PER_REQUEST
+      GlobalSecondaryIndexes:
+        - IndexName: "ID-Index"
+          KeySchema:
+            - AttributeName: "id"
+              KeyType: "HASH"
+          Projection:
+            ProjectionType: ALL
+        - IndexName: "Category-Index"
+          KeySchema:
+            - AttributeName: "category"
+              KeyType: "HASH"
+            - AttributeName: "name"
+              KeyType: "RANGE"
+          Projection:
+            ProjectionType: ALL
+        - IndexName: "Available-Index"
+          KeySchema:
+            - AttributeName: "available"
+              KeyType: "HASH"
+            - AttributeName: "name"
+              KeyType: "RANGE"
+          Projection:
+            ProjectionType: ALL

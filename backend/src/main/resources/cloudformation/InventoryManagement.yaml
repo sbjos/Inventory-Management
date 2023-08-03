@@ -1,0 +1,127 @@
+Resources:
+  InventoryManagementLambdaRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - lambda.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      Path: "/"
+      Policies:
+        - PolicyName: dynamodbAccessRole
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - dynamodb:*
+                Resource: "*"
+              - Effect: Allow
+                Action:
+                  - logs:*
+                Resource: "*"
+
+  InventoryManagementCreateFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: "IM-CreateItem"
+      CodeUri: s3://inventorymanagementapp-sj/
+      Handler: com.inventorymanagement.handler.CreateItemHandler::handleRequest
+      Runtime: java11
+      Description: "Java POST function"
+      MemorySize: 512
+      Timeout: 10
+      # Function's execution role
+      Policies:
+        - AWSLambdaBasicExecutionRole
+        - AWSLambda_ReadOnlyAccess
+        - AWSXrayWriteOnlyAccess
+        - AWSLambdaVPCAccessExecutionRole
+        - AmazonDynamoDBFullAccess
+      Tracing: Active
+
+  CategoryTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: "IM-Category"
+      PointInTimeRecoverySpecification:
+        PointInTimeRecoveryEnabled: true
+      AttributeDefinitions:
+        - AttributeName: "category"
+          AttributeType: "S"
+      KeySchema:
+        - AttributeName: "name"
+          KeyType: "HASH"
+      BillingMode: PAY_PER_REQUEST
+
+  InventoryManagementTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: "IM-Item"
+      PointInTimeRecoverySpecification:
+        PointInTimeRecoveryEnabled: true
+      AttributeDefinitions:
+        - AttributeName: "name"
+          AttributeType: "S"
+        - AttributeName: "id"
+          AttributeType: "S"
+        - AttributeName: "category"
+          AttributeType: "S"
+        - AttributeName: "available"
+          AttributeType: "B"
+      KeySchema:
+        - AttributeName: "name"
+          KeyType: "HASH"
+      BillingMode: PAY_PER_REQUEST
+      GlobalSecondaryIndexes:
+        - IndexName: "IdIndex"
+          KeySchema:
+            - AttributeName: "id"
+              KeyType: "HASH"
+          Projection:
+            ProjectionType: ALL
+        - IndexName: "categoryIndex"
+          KeySchema:
+            - AttributeName: "category"
+              KeyType: "HASH"
+            - AttributeName: "name"
+              KeyType: "RANGE"
+          Projection:
+            ProjectionType: ALL
+        - IndexName: "availableIndex"
+          KeySchema:
+            - AttributeName: "available"
+              KeyType: "HASH"
+            - AttributeName: "name"
+              KeyType: "RANGE"
+          Projection:
+            ProjectionType: ALL
+
+#  APIGatewayRestApi:
+#    Type: AWS::ApiGateway::RestApi
+#    Properties:
+#      Name: "Inventory-Management"
+#      Body:
+#        Fn::Transform:
+#          Name: AWS::Include
+#          Parameters:
+#            Location: !Sub "s3://<inventory-management-application>/InventoryManagement-api.yaml"
+#      FailOnWarnings: true
+#
+#  APIGatewayDeployment:
+#    Type: AWS::ApiGateway::Deployment
+#    DependsOn: APIGatewayRestApi
+#    Properties:
+#      RestApiId: !Ref APIGatewayRestApi
+#
+#  APIGatewayStage:
+#    Type: AWS::ApiGateway::Stage
+#    Properties:
+#      RestApiId: !Ref APIGatewayRestApi
+#      DeploymentId: !Ref APIGatewayDeployment
+#      StageName: "prod"

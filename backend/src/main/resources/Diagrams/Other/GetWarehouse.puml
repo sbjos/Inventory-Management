@@ -1,0 +1,48 @@
+@startuml
+title Get Warehouse
+
+actor Client
+participant APIGateway
+participant Lambda
+participant GetWarehouse
+participant WarehouseDao
+participant Converter
+database Database
+
+Client -> APIGateway : POST / Warehouse
+activate Client
+APIGateway -> Lambda
+activate Lambda
+Lambda -> GetWarehouse :  handleRequest(CreateItemRequest, Context)
+activate GetWarehouse
+GetWarehouse -> WarehouseDao : getItem(name)
+activate WarehouseDao
+WarehouseDao -> Database : Get Warehouse
+
+alt if name invalid
+    GetWarehouse <-- Database : false
+    Lambda <-- GetWarehouse : throw ItemNotFoundException
+    APIGateway <-- Lambda
+    Client <-- APIGateway : 4xx Response
+else otherwise, continue
+end
+
+WarehouseDao <- Database : Warehouse
+
+GetWarehouse <-- WarehouseDao : Warehouse
+deactivate WarehouseDao
+
+GetWarehouse -> Converter : constructItem(Item)
+activate Converter
+
+GetWarehouse <-- Converter : ItemModel(Item)
+deactivate Converter
+
+Lambda <-- GetWarehouse : CreateItemResult
+deactivate GetWarehouse
+APIGateway <-- Lambda
+deactivate Lambda
+Client <-- APIGateway : 200 Response
+deactivate Client
+
+@enduml
