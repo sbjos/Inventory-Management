@@ -1,8 +1,5 @@
 package com.inventorymanagement.model;
 
-import com.inventorymanagement.table.Item;
-
-import java.util.List;
 import java.util.Objects;
 
 public class ItemModel {

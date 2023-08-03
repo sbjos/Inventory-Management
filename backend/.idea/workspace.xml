@@ -5,30 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3ecbdb82-9cea-4e96-a7ed-682a078805e5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/configuration/awsglobalsecondaryindex/AwsGsiCategory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/configuration/awsglobalsecondaryindex/AwsGsiModule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/configuration/AwsGlobalSecondaryIndex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/configuration/awsglobalsecondaryindex/AwsGsiItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/configuration/DaoModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/dao/DaoModule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/configuration/DynamoDBConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/configuration/AwsDynamoDBConfiguration.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/configuration/InventoryManagementAppComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/configuration/InventoryManagementAppComponent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/dao/CategoryDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/dao/CategoryDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/dao/ItemDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/dao/ItemDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/dao/DaoModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/dao/DaoModule.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/model/ItemModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/model/ItemModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/result/ItemResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/result/ItemResult.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/service/GetItemService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/service/GetItemService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/table/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/table/Item.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/utility/ModelConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/utility/ModelConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/inventorymanagement/test/TestHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/inventorymanagement/test/TestHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/inventorymanagement/test/dao/CategoryDaoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/inventorymanagement/test/dao/CategoryDaoTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/inventorymanagement/test/dao/ItemDaoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/inventorymanagement/test/dao/ItemDaoTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/inventorymanagement/test/service/CreateCategoryServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/inventorymanagement/test/service/CreateCategoryServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/inventorymanagement/test/service/CreateItemServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/inventorymanagement/test/service/CreateItemServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/inventorymanagement/test/service/DeleteCategoryServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/inventorymanagement/test/service/DeleteCategoryServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/inventorymanagement/test/service/DeleteItemServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/inventorymanagement/test/service/DeleteItemServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/inventorymanagement/test/service/GetItemServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/inventorymanagement/test/service/GetItemServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/inventorymanagement/test/service/UpdateItemServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/inventorymanagement/test/service/UpdateItemServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -236,16 +217,5 @@
       <updated>1690918484713</updated>
     </task>
     <servers />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/inventorymanagement/service/GetItemService.java</url>
-          <line>100</line>
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

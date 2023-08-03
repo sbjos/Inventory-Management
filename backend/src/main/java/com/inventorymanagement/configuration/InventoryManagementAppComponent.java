@@ -1,7 +1,5 @@
 package com.inventorymanagement.configuration;
 
-import com.inventorymanagement.configuration.awsglobalsecondaryindex.AwsGsiCategory;
-import com.inventorymanagement.configuration.awsglobalsecondaryindex.AwsGsiItem;
 import com.inventorymanagement.dao.CategoryDao;
 import com.inventorymanagement.dao.ItemDao;
 import com.inventorymanagement.service.*;

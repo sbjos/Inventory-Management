@@ -1,8 +1,6 @@
 package com.inventorymanagement.dao;
 
-
 import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedQueryList;
-import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedScanList;
 
 public interface DaoModule <Class, Type> {
 
