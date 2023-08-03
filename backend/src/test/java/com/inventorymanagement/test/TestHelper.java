@@ -13,8 +13,8 @@ public final class TestHelper {
         item.setName("Ramen Noodle");
         item.setId("A125");
         item.setCategory("Food");
-        item.setAvailable("True");
-        item.setQuantity(15);
+        item.setAvailable("False");
+        item.setQuantity(0);
         item.setLocation("A12");
 
         return item;
@@ -25,6 +25,18 @@ public final class TestHelper {
         item.setName("Lettuce");
         item.setId("R212");
         item.setCategory("Food");
+        item.setAvailable("True");
+        item.setQuantity(17);
+        item.setLocation("R2");
+
+        return item;
+    }
+
+    public static Item computer() {
+        Item item = new Item();
+        item.setName("Computer");
+        item.setId("R212");
+        item.setCategory("Electronic");
         item.setAvailable("True");
         item.setQuantity(17);
         item.setLocation("R2");

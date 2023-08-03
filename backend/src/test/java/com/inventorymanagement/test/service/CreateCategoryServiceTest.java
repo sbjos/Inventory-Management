@@ -46,7 +46,7 @@ public class CreateCategoryServiceTest {
     }
 
     @Test
-    void handleRequest_withExistingCategory_CategoryAlreadyExistException() {
+    void handleRequest_withExistingCategory_throwsCategoryAlreadyExistException() {
         // GIVEN
         controller = Controller
                 .builder()
@@ -78,7 +78,7 @@ public class CreateCategoryServiceTest {
     }
 
     @Test
-    void handleRequest_withInvalidCategoryName_returnsCategoryName() {
+    void handleRequest_withInvalidCategoryName_throwsInvalidAttributeException() {
         // GIVEN
         controller = Controller
                 .builder()

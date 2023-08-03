@@ -108,7 +108,7 @@ public class CreateItemServiceTest {
     }
 
     @Test
-    void handleRequest_withQuantityLessThanOne_returnAvailabilityToFalse() {
+    void handleRequest_withQuantityLessThanOne_setsAvailabilityToFalse() {
         // GIVEN
         List<Item> existingItem = new ArrayList<>();
         existingItem.add(ramen);

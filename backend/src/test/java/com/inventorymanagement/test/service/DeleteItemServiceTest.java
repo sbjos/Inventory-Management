@@ -52,6 +52,20 @@ public class DeleteItemServiceTest {
     }
 
     @Test
+    void handleRequest_withInvalidName_throwsInvalidAttributeException() {
+        // GIVEN
+        controller = Controller.builder()
+                .withCategory(null).build();
+
+        when(itemDao.find(" ")).thenThrow(InvalidAttributeException.class);
+
+        // WHEN - // THEN
+        assertThrows(InvalidAttributeException.class, () ->
+                        deleteItemService.handleRequest(controller, null),
+                ("Please enter a valid item name."));
+    }
+
+    @Test
     void handleRequest_withValidId_deletesResult() {
         // GIVEN
         controller = Controller.builder()
@@ -69,21 +83,6 @@ public class DeleteItemServiceTest {
         assertEquals(ramen.isAvailable(), result.getItem().isAvailable());
         assertEquals(ramen.getQuantity(), result.getItem().getQuantity());
         assertEquals(ramen.getLocation(), result.getItem().getLocation());
-    }
-
-    @Test
-    void handleRequest_withNoNameOrId_ThrowsInvalidAttributeException() {
-        // GIVEN
-        controller = Controller.builder()
-                .withId(null)
-                .withName(null).build();
-
-        when(itemDao.find(controller.getName())).thenThrow(InvalidAttributeException.class);
-
-        // WHEN - // THEN
-        assertThrows(InvalidAttributeException.class, () ->
-                deleteItemService.handleRequest(controller, null),
-                ("Please enter a valid item name."));
     }
 
     @Test

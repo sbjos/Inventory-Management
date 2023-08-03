@@ -1,20 +1,20 @@
 package com.inventorymanagement.dao;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedQueryList;
-import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedScanList;
-import com.inventorymanagement.configuration.DaoModule;
+import com.inventorymanagement.configuration.awsglobalsecondaryindex.AwsGsiCategory;
 import com.inventorymanagement.table.Category;
 
 import javax.inject.Inject;
 
 public class CategoryDao implements DaoModule<Category, String> {
     private final DynamoDBMapper dynamoDBMapper;
+    private final AwsGsiCategory awsGsiCategory;
 
     @Inject
-    public CategoryDao(DynamoDBMapper dynamoDBMapper) {
+    public CategoryDao(DynamoDBMapper dynamoDBMapper, AwsGsiCategory awsGsiCategory) {
         this.dynamoDBMapper = dynamoDBMapper;
+        this.awsGsiCategory = awsGsiCategory;
     }
 
     @Override
@@ -32,19 +32,28 @@ public class CategoryDao implements DaoModule<Category, String> {
         return null;
     }
 
+    public PaginatedQueryList<Category> findByCategory(String category) {
+        return null;
+    }
+
     @Override
     public PaginatedQueryList<Category> findByCategory(String category, String name) {
         return null;
     }
 
-    @Override
-    public PaginatedQueryList<Category> findByByAvailability(String name, String availability) {
+    public PaginatedQueryList<Category> findByByAvailability(String availability) {
         return null;
     }
 
     @Override
-    public PaginatedScanList<Category> findAll() {
-        return dynamoDBMapper.scan(Category.class, new DynamoDBScanExpression());
+    public PaginatedQueryList<Category> findByByAvailability(String availability, String name) {
+        return null;
+    }
+
+    @Override
+    public PaginatedQueryList<Category> findAll() {
+        return dynamoDBMapper.query(Category.class,
+                awsGsiCategory.findAll());
     }
 
     @Override

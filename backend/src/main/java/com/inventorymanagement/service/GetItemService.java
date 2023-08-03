@@ -12,6 +12,10 @@ import com.inventorymanagement.table.Item;
 import com.inventorymanagement.utility.ModelConverter;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class GetItemService implements RequestHandler<Controller, ItemResult> {
     private ItemDao itemDao;
@@ -84,36 +88,59 @@ public class GetItemService implements RequestHandler<Controller, ItemResult> {
     }
 
     private ItemResult findByCategory(String category, String name) {
-        PaginatedQueryList<Item> categoryList = itemDao.findByCategory(category, name);
-//        List<Item> itemCategory = new ArrayList<>();
-        Item itemCategory = null;
+        PaginatedQueryList<Item> categoryList;
+        Set<Item> itemCategory = new HashSet<>();
+        Item item = new Item();
+
+        if (name != null) categoryList = itemDao.findByCategory(category, name);
+        else categoryList = itemDao.findByCategory(category);
+
         if (categoryList == null) throw new CategoryNotFoundException
                 ("Unable to find items in this category.");
 
-        for (Item list : categoryList) {
-            if (list.getCategory().equals(category))
-//            itemCategory.add(list);
-                itemCategory = list;
-        }
+//        for (Item list : categoryList) {
+//            if (list.getCategory().equals(category)) {
+//                item.setName(list.getName());
+//                item.setId(list.getId());
+//                item.setCategory(list.getCategory());
+//                item.setQuantity(list.getQuantity());
+//                item.setAvailable(list.isAvailable());
+//                item.setLocation(list.getLocation());
+//
+//                itemCategory.add(item);
+//            }
+//        }
 
         return ItemResult.builder()
-                .withItem(new ModelConverter().itemConverter(itemCategory))
+                .withItemList(new ModelConverter().itemListConverter(categoryList))
                 .build();
     }
 
     private ItemResult findByByAvailability(String available, String name) {
-        PaginatedQueryList<Item> availableList = itemDao.findByByAvailability(available, name);
-//        List<Item> itemAvailability = new ArrayList<>();
-        Item itemAvailability = null;
+        PaginatedQueryList<Item> availableList;
+        Set<Item> itemAvailability = new HashSet<>();
+        Item item = new Item();
 
-        for (Item list : availableList) {
-            if (list.isAvailable().equals(available))
+        if (name != null) availableList = itemDao.findByByAvailability(available, name);
+        else availableList = itemDao.findByByAvailability(available);
+
+
+//        for (Item list : availableList) {
+//            if (list.isAvailable().equals(available)){
+//
+//                item.setName(list.getName());
+//                item.setId(list.getId());
+//                item.setCategory(list.getCategory());
+//                item.setQuantity(list.getQuantity());
+//                item.setAvailable(list.isAvailable());
+//                item.setLocation(list.getLocation());
+//
 //                itemAvailability.add(list);
-                itemAvailability = list;
-        }
+//            }
+//        }
 
         return ItemResult.builder()
-                .withItem(new ModelConverter().itemConverter(itemAvailability))
+                .withItemList(new ModelConverter().itemListConverter(availableList))
                 .build();
     }
 }

@@ -60,27 +60,6 @@ public class UpdateItemServiceTest {
     }
 
     @Test
-    void handleRequest_withInvalidName_ReturnUpdatedItem() {
-        // GIVEN
-        controller = Controller.builder()
-                .withName("invalidName")
-                .withQuantity(availQuantity)
-                .withLocation(location)
-                .build();
-
-        when(itemDao.find(controller.getName())).thenThrow(ItemNotFoundException.class);
-
-        ramen.setQuantity(availQuantity);
-        ramen.setLocation(location);
-
-
-        // WHEN - // THEN
-        assertThrows(ItemNotFoundException.class, () ->
-                updateItemService.handleRequest(controller, null),
-                ("Unable to find this item. It may not exist."));
-    }
-
-    @Test
     void handleRequest_withValidId_ReturnUpdatedItem() {
         // GIVEN
         Category category = new Category();
@@ -108,7 +87,28 @@ public class UpdateItemServiceTest {
     }
 
     @Test
-    void handleRequest_withInvalidId_ReturnUpdatedItem() {
+    void handleRequest_withInvalidName_throwsItemNotFoundException() {
+        // GIVEN
+        controller = Controller.builder()
+                .withName("invalidName")
+                .withQuantity(availQuantity)
+                .withLocation(location)
+                .build();
+
+        when(itemDao.find(controller.getName())).thenThrow(ItemNotFoundException.class);
+
+        ramen.setQuantity(availQuantity);
+        ramen.setLocation(location);
+
+
+        // WHEN - // THEN
+        assertThrows(ItemNotFoundException.class, () ->
+                updateItemService.handleRequest(controller, null),
+                ("Unable to find this item. It may not exist."));
+    }
+
+    @Test
+    void handleRequest_withInvalidId_throwsItemNotFoundException() {
         // GIVEN
         controller = Controller.builder()
                 .withId("invalidId")
@@ -124,26 +124,6 @@ public class UpdateItemServiceTest {
         // WHEN - // THEN
         assertThrows(ItemNotFoundException.class, () ->
                         updateItemService.handleRequest(controller, null),
-                ("Unable to find this item. It may not exist."));
-    }
-
-    @Test
-    void handleRequest_itemDoesNotExist_returnItemNotFoundException() {
-        // GIVEN
-        controller = Controller.builder()
-                .withName("Salmon")
-                .withQuantity(availQuantity)
-                .withLocation(location)
-                .build();
-
-        when(itemDao.find(controller.getName())).thenReturn(null);
-
-        ramen.setQuantity(availQuantity);
-        ramen.setLocation(location);
-
-        // WHEN - // THEN
-        assertThrows(ItemNotFoundException.class, () ->
-                updateItemService.handleRequest(controller, null),
                 ("Unable to find this item. It may not exist."));
     }
 }

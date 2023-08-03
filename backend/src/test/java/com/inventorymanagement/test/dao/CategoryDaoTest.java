@@ -2,6 +2,7 @@ package com.inventorymanagement.test.dao;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedQueryList;
+import com.inventorymanagement.configuration.awsglobalsecondaryindex.AwsGsiCategory;
 import com.inventorymanagement.dao.CategoryDao;
 import com.inventorymanagement.table.Category;
 import com.inventorymanagement.test.TestHelper;
@@ -10,6 +11,9 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
@@ -23,6 +27,8 @@ public class CategoryDaoTest {
     private CategoryDao categoryDao;
     @Mock
     private DynamoDBMapper dynamoDBMapper;
+    @Mock
+    private AwsGsiCategory awsGsiCategory;
     @Mock
     private PaginatedQueryList<Category> paginatedQueryList;
 
@@ -45,25 +51,24 @@ public class CategoryDaoTest {
         assertEquals(food, result);
     }
 
-//    @Test
-//    void findAll_ReturnsItem() {
-//        // GIVEN
-//        List<Category> existingItem = new ArrayList<>();
-//        existingItem.add(food);
-//        existingItem.add(electronic);
-//
-//        when(paginatedQueryList.iterator()).thenReturn(existingItem.iterator());
-//        when(paginatedQueryList.size()).thenReturn(existingItem.size());
-//        when(paginatedQueryList.isEmpty()).thenReturn(false);
-//        when(paginatedQueryList.stream()).thenReturn(existingItem.stream());
-//
-//        when(categoryDao.findAll()).thenReturn(paginatedQueryList);
-//
-//        // WHEN
-//        PaginatedQueryList<Category> result = categoryDao.findAll();
-//
-//        // THEN
-//        System.out.println(result);
-//        assertEquals(existingItem, result);
-//    }
+    @Test
+    void findAll_ReturnsItem() {
+        // GIVEN
+        List<Category> existingItem = new ArrayList<>();
+        existingItem.add(food);
+        existingItem.add(electronic);
+
+        when(paginatedQueryList.iterator()).thenReturn(existingItem.iterator());
+        when(paginatedQueryList.size()).thenReturn(existingItem.size());
+        when(paginatedQueryList.isEmpty()).thenReturn(false);
+        when(paginatedQueryList.stream()).thenReturn(existingItem.stream());
+
+        when(categoryDao.findAll()).thenReturn(paginatedQueryList);
+
+        // WHEN
+        PaginatedQueryList<Category> result = categoryDao.findAll();
+
+        // THEN
+        assertEquals(existingItem, result);
+    }
 }

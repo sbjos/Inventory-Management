@@ -1,11 +1,14 @@
 package com.inventorymanagement.utility;
 
+import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedQueryList;
 import com.inventorymanagement.model.CategoryModel;
+import com.inventorymanagement.model.ItemListModel;
 import com.inventorymanagement.model.ItemModel;
 import com.inventorymanagement.table.Category;
 import com.inventorymanagement.table.Item;
 
 import java.util.List;
+import java.util.Set;
 
 public class ModelConverter {
 
@@ -22,6 +25,12 @@ public class ModelConverter {
                 .withAvailable(item.isAvailable())
                 .withQuantity(item.getQuantity())
                 .withLocation(item.getLocation())
+                .build();
+    }
+
+    public ItemListModel itemListConverter(List<Item> item) {
+        return ItemListModel.builder()
+                .withItemList(item)
                 .build();
     }
 

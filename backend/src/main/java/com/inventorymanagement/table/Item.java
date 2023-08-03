@@ -1,11 +1,9 @@
 package com.inventorymanagement.table;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.*;
-import lombok.Data;
 
 import java.util.Objects;
 
-@Data
 @DynamoDBTable(tableName = "IM-Item")
 public class Item {
 
@@ -88,7 +86,7 @@ public class Item {
                 ", available'=" + available +
                 ", quantity=" + quantity +
                 ", location='" + location + '\'' +
-                '}';
+                '}' +  "\n";
     }
 
     @Override

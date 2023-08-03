@@ -13,7 +13,7 @@ import dagger.Provides;
 import javax.inject.Singleton;
 
 @Module
-public class DynamoDBConfiguration {
+public class AwsDynamoDBConfiguration {
 
     public DynamoDBMapperConfig dynamoDBMapperConfig() {
         return DynamoDBMapperConfig.DEFAULT;

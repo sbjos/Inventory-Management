@@ -53,7 +53,7 @@ public class DeleteCategoryServiceTest {
         controller = Controller.builder()
                 .withCategory(null).build();
 
-        when(categoryDao.find(controller.getCategory())).thenReturn(food);
+        when(categoryDao.find(" ")).thenThrow(InvalidAttributeException.class);
 
         // WHEN - // THEN
         assertThrows(InvalidAttributeException.class, () ->
