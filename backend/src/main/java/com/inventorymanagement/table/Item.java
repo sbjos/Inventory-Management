@@ -7,11 +7,11 @@ import java.util.Objects;
 @DynamoDBTable(tableName = "IM-Item")
 public class Item {
 
-    public static final String ID_TYPE_INDEX = "id";
-    public static final String CATEGORY_TYPE_INDEX = "categoryIndex";
-    public static final String AVAILABLE_TYPE_INDEX = "availableIndex";
+    public static final String ID_TYPE_INDEX = "IdIndex";
+    public static final String CATEGORY_TYPE_INDEX = "CategoryIndex";
+    public static final String AVAILABLE_TYPE_INDEX = "AvailableIndex";
 
-    private String name;
+    private String itemName;
     private String id;
     private String category;
     private String available;
@@ -20,15 +20,15 @@ public class Item {
 
     public Item() {}
 
-    @DynamoDBHashKey(attributeName = "name")
+    @DynamoDBHashKey(attributeName = "itemName")
     @DynamoDBIndexRangeKey(globalSecondaryIndexNames = {CATEGORY_TYPE_INDEX, AVAILABLE_TYPE_INDEX},
-                            attributeName = "name")
-    public String getName() {
-        return name;
+                            attributeName = "itemName")
+    public String getItemName() {
+        return itemName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
     }
 
     @DynamoDBIndexHashKey(globalSecondaryIndexName = ID_TYPE_INDEX, attributeName = "id")
@@ -80,7 +80,7 @@ public class Item {
     @Override
     public String toString() {
         return "Item{" +
-                "name='" + name + '\'' +
+                "itemName='" + itemName + '\'' +
                 ", id='" + id + '\'' +
                 ", category='" + category + '\'' +
                 ", available'=" + available +
@@ -94,11 +94,11 @@ public class Item {
         if (this == o) return true;
         if (o == null || this.getClass() != o.getClass()) return false;
         Item that = (Item) o;
-        return Objects.equals(id, that.id) && Objects.equals(name, that.name);
+        return Objects.equals(id, that.id) && Objects.equals(itemName, that.itemName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(id, itemName);
     }
 }

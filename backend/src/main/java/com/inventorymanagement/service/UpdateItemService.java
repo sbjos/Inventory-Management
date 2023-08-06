@@ -5,7 +5,6 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.inventorymanagement.controller.Controller;
 import com.inventorymanagement.dao.CategoryDao;
 import com.inventorymanagement.dao.ItemDao;
-import com.inventorymanagement.exception.InvalidAttributeException;
 import com.inventorymanagement.exception.ItemNotFoundException;
 import com.inventorymanagement.result.ItemResult;
 import com.inventorymanagement.table.Item;
@@ -14,8 +13,8 @@ import com.inventorymanagement.utility.ModelConverter;
 import javax.inject.Inject;
 
 public class UpdateItemService implements RequestHandler<Controller, ItemResult> {
-    private ItemDao itemDao;
-    private CategoryDao categoryDao;
+    private final ItemDao itemDao;
+    private final CategoryDao categoryDao;
 
     @Inject
     public UpdateItemService(ItemDao itemDao, CategoryDao categoryDao) {
@@ -32,15 +31,11 @@ public class UpdateItemService implements RequestHandler<Controller, ItemResult>
         String location = input.getLocation();
         Item item = null;
 
-        // TODO: Name and ID should not have update options. Once the user gets the item, they
-        //  have the option to update that item. No availability to update the name or the ID.
+        item = itemDao.find(itemName);
 
-        if (itemName == null && itemId == null) throw new InvalidAttributeException
-                ("Please enter a valid item name.");
-        if (itemName != null) item = itemDao.find(itemName);
-        if (itemName == null) item = itemDao.find(itemId);
+        // SafeGuard
         if (item == null) throw new ItemNotFoundException
-                ("Unable to find this item. It may not exist.");
+                ("Unable to find this item to update. It may not exist.");
 
         if (category == null) item.setCategory(item.getCategory());
         else item.setCategory(category);
@@ -48,8 +43,8 @@ public class UpdateItemService implements RequestHandler<Controller, ItemResult>
         if (quantity == null) item.setQuantity(item.getQuantity());
         else item.setQuantity(quantity);
 
-        if (item.getQuantity() > 0) item.setAvailable("True");
-        else item.setAvailable("False");
+        if (item.getQuantity() > 0) item.setAvailable("Available");
+        else item.setAvailable("Unavailable");
 
         if (location == null) item.setLocation(item.getLocation());
         else item.setLocation(location);

@@ -1,200 +1,188 @@
-# SBJOS Design Document
-
-## Design - Inventory Management System
+# Inventory Management Application
 
 ## 1. Problem Statement
 
-Inventory Management System is an application that helps an organization keep track of their inventories,
-purchase and sell prices, and shows an alert when a stock is running low.
+Inventory Management System is an application that helps keep track of their inventories.
 
 ## 2. Top Questions to Resolve in Review
 
-1. Should the set limit be a percentage based on the amount of items or Should it be fully determined
-   by the organization. Should it be set in percentage, number or optional?
+1. Should the ID Number a per item number with a specific prefix or should there be one item number 
+   for all items of the same type?
 
-2. Should we add vendors and customers in the application to allow a warehouse to keep track of these
-   aspects of their business?
+2. Capability to filter the item list by each of the attribute.
 
-3. should it provide the average time an item spends in category before sold? Should the items purchase
-   and sell price be optional or mandatory?
+3. Add additional item database or add other DB to create a one-to-many DB relationship where one 
+   database is an item database and others could be related to location, or category.  
 
-4. Should the ID Number a per item number with a specific prefix or should there be one item number for
-   all items of the same type, and keep manufacture's Item Serial Number for per item identification?
+4. Able to create pre-defied categories for items. (With admin privilege)
 
-5. Capability to filter the item list by each of the available attribute.
+5. Provide account access. User and Admin accounts.
 
-6. Able to change the name of an inventory if it is required for restructuring.
-
-7. Able to create pre-defied categories for items for assignment with admin account only.
-
-8. Provide account access. User and Admin accounts.
+6. Assign a pre-defined location to that item.
 
 ## 3. Use Cases
 
-[//]: # (U1. ** As a user, I want to create an inventory to identify where the items are stored.)
+U1. Ability to retrieve a list of all items in the inventory.
 
-[//]: # ()
-[//]: # (U2. ** As a user, I want to be able to retrieve an inventory to get a list of items in that inventory.)
+U2. Ability to retrieve a list items based on availability.
 
-[//]: # ()
-[//]: # (U3. ** As a user, I want to be able to delete an inventory, only if it is empty, if it is not being used.)
+U3. Ability to retrieve a list items based on category.
 
-[//]: # ()
-[//]: # (U4. ** As a user, I want to be able to add items to an inventory.)
+U4. Ability to retrieve a list items based on location.
 
-U4. As a user, I want to be able to add items to an inventory and assign a pre-defined location to that item.
+U5. Ability to retrieve a list items based on availability in that category.
 
-U5. As a user, I want to be able to create pre-defined categories for items for assignment.
+U6. Ability to retrieve a list items based on category in that location.
 
-U5. As a user, I want to be able to create pre-defined location for items for assignment.
+U7. Ability to retrieve an item from the inventory.
 
-U6. As a user, I want to be able to delete pre-defined categories for items for assignment.
+U8. Ability to add an item to the inventory.
 
-U6. As a user, I want to be able to delete pre-defined location for items for assignment.
+U9. Ability to modify an item to the inventory except for the item name and ID.
 
-U7. As a user, I want to be able to change the values of an item's attribute in an inventory.
+U10. Ability to remove an item to the inventory.
 
-U8. As a user, I want to be able to retrieve items in an inventory.
+U11. Ability to create pre-defined categories.
 
-U9. As a user, I want to be able to remove items to an inventory.
+U12. Ability to create pre-defined locations.
 
-U10. As a user, I want to be able to set a warning level for low items in an inventory.
+U13. Ability to delete pre-defined categories.
+
+U14. Ability to delete pre-defined locations.
 
 ## 4. Project Scope
 
 ### 4.1. In Scope
 
-[//]: # (- ** Creating an inventory)
-[//]: # (- Removing an inventory)
 - Creating items in an inventory
 - Retrieving items in an inventory
 - Updating items in an inventory
 - Removing items in an inventory
+- Creating pre-defined categories
+- removing pre-defined categories
+- Creating pre-defined locations
+- removing pre-defined locations
 
 ### 4.2. Out of Scope
 
-- User ID who is accessing or modifying the values.
-- Provide a graph for inventories for statistical purposes.
-- Creating, retrieving, updating and removing provider list.
-- Creating, retrieving, updating and removing customer list.
-- Use a scanner for input to scan stocks.
-- Restock estimation based on shipment delivery time and item time in inventory.
-- Assign a pre-defined category to that item.
-- Setting warning level.
+- Creating user accounts.
+- Delete a group of items simultaneously.
 
 ## 5. Proposed Architecture Overview
 
-This will provide the ability to create, retrieve, update, and delete items by using the following endpoints:
+The following endpoints will allow to create, retrieve, update, and delete items:
 
-- `CreateItemRequest`
-- `GetItemRequest`
-- `UpdateItemRequest`
-- `DeleteItemRequest`
+- `DeleteCategoryService`
+- `CreateCategoryService`
+- `CreateLocationService`
+- `DeleteLocationService`
+- `CreateItemService`
+- `GetItemService`
+- `UpdateItemService`
+- `DeleteItemService`
 
-The inventory will be a DynamoDB table. The items will be stored in a list of items in the inventory  
-table.
+A web interface will be provided to allow users to interact with the application.
 
-We will provide a web interface for users to manage their inventories. Thi webpage will use HTML, CSS and JavaScript
-for design, JavaScript and AXIOS for RestAPI communication.
-
-API will communicate with Lambda for `GET` `PUT` `POST` `DELETE` actions.
+The app uses a DynamoDB table to store data, AWS Lambda functions to handle request, RestAPI to 
+handle user request.
 
 ## 6. API
 
 ### 6.1. Public Models
-
 ````
 // ItemModel
 
-String category;
-String name;
-String id;
-Boolean availabile;
-Integer quantity;
-String location;
+ private String name;
+ private String id;
+ private String category;
+ private String available;
+ private long quantity;
+ private String location;
 ````
+````
+// categoryModel
 
-[//]: # (### 6.2. GetWareHouse Endpoint)
+ private String category;
+````
+````
+// locationModel
 
-[//]: # ()
-[//]: # (- Accepts `GET` request to `/inventory/:name`)
+ private String location;
+````
+````
+// ItemListModel
 
-[//]: # (- Accepts an inventory name and returns the inventory category.)
-
-[//]: # (  - If the inventory ID or name is not found, will throw a `InventoryNotFoundException`)
-
-[//]: # ()
-[//]: # (### 6.3 CreateWareHouse Endpoint)
-
-[//]: # ()
-[//]: # (- Accepts `POST` requests to `/inventory`)
-
-[//]: # (- Accepts data to create a new inventory with a provided name.)
-
-[//]: # (- Returns the new inventory with a unique inventory ID assigned by the service if one was not provided.)
-
-[//]: # (- Will verify the provided inventory name if it does not contain any invalid characters`"'` or if it exists.)
-
-[//]: # (  - If the inventory name already exist, will throw a `NameAlreadyInUseException`.)
-
-[//]: # (  - If the inventory name provided contains any of the invalid characters, will throw an `InvalidAttributeException`.)
-
-[//]: # ()
-[//]: # (### 6.4 DeleteInventory Endpoint)
-
-[//]: # ()
-[//]: # (- Accepts `DELETE` requests to `/inventory/:name`)
-
-[//]: # (- Accepts name to delete an inventory.)
-
-[//]: # (  - If the inventory name is not found, will throw a `InventoryNotFoundException`.)
-
-[//]: # (  - If items still exist in an inventory, will throw a `InventoryNotEmptyException`.)
-
-[//]: # (- Deletes the inventory.)
+ private List<Item> itemList;
+````
 
 ### 6.5 CreateItem Endpoint
 
-- Accepts `POST` requests to `/inventory/add`
+- Accepts `POST` requests to `/inventory/add:`
 - Accepts all attributes to create a new item
-- Verify the item name for invalid characters `[\"\'\\\\]`
+- Auto-assigns an alphanumeric ID to the item.
+- Verify the item name for valid characters `[\"\'\\\\]`
 - If invalid character, throw `InvalidAttributeException`
-- Assigns an alphanumeric ID to the item.
-- Inserts the new item to the end of the list.
-- Return new item.
+- Inserts the new item ar random order to the list.
+- Returns new item.
 
-### 6.6 UpdateItem Endpoint
+### 6.6 UpdateItemService Endpoint
 
-- Accepts `PUT` requests to `/inventory/item/:name`
-- Accepts an item name or ID to update an item's attribute except the item's ID:
+- Accepts `PUT` requests to `/inventory/update:`
+- Accepts an items name to update an item's attribute except the item's name and ID.
 
-### 6.7 GetItem Endpoint
+### 6.7 GetItemService Endpoint
 
-- Accepts `GET` requests to `/inventory/item/:name/id/:id`
+#### Find by name
+- Accepts `GET` requests to `/inventory/name/{name}:`
 - Accepts a name.
 - If the item is not found, will throw a `ItemNotFoundException`
-- If the item name is found, returns the item
+- Returns the item
 
-### 6.7 GetItemByCategory Endpoint
+#### Find by ID
+- Accepts `GET` requests to `/inventory/id/{id}:`
+- Accepts an ID.
+- If the item is not found, will throw a `ItemNotFoundException`
+- Returns the item
+- 
+#### Find by availability
 
-- Accepts `GET` requests to `/inventory/category/:category`
+- Accepts `GET` requests to `/inventory/available/{available}`
+- Accepts an availability status.
+- Returns all items based on availability.
+
+#### Find by category
+- Accepts `GET` requests to `/inventory/category/{category}:`
 - Accepts a category name.
-- If the category name is found, but contains no items, will throw a `ListEmptyException`.
+- If the category name is found, but contains no items, will throw a `ItemListNotFoundException`.
 - If the category is not found, will throw a `CategoryNotFoundException`
 - Retrieves all items from a category.
-- Returns the category list in default order.
+- Returns the category list.
 
-### 6.7 GetItemByAvailability Endpoint
+#### Find by category and availability
+- Accepts `GET` requests to `/inventory/category/{category}/{availabe}:`
+- Accepts a category and availability.
+- If the category name is found, but contains no items, will throw a `ItemListNotFoundException`.
+- If the category is not, will throw a `CategoryNotFoundException`
+- Retrieves all items from a category.
+- Returns the category list.
 
-- Accepts `GET` requests to `/inventory/available/:available`
-- Accepts an availability status (ENUM - true / false).
-- If the category name is found, but contains no items, the item list will be empty.
+#### Find by Location
+- Accepts `GET` requests to `/inventory/location/{location}:`
+- Accepts a location name.
+- If the location name is found, but contains no items, will throw a `ItemListNotFoundException`.
+- If the location is not found, will throw a `LocationNotFoundException`
+- Retrieves all items from a location.
+- Returns the category list.
 
-[//]: # (- If the category is not found, will throw a `CategoryNotFoundException`)
-- Retrieves all items with availability true or false.
-- Returns the category list in default order.
+#### Find by location and category
+- Accepts `GET` requests to `/inventory/location/{location}/{category}:`
+- Accepts a location and category.
+- If the location name is found, but contains no items, will throw a `ItemListNotFoundException`.
+- If the location is not found, will throw a `LocationNotFoundException`
+- Retrieves all items from a category.
+- Returns the category list.
 
-### 6.8 DeleteItem Endpoint
+### 6.8 DeleteItemService Endpoint
 
 - Accepts `DELETE` requests to `/inventory/delete`
 - Accepts name to delete an item.
@@ -204,14 +192,24 @@ String location;
 
 ## 7. Tables
 
-### 7.1 Inventory
+### 7.1 IM-Item
 ````
-name // sort key. string
-id // partition key, string
+itemName // partition key, string 
+id // string
 category // string
-available // boolean
+available // string
 quantity // number
 location // string
 ````
 
+### 7.1 IM-Category
+````
+category // partition key, string 
+````
+### 7.1 IM-Location
+````
+location // partition key, string 
+````
+
 ## 8. Pages
+##

@@ -6,7 +6,9 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.inventorymanagement.controller.Controller;
 import com.inventorymanagement.dao.ItemDao;
 import com.inventorymanagement.exception.CategoryNotFoundException;
+import com.inventorymanagement.exception.ItemListNotFoundException;
 import com.inventorymanagement.exception.ItemNotFoundException;
+import com.inventorymanagement.exception.LocationNotFoundException;
 import com.inventorymanagement.result.ItemResult;
 import com.inventorymanagement.table.Item;
 import com.inventorymanagement.utility.ModelConverter;
@@ -14,7 +16,7 @@ import com.inventorymanagement.utility.ModelConverter;
 import javax.inject.Inject;
 
 public class GetItemService implements RequestHandler<Controller, ItemResult> {
-    private ItemDao itemDao;
+    private final ItemDao itemDao;
 
     @Inject
     public GetItemService(ItemDao itemDao) {
@@ -23,23 +25,25 @@ public class GetItemService implements RequestHandler<Controller, ItemResult> {
 
     @Override
     public ItemResult handleRequest(Controller input, Context context) {
-        String itemName = input.getName();
-        String itemId = input.getId();
-        String category = input.getCategory();
+        String name = input.getName();
+        String id = input.getId();
         String available = input.isAvailable();
+        String category = input.getCategory();
+        String location = input.getLocation();
 
-        if (itemId != null) return findById(itemId);
-        if (category != null) return findByCategory(category, itemName);
-        if (available != null) return findByByAvailability(available, itemName);
+        if (location != null) return findByByLocation(location, category);
+        if (category != null) return findByCategory(category, available);
+        if (id != null) return findById(id);
+        if (available != null) return findByByAvailability(available);
 
-        return find(itemName);
+        return find(name);
     }
 
-    private ItemResult find(String itemName) {
-        Item item = itemDao.find(itemName);
+    private ItemResult find(String name) {
+        Item item = itemDao.find(name);
 
         if (item == null) throw new ItemNotFoundException
-                ("Unable to find this item. It may not exist.");
+                (String.format("Unable to find %s. It may not exist.", name));
 
         return ItemResult.builder()
                 .withItem(new ModelConverter().itemConverter(item))
@@ -47,44 +51,61 @@ public class GetItemService implements RequestHandler<Controller, ItemResult> {
     }
 
     private ItemResult findById(String itemId) {
-        PaginatedQueryList<Item> itemList = itemDao.findById(itemId);
-        Item item = null;
+        PaginatedQueryList<Item> item = itemDao.findById(itemId);
 
-        if (itemList == null) throw new ItemNotFoundException
-                ("Unable to find this item. It may not exist.");
-
-        for (Item list : itemList) {
-            if (list.getId().equals(itemId)) item = list;
-            break;
-        }
+        if (item == null) throw new ItemNotFoundException
+                (String.format("Unable to find item ID %s. It may not exist.", itemId));
 
         return ItemResult.builder()
-                .withItem(new ModelConverter().itemConverter(item))
+                .withItemList(new ModelConverter().itemListConverter(item))
                 .build();
     }
 
-    private ItemResult findByCategory(String category, String name) {
+    private ItemResult findByByAvailability(String available) {
+        PaginatedQueryList<Item> availableList = itemDao.findByByAvailability(available);
+
+        return ItemResult.builder()
+                .withItemList(new ModelConverter().itemListConverter(availableList))
+                .build();
+    }
+
+    private ItemResult findByCategory(String category, String available) {
         PaginatedQueryList<Item> categoryList;
 
-        if (name != null) categoryList = itemDao.findByCategory(category, name);
-        else categoryList = itemDao.findByCategory(category);
+        if (available != null) categoryList = itemDao.findByCategory(category, available);
+         else categoryList = itemDao.findByCategory(category);
 
+        // SafeGuard - Category will be provided as a list in the UI
         if (categoryList == null) throw new CategoryNotFoundException
-                ("Unable to find items in this category.");
+                (String.format("Unable to find the %s category.", category));
+
+        for (Item list : categoryList) {
+            if (list == null) throw new ItemListNotFoundException
+                    (String.format("Unable to find the list of items in the %s category.", category));
+        }
 
         return ItemResult.builder()
                 .withItemList(new ModelConverter().itemListConverter(categoryList))
                 .build();
     }
 
-    private ItemResult findByByAvailability(String available, String name) {
-        PaginatedQueryList<Item> availableList;
+    private ItemResult findByByLocation(String location, String category) {
+        PaginatedQueryList<Item> locationList;
 
-        if (name != null) availableList = itemDao.findByByAvailability(available, name);
-        else availableList = itemDao.findByByAvailability(available);
+        if (category != null) locationList = itemDao.findByByLocation(location, category);
+        else locationList = itemDao.findByByLocation(location);
+
+        // SafeGuard - Location will be provided as a list in the UI
+        if (locationList == null) throw new LocationNotFoundException
+                (String.format("Unable to find the %s. location", location));
+
+        for (Item list : locationList) {
+            if (list == null) throw new ItemListNotFoundException
+                    (String.format("Unable to find the %s category in the %s location.", category, location));
+        }
 
         return ItemResult.builder()
-                .withItemList(new ModelConverter().itemListConverter(availableList))
+                .withItemList(new ModelConverter().itemListConverter(locationList))
                 .build();
     }
 }

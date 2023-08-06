@@ -6,13 +6,15 @@ public interface AwsGsiModule<Class, Type> {
 
     public DynamoDBQueryExpression<Class> idIndexQueryExpression(Type id);
 
+    public DynamoDBQueryExpression<Class> availableIndexQueryExpression(Type available);
+
     public DynamoDBQueryExpression<Class> categoryIndexQueryExpression(Type category);
 
-    public DynamoDBQueryExpression<Class> categoryIndexQueryExpression(Type category, Type name);
+    public DynamoDBQueryExpression<Class> categoryIndexQueryExpression(Type category, Type available);
 
-    public DynamoDBQueryExpression<Class> availableIndexQueryExpression(Type availability);
+    public DynamoDBQueryExpression<Class> locationIndexQueryExpression(Type location);
 
-    public DynamoDBQueryExpression<Class> availableIndexQueryExpression(Type availability, Type name);
+    public DynamoDBQueryExpression<Class> locationIndexQueryExpression(Type location, Type category);
 
     public DynamoDBQueryExpression<Class> findAll();
 }

@@ -1,12 +1,12 @@
 package com.inventorymanagement.exception;
 
-public class InventoryNotFoundException extends RuntimeException {
-    private static final long serialVersionUID = -8188503948805888569L;
+public class LocationAlreadyExistException extends RuntimeException {
+    private static final long serialVersionUID = -2477783951033484664L;
 
     /**
      * Constructs exception with username, message and cause.
      */
-    public InventoryNotFoundException() {
+    public LocationAlreadyExistException() {
         super();
     }
 
@@ -14,7 +14,7 @@ public class InventoryNotFoundException extends RuntimeException {
      * Constructs exception with username, message and cause.
      * @param message - Description of the error encountered.
      */
-    public InventoryNotFoundException(String message) {
+    public LocationAlreadyExistException(String message) {
         super(message);
     }
 
@@ -23,15 +23,15 @@ public class InventoryNotFoundException extends RuntimeException {
      * @param message - Description of the error encountered.
      * @param cause - The Exception that caused this exception to be thrown.
      */
-    public InventoryNotFoundException(String message, Throwable cause) {
+    public LocationAlreadyExistException(String message, Throwable cause) {
         super(message, cause);
     }
-    
+
     /**
      * Constructs exception with username, message and cause.
      * @param cause - The Exception that caused this exception to be thrown.
      */
-    public InventoryNotFoundException(Throwable cause) {
+    public LocationAlreadyExistException(Throwable cause) {
         super(cause);
     }
 }

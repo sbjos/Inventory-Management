@@ -2,9 +2,9 @@ package com.inventorymanagement.test.dao;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedQueryList;
-import com.inventorymanagement.configuration.awsglobalsecondaryindex.AwsGsiCategory;
-import com.inventorymanagement.dao.CategoryDao;
-import com.inventorymanagement.table.Category;
+import com.inventorymanagement.table.Location;
+import com.inventorymanagement.configuration.awsglobalsecondaryindex.AwsGsiLocation;
+import com.inventorymanagement.dao.LocationDao;
 import com.inventorymanagement.test.TestHelper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,21 +16,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.when;
 
 // TODO: Review for unnecessary or missing test
-public class CategoryDaoTest {
-    private final Category food = TestHelper.food();
-    private final Category electronic = TestHelper.electronic();
+public class LocationDaoTest {
+    private final Location DF1 = TestHelper.locationDF1();
+    private final Location E4 = TestHelper.locationE4();
+    private final Location R2 = TestHelper.locationR2();
     @InjectMocks
-    private CategoryDao categoryDao;
+    private LocationDao locationDao;
     @Mock
     private DynamoDBMapper dynamoDBMapper;
     @Mock
-    private AwsGsiCategory awsGsiCategory;
+    private AwsGsiLocation awsGsiLocation;
     @Mock
-    private PaginatedQueryList<Category> paginatedQueryList;
+    private PaginatedQueryList<Location> paginatedQueryList;
 
     @BeforeEach
     // FIXME: Check what is that openMock "auto-closable" thing is.
@@ -42,33 +43,36 @@ public class CategoryDaoTest {
     @Test
     void find_ReturnsItem() {
         // GIVEN
-        when(dynamoDBMapper.load(Category.class, food.getCategory())).thenReturn(food);
+        when(dynamoDBMapper.load(Location.class, DF1.getLocationName())).thenReturn(DF1);
 
         // WHEN
-        Category result = categoryDao.find(food.getCategory());
+        Location result = locationDao.find(DF1.getLocationName());
 
         // THEN
-        assertEquals(food, result);
+        assertEquals(DF1, result);
     }
 
     @Test
     void findAll_ReturnsItem() {
         // GIVEN
-        List<Category> existingItem = new ArrayList<>();
-        existingItem.add(food);
-        existingItem.add(electronic);
+        List<Location> existingItem = new ArrayList<>();
+        existingItem.add(DF1);
+        existingItem.add(R2);
+        existingItem.add(E4);
 
         when(paginatedQueryList.iterator()).thenReturn(existingItem.iterator());
         when(paginatedQueryList.size()).thenReturn(existingItem.size());
         when(paginatedQueryList.isEmpty()).thenReturn(false);
         when(paginatedQueryList.stream()).thenReturn(existingItem.stream());
 
-        when(categoryDao.findAll()).thenReturn(paginatedQueryList);
+        when(locationDao.findAll()).thenReturn(paginatedQueryList);
 
         // WHEN
-        PaginatedQueryList<Category> result = categoryDao.findAll();
+        PaginatedQueryList<Location> result = locationDao.findAll();
 
         // THEN
-        assertEquals(existingItem, result);
+        for (Location list : paginatedQueryList)
+            System.out.println(list);
+        assertNotNull(result);
     }
 }

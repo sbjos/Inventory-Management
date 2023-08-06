@@ -5,7 +5,6 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.inventorymanagement.controller.Controller;
 import com.inventorymanagement.dao.CategoryDao;
 import com.inventorymanagement.exception.CategoryNotFoundException;
-import com.inventorymanagement.exception.InvalidAttributeException;
 import com.inventorymanagement.model.CategoryModel;
 import com.inventorymanagement.result.CategoryResult;
 import com.inventorymanagement.table.Category;
@@ -13,7 +12,7 @@ import com.inventorymanagement.table.Category;
 import javax.inject.Inject;
 
 public class DeleteCategoryService implements RequestHandler<Controller, CategoryResult> {
-    private CategoryDao categoryDao;
+    private final CategoryDao categoryDao;
 
     @Inject
     public DeleteCategoryService(CategoryDao categoryDao) {
@@ -24,10 +23,6 @@ public class DeleteCategoryService implements RequestHandler<Controller, Categor
     public CategoryResult handleRequest(Controller input, Context context) {
         String categoryName = input.getCategory();
         Category category = categoryDao.find(categoryName);
-
-        if (categoryName == null) throw new InvalidAttributeException
-                ("Please enter a valid category name.");
-
 
         if (category == null) throw new CategoryNotFoundException
                 ("Unable to find this item. It may not exist.");

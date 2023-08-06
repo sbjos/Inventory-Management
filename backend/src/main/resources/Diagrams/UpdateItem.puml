@@ -1,5 +1,5 @@
 @startuml
-title CREATE ITEM
+title UPDATE ITEM
 
 actor Client
 participant APIGateway
@@ -20,42 +20,18 @@ CreateItemService -> ItemDao : find(name)
 activate ItemDao
 ItemDao -> Database : load
 
-alt if name Is Not In Use
+alt if Item Is Found
     ItemDao <-- Database : false
     CreateItemService <-- ItemDao : false
-    Lambda <-- CreateItemService : throw ItemAlreadyExistException
+    Lambda <-- CreateItemService : throw ItemNotFoundException
     APIGateway <-- Lambda
     Client <-- APIGateway : 4xx Response
 else otherwise, continue
 end
 
-CreateItemService -> ServiceUtility : isValid(String)
-activate ServiceUtility
-
-alt if name invalid
-    CreateItemService <-- ServiceUtility : false
-    Lambda <-- CreateItemService : throw InvalidAttributeException
-    APIGateway <-- Lambda
-    Client <-- APIGateway : 4xx Response
-else otherwise, continue
-end
-
-CreateItemService <-- ServiceUtility : Name is Valid
-
-CreateItemService -> ServiceUtility : generateId()
-
-alt if ID Does Not Exist
-    CreateItemService <-- ServiceUtility : false
-    Lambda <-- CreateItemService : throw InvalidAttributeException
-    APIGateway <-- Lambda
-    Client <-- APIGateway : 4xx Response
-else otherwise, continue
-end
-
-CreateItemService <-- ServiceUtility : New Item ID
 deactivate ServiceUtility
 
-CreateItemService -> CreateItemService : Populate Item Object
+CreateItemService -> CreateItemService : populate Item object
 
 CreateItemService -> ItemDao : save(Item)
 activate ItemDao

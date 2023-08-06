@@ -3,8 +3,10 @@ package com.inventorymanagement.utility;
 import com.inventorymanagement.model.CategoryModel;
 import com.inventorymanagement.model.ItemListModel;
 import com.inventorymanagement.model.ItemModel;
+import com.inventorymanagement.model.LocationModel;
 import com.inventorymanagement.table.Category;
 import com.inventorymanagement.table.Item;
+import com.inventorymanagement.table.Location;
 
 import java.util.List;
 
@@ -17,7 +19,7 @@ public class ModelConverter {
      */
     public ItemModel itemConverter(Item item) {
         return ItemModel.builder()
-                .withName(item.getName())
+                .withName(item.getItemName())
                 .withId(item.getId())
                 .withCategory(item.getCategory())
                 .withAvailable(item.isAvailable())
@@ -34,7 +36,13 @@ public class ModelConverter {
 
     public CategoryModel categoryConverter(Category category) {
         return CategoryModel.builder()
-                .withCategory(category.getCategoryName())
+                .withCategory(category.getCategory())
+                .build();
+    }
+
+    public LocationModel locationConverter(Location location) {
+        return LocationModel.builder()
+                .withLocation(location.getLocationName())
                 .build();
     }
 }

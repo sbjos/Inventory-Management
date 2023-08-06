@@ -1,10 +1,10 @@
 @startuml
-title Delete Warehouse
+title DELETE ITEM
 
 actor Client
 participant APIGateway
 participant Lambda
-participant DeleteItem
+participant DeleteItemService
 participant ItemDao
 database Database
 
@@ -12,26 +12,27 @@ Client -> APIGateway : POST / Item
 activate Client
 APIGateway -> Lambda
 activate Lambda
-Lambda -> DeleteItem :  handleRequest(DeleteItemRequest, Context)
-activate DeleteItem
+Lambda -> DeleteItemService :  handleRequest(Controller, Context)
+activate DeleteItemService
 
-DeleteItem -> ItemDao : deleteItem(item)
+
+DeleteItemService -> ItemDao : deleteItem(item)
 activate ItemDao
 
-ItemDao -> Database : Delete Item
+ItemDao -> Database : delete
 
 alt if name Does Not Exist
     ItemDao <-- Database : false
-    DeleteItem <-- ItemDao : false
+    DeleteItemService <-- ItemDao : false
     deactivate ItemDao
-    Lambda <-- DeleteItem : throw ItemNotFoundException
+    Lambda <-- DeleteItemService : throw ItemNotFoundException
     APIGateway <-- Lambda
     Client <-- APIGateway : 4xx Response
 else otherwise, continue
 end
 
-Lambda <-- DeleteItem : DeleteItemResult
-deactivate DeleteItem
+Lambda <-- DeleteItemService : handleRequest(Controller, Context)
+deactivate DeleteItemService
 APIGateway <-- Lambda
 deactivate Lambda
 Client <-- APIGateway : 200 Response

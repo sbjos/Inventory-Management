@@ -24,8 +24,8 @@ public class CategoryResult {
     public static final class Builder {
         private CategoryModel category;
 
-        public Builder withCategory(CategoryModel category) {
-            this.category = category;
+        public Builder withCategory(CategoryModel categoryToUse) {
+            this.category = categoryToUse;
             return this;
         }
 

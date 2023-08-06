@@ -1,0 +1,62 @@
+@startuml
+title CREATE CATEGORY
+
+actor Client
+participant APIGateway
+participant Lambda
+participant CreateLocationService
+participant LocationDao
+participant ServiceUtility
+database Database
+
+Client -> APIGateway : POST / Item
+activate Client
+APIGateway -> Lambda
+activate Lambda
+Lambda -> CreateLocationService :  handleRequest(Controller, Context)
+activate CreateLocationService
+
+CreateLocationService -> LocationDao : find(name)
+activate LocationDao
+LocationDao -> Database : load
+
+alt if name Is Not In Use
+    LocationDao <-- Database : false
+    CreateLocationService <-- LocationDao : false
+    Lambda <-- CreateLocationService : throw LocationAlreadyExistException
+    APIGateway <-- Lambda
+    Client <-- APIGateway : 4xx Response
+else otherwise, continue
+end
+
+CreateLocationService -> ServiceUtility : isValid(String)
+activate ServiceUtility
+
+alt if name invalid
+    CreateLocationService <-- ServiceUtility : false
+    Lambda <-- CreateLocationService : throw InvalidAttributeException
+    APIGateway <-- Lambda
+    Client <-- APIGateway : 4xx Response
+else otherwise, continue
+end
+
+CreateLocationService <-- ServiceUtility : Name is Valid
+deactivate ServiceUtility
+
+CreateLocationService -> CreateLocationService : Populate Location Object
+
+CreateLocationService -> LocationDao : save(Item)
+activate LocationDao
+
+LocationDao -> Database : save
+
+deactivate LocationDao
+
+Lambda <-- CreateLocationService : handleRequest(Controller, Context)
+deactivate CreateLocationService
+APIGateway <-- Lambda
+deactivate Lambda
+Client <-- APIGateway : 200 Response
+deactivate Client
+
+@enduml

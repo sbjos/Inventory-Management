@@ -31,13 +31,13 @@ public class CreateItemService implements RequestHandler<Controller, ItemResult>
         Item existingItem = itemDao.find(itemName);
 
         if (existingItem != null) throw new ItemAlreadyExistException
-                (String.format("%s already exist. Please choose a different name.", existingItem));
+                (String.format("%s already exist. Please choose a different name.", existingItem.getItemName()));
 
         if (ServiceUtility.isValid(itemName)) throw new InvalidAttributeException
                 ("Please enter a valid item name.");
 
         Item item = new Item();
-        item.setName(itemName);
+        item.setItemName(itemName);
 
         // FIXME: Generate ID in uppercase Only
         item.setId(ServiceUtility.generateId());
@@ -51,8 +51,8 @@ public class CreateItemService implements RequestHandler<Controller, ItemResult>
         item.setCategory(input.getCategory());
         item.setQuantity(input.getQuantity());
 
-        if (item.getQuantity() > 0) item.setAvailable("True");
-        else item.setAvailable("False");
+        if (input.getQuantity() > 0) item.setAvailable("Available");
+        else item.setAvailable("Unavailable");
 
         item.setLocation(input.getLocation());
 

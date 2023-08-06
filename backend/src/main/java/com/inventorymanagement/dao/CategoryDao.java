@@ -32,21 +32,28 @@ public class CategoryDao implements DaoModule<Category, String> {
         return null;
     }
 
+    @Override
+    public PaginatedQueryList<Category> findByByAvailability(String available) {
+        return null;
+    }
+
+    @Override
     public PaginatedQueryList<Category> findByCategory(String category) {
         return null;
     }
 
     @Override
-    public PaginatedQueryList<Category> findByCategory(String category, String name) {
-        return null;
-    }
-
-    public PaginatedQueryList<Category> findByByAvailability(String availability) {
+    public PaginatedQueryList<Category> findByCategory(String category, String available) {
         return null;
     }
 
     @Override
-    public PaginatedQueryList<Category> findByByAvailability(String availability, String name) {
+    public PaginatedQueryList<Category> findByByLocation(String location) {
+        return null;
+    }
+
+    @Override
+    public PaginatedQueryList<Category> findByByLocation(String location, String category) {
         return null;
     }
 

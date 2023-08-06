@@ -7,7 +7,6 @@ import com.inventorymanagement.exception.InvalidAttributeException;
 import com.inventorymanagement.result.CategoryResult;
 import com.inventorymanagement.service.CreateCategoryService;
 import com.inventorymanagement.table.Category;
-import com.inventorymanagement.table.Item;
 import com.inventorymanagement.test.TestHelper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,34 +14,20 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 public class CreateCategoryServiceTest {
-    private final Item ramen = TestHelper.ramenNoodle();
-    private final Item lettuce = TestHelper.lettuce();
     private final Category food = TestHelper.food();
-    private final String validName = "Salmon";
-    private final int availQuantity = 10;
-    private final String location = "R12";
     @InjectMocks
     CreateCategoryService createCategoryService;
     @Mock
     private CategoryDao categoryDao;
-    private Item item;
     private Controller controller;
 
     @BeforeEach
     void setup() {
         MockitoAnnotations.openMocks(this);
-
-        item = new Item();
-        item.setName(validName);
-        item.setCategory(food.getCategoryName());
-        item.setAvailable("true");
-        item.setQuantity(availQuantity);
-        item.setLocation(location);
     }
 
     @Test
@@ -50,10 +35,10 @@ public class CreateCategoryServiceTest {
         // GIVEN
         controller = Controller
                 .builder()
-                .withCategory(food.getCategoryName())
+                .withCategory(food.getCategory())
                 .build();
 
-        when(categoryDao.find(food.getCategoryName())).thenReturn(food);
+        when(categoryDao.find(food.getCategory())).thenReturn(food);
 
         // WHEN - // THEN
         assertThrows(CategoryAlreadyExistException.class, () ->
@@ -64,17 +49,18 @@ public class CreateCategoryServiceTest {
     @Test
     void handleRequest_withValidCategoryName_returnsCategoryName() {
         // GIVEN
+        String newCategory = "Fitness";
+
         controller = Controller
                 .builder()
-                .withCategory(food.getCategoryName())
+                .withCategory(newCategory)
                 .build();
 
         // WHEN
         CategoryResult result = createCategoryService.handleRequest(controller, null);
 
         // THEN
-        assertNotEquals(ramen.getId(), result.getCategory().getCategory());
-        assertNotEquals(lettuce.getId(), result.getCategory().getCategory());
+        assertEquals(newCategory, result.getCategory().getCategory());
     }
 
     @Test

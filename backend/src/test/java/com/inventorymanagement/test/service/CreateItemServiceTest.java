@@ -47,9 +47,9 @@ public class CreateItemServiceTest {
         MockitoAnnotations.openMocks(this);
 
         item = new Item();
-        item.setName(validName);
-        item.setCategory(food.getCategoryName());
-        item.setAvailable("True");
+        item.setItemName(validName);
+        item.setCategory(food.getCategory());
+        item.setAvailable("Available");
         item.setQuantity(availQuantity);
         item.setLocation(location);
     }
@@ -63,7 +63,7 @@ public class CreateItemServiceTest {
 
         controller = Controller.builder()
                 .withName(validName)
-                .withCategory(food.getCategoryName())
+                .withCategory(food.getCategory())
                 .withQuantity(availQuantity)
                 .withLocation(location)
                 .build();
@@ -74,7 +74,7 @@ public class CreateItemServiceTest {
         when(paginatedQueryList.stream()).thenReturn(existingItem.stream());
 
         when(itemDao.findById(any())).thenReturn(paginatedQueryList);
-        when(categoryDao.find(food.getCategoryName())).thenReturn(food);
+        when(categoryDao.find(food.getCategory())).thenReturn(food);
 
         // WHEN
         ItemResult result = createItemService.handleRequest(controller, null);
@@ -82,7 +82,7 @@ public class CreateItemServiceTest {
         // THEN
         System.out.println(result.getItem());
         System.out.println(result.getItem());
-        assertEquals(item.getName(), result.getItem().getName());
+        assertEquals(item.getItemName(), result.getItem().getName());
         assertEquals(item.getCategory(), result.getItem().getCategory());
         assertEquals(item.isAvailable(), result.getItem().isAvailable());
         assertEquals(item.getQuantity(), result.getItem().getQuantity());
@@ -96,7 +96,7 @@ public class CreateItemServiceTest {
         String invalidName = " ";
         controller = Controller.builder()
                 .withName(invalidName)
-                .withCategory(food.getCategoryName())
+                .withCategory(food.getCategory())
                 .withQuantity(availQuantity)
                 .withLocation(location)
                 .build();
@@ -116,7 +116,7 @@ public class CreateItemServiceTest {
 
         controller = Controller.builder()
                 .withName(validName)
-                .withCategory(food.getCategoryName())
+                .withCategory(food.getCategory())
                 .withQuantity(0)
                 .withLocation(location)
                 .build();
@@ -127,13 +127,13 @@ public class CreateItemServiceTest {
         when(paginatedQueryList.stream()).thenReturn(existingItem.stream());
 
         when(itemDao.findById(any())).thenReturn(paginatedQueryList);
-        when(categoryDao.find(food.getCategoryName())).thenReturn(food);
+        when(categoryDao.find(food.getCategory())).thenReturn(food);
 
         // WHEN
         ItemResult result = createItemService.handleRequest(controller, null);
 
         // THEN
-        assertEquals("False", result.getItem().isAvailable());
+        assertEquals("Unavailable", result.getItem().isAvailable());
     }
 
     @Test
@@ -144,8 +144,8 @@ public class CreateItemServiceTest {
         existingItem.add(lettuce);
 
         controller = Controller.builder()
-                .withName(ramen.getName())
-                .withCategory(food.getCategoryName())
+                .withName(ramen.getItemName())
+                .withCategory(food.getCategory())
                 .withQuantity(availQuantity)
                 .withLocation(location)
                 .build();
@@ -168,7 +168,7 @@ public class CreateItemServiceTest {
         controller = Controller
                 .builder()
                 .withName(validName)
-                .withCategory(food.getCategoryName())
+                .withCategory(food.getCategory())
                 .withQuantity(availQuantity)
                 .withLocation(location)
                 .build();

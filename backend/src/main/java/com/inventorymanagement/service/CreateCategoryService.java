@@ -14,7 +14,7 @@ import com.inventorymanagement.utility.ServiceUtility;
 import javax.inject.Inject;
 
 public class CreateCategoryService implements RequestHandler<Controller, CategoryResult> {
-    private CategoryDao categoryDao;
+    private final CategoryDao categoryDao;
 
     @Inject
     public CreateCategoryService(CategoryDao categoryDao) {
@@ -33,7 +33,7 @@ public class CreateCategoryService implements RequestHandler<Controller, Categor
                 ("Please enter a valid category name.");
 
         Category category = new Category();
-        category.setCategoryName(categoryName);
+        category.setCategory(categoryName);
 
         categoryDao.save(category);
 

@@ -1,12 +1,12 @@
 package com.inventorymanagement.exception;
 
-public class ListEmptyException extends RuntimeException {
-    private static final long serialVersionUID = 1896300600500152638L;
+public class ItemListNotFoundException extends RuntimeException {
+    private static final long serialVersionUID = -8188503948805888569L;
 
     /**
      * Constructs exception with username, message and cause.
      */
-    public ListEmptyException() {
+    public ItemListNotFoundException() {
         super();
     }
 
@@ -14,7 +14,7 @@ public class ListEmptyException extends RuntimeException {
      * Constructs exception with username, message and cause.
      * @param message - Description of the error encountered.
      */
-    public ListEmptyException(String message) {
+    public ItemListNotFoundException(String message) {
         super(message);
     }
 
@@ -23,16 +23,15 @@ public class ListEmptyException extends RuntimeException {
      * @param message - Description of the error encountered.
      * @param cause - The Exception that caused this exception to be thrown.
      */
-    public ListEmptyException(String message, Throwable cause) {
+    public ItemListNotFoundException(String message, Throwable cause) {
         super(message, cause);
     }
-
+    
     /**
      * Constructs exception with username, message and cause.
      * @param cause - The Exception that caused this exception to be thrown.
      */
-    public ListEmptyException(Throwable cause) {
+    public ItemListNotFoundException(Throwable cause) {
         super(cause);
     }
 }
-

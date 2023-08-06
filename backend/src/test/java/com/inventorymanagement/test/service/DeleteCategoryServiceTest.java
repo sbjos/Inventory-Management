@@ -2,7 +2,6 @@ package com.inventorymanagement.test.service;
 
 import com.inventorymanagement.controller.Controller;
 import com.inventorymanagement.exception.CategoryNotFoundException;
-import com.inventorymanagement.exception.InvalidAttributeException;
 import com.inventorymanagement.exception.ItemNotFoundException;
 import com.inventorymanagement.dao.CategoryDao;
 import com.inventorymanagement.result.CategoryResult;
@@ -36,7 +35,7 @@ public class DeleteCategoryServiceTest {
     void handleRequest_withValidCategory_deleteResult() {
         // GIVEN
         controller = Controller.builder()
-                .withCategory(food.getCategoryName()).build();
+                .withCategory(food.getCategory()).build();
 
         when(categoryDao.find(controller.getCategory())).thenReturn(food);
 
@@ -44,21 +43,7 @@ public class DeleteCategoryServiceTest {
         CategoryResult result = deleteCategoryService.handleRequest(controller, null);
 
         // THEN
-        assertEquals(food.getCategoryName(), result.getCategory().getCategory());
-    }
-
-    @Test
-    void handleRequest_withInvalidCategory_throwsInvalidAttributeException() {
-        // GIVEN
-        controller = Controller.builder()
-                .withCategory(null).build();
-
-        when(categoryDao.find(" ")).thenThrow(InvalidAttributeException.class);
-
-        // WHEN - // THEN
-        assertThrows(InvalidAttributeException.class, () ->
-                        deleteCategoryService.handleRequest(controller, null),
-                ("Please enter a valid category name."));
+        assertEquals(food.getCategory(), result.getCategory().getCategory());
     }
 
     @Test

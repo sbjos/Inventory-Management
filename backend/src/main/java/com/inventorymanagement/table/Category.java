@@ -1,31 +1,29 @@
 package com.inventorymanagement.table;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.*;
-import lombok.Data;
 
 import java.util.Objects;
 
-@Data
 @DynamoDBTable(tableName = "IM-Category")
 public class Category {
 
-    private String categoryName;
+    private String category;
 
     public Category() {}
 
     @DynamoDBHashKey(attributeName = "name")
-    public String getCategoryName() {
-        return categoryName;
+    public String getCategory() {
+        return category;
     }
 
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     @Override
     public String toString() {
         return "Category{" +
-                "category='" + categoryName + '\'' +
+                "category='" + category + '\'' +
                 '}';
     }
 
@@ -34,11 +32,11 @@ public class Category {
         if (this == o) return true;
         if (o == null || this.getClass() != o.getClass()) return false;
         Category that = (Category) o;
-        return Objects.equals(categoryName, that.categoryName);
+        return Objects.equals(category, that.category);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(categoryName);
+        return Objects.hash(category);
     }
 }

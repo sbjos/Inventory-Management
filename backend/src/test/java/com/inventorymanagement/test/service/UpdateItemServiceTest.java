@@ -37,11 +37,11 @@ public class UpdateItemServiceTest {
     void handleRequest_withValidName_ReturnUpdatedItem() {
         // GIVEN
         Category category = new Category();
-        category.setCategoryName("Quick and Easy Food");
+        category.setCategory("Quick and Easy Food");
 
         controller = Controller.builder()
-                .withName(ramen.getName())
-                .withCategory(category.getCategoryName())
+                .withName(ramen.getItemName())
+                .withCategory(category.getCategory())
                 .withLocation(location)
                 .build();
 
@@ -51,39 +51,12 @@ public class UpdateItemServiceTest {
         ItemResult result = updateItemService.handleRequest(controller, null);
 
         // THEN
-        assertEquals(ramen.getName(), result.getItem().getName());
+        assertEquals(ramen.getItemName(), result.getItem().getName());
         assertEquals(ramen.getId(), result.getItem().getId());
         assertEquals(ramen.getCategory(), result.getItem().getCategory());
         assertEquals(ramen.isAvailable(), result.getItem().isAvailable());
         assertEquals(ramen.getQuantity(), result.getItem().getQuantity());
         assertEquals(ramen.getLocation(), result.getItem().getLocation());
-    }
-
-    @Test
-    void handleRequest_withValidId_ReturnUpdatedItem() {
-        // GIVEN
-        Category category = new Category();
-        category.setCategoryName("Quick and Easy Food");
-
-        controller = Controller.builder()
-                .withId(ramen.getId())
-                .withCategory(category.getCategoryName())
-                .withLocation(location)
-                .build();
-
-        when(itemDao.find(controller.getId())).thenReturn(ramen);
-
-        // WHEN
-        ItemResult result = updateItemService.handleRequest(controller, null);
-
-        // THEN
-        assertEquals(ramen.getName(), result.getItem().getName());
-        assertEquals(ramen.getId(), result.getItem().getId());
-        assertEquals(ramen.getCategory(), result.getItem().getCategory());
-        assertEquals(ramen.isAvailable(), result.getItem().isAvailable());
-        assertEquals(ramen.getQuantity(), result.getItem().getQuantity());
-        assertEquals(ramen.getLocation(), result.getItem().getLocation());
-
     }
 
     @Test
@@ -104,26 +77,6 @@ public class UpdateItemServiceTest {
         // WHEN - // THEN
         assertThrows(ItemNotFoundException.class, () ->
                 updateItemService.handleRequest(controller, null),
-                ("Unable to find this item. It may not exist."));
-    }
-
-    @Test
-    void handleRequest_withInvalidId_throwsItemNotFoundException() {
-        // GIVEN
-        controller = Controller.builder()
-                .withId("invalidId")
-                .withQuantity(availQuantity)
-                .withLocation(location)
-                .build();
-
-        when(itemDao.find(controller.getId())).thenThrow(ItemNotFoundException.class);
-
-        ramen.setQuantity(availQuantity);
-        ramen.setLocation(location);
-
-        // WHEN - // THEN
-        assertThrows(ItemNotFoundException.class, () ->
-                        updateItemService.handleRequest(controller, null),
-                ("Unable to find this item. It may not exist."));
+                ("Unable to find this item to update. It may not exist."));
     }
 }

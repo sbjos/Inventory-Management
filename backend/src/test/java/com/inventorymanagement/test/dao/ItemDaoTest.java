@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.when;
 
 public class ItemDaoTest {
@@ -41,10 +42,10 @@ public class ItemDaoTest {
     @Test
     void find_ReturnsItem() {
         // GIVEN
-        when(dynamoDBMapper.load(Item.class, ramen.getName())).thenReturn(ramen);
+        when(dynamoDBMapper.load(Item.class, ramen.getItemName())).thenReturn(ramen);
 
         // WHEN
-        Item result = itemDao.find(ramen.getName());
+        Item result = itemDao.find(ramen.getItemName());
 
         // THEN
         assertEquals(ramen, result);
@@ -83,6 +84,25 @@ public class ItemDaoTest {
 
     @Test
     void findByByAvailability_returnsListOfAvailable() {
+        List<Item> existingItem = new ArrayList<>();
+        existingItem.add(electronic);
+
+        when(paginatedQueryList.size()).thenReturn(existingItem.size());
+        when(paginatedQueryList.isEmpty()).thenReturn(false);
+        when(paginatedQueryList.iterator()).thenReturn(existingItem.iterator());
+        when(paginatedQueryList.stream()).thenReturn(existingItem.stream());
+
+        when(itemDao.findByCategory(electronic.getLocation())).thenReturn(paginatedQueryList);
+
+        // WHEN
+        PaginatedQueryList<Item> result = itemDao.findAll();
+
+        // THEN
+        assertNotNull(result);
+    }
+
+    @Test
+    void findByByLocation_returnsListOfLocation() {
         List<Item> existingItem = new ArrayList<>();
         existingItem.add(lettuce);
         existingItem.add(electronic);

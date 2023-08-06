@@ -1,5 +1,7 @@
 package com.inventorymanagement.configuration;
 
+import com.inventorymanagement.configuration.awsglobalsecondaryindex.AwsGsiCategory;
+import com.inventorymanagement.configuration.awsglobalsecondaryindex.AwsGsiItem;
 import com.inventorymanagement.dao.CategoryDao;
 import com.inventorymanagement.dao.ItemDao;
 import com.inventorymanagement.service.*;
@@ -10,6 +12,8 @@ import javax.inject.Singleton;
 @Singleton
 @Component(modules = {AwsDynamoDBConfiguration.class})
 public interface InventoryManagementAppComponent {
+    AwsGsiItem provideAwsGsiItem();
+    AwsGsiCategory provideAwsGsiCategory();
     ItemDao provideItemDao();
     CategoryDao provideCategoryDao();
     CreateItemService provideCreateItemService();
@@ -18,4 +22,6 @@ public interface InventoryManagementAppComponent {
     DeleteItemService provideDeleteItemService();
     CreateCategoryService provideCreateCategoryService();
     DeleteCategoryService provideDeleteCategoryService();
+    CreateLocationService provideCreateLocationService();
+    DeleteLocationService provideDeleteLocationService();
 }

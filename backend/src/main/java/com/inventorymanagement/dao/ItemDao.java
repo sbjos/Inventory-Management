@@ -33,27 +33,33 @@ public class ItemDao implements DaoModule<Item, String> {
     }
 
     @Override
+    public PaginatedQueryList<Item> findByByAvailability(String available) {
+        return dynamoDBMapper.query(Item.class,
+                awsGsiItem.availableIndexQueryExpression(available));
+    }
+
+    @Override
     public PaginatedQueryList<Item> findByCategory(String category) {
         return dynamoDBMapper.query(Item.class,
                 awsGsiItem.categoryIndexQueryExpression(category));
     }
 
     @Override
-    public PaginatedQueryList<Item> findByCategory(String category, String name) {
+    public PaginatedQueryList<Item> findByCategory(String category, String available) {
         return dynamoDBMapper.query(Item.class,
-                awsGsiItem.categoryIndexQueryExpression(category, name));
+                awsGsiItem.categoryIndexQueryExpression(category, available));
     }
 
     @Override
-    public PaginatedQueryList<Item> findByByAvailability(String availability) {
+    public PaginatedQueryList<Item> findByByLocation(String location) {
         return dynamoDBMapper.query(Item.class,
-                awsGsiItem.availableIndexQueryExpression(availability));
+                awsGsiItem.locationIndexQueryExpression(location));
     }
 
     @Override
-    public PaginatedQueryList<Item> findByByAvailability(String availability, String name) {
+    public PaginatedQueryList<Item> findByByLocation(String location, String category) {
         return dynamoDBMapper.query(Item.class,
-                awsGsiItem.availableIndexQueryExpression(availability, name));
+                awsGsiItem.locationIndexQueryExpression(location, category));
     }
 
     @Override

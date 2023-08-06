@@ -1,0 +1,62 @@
+@startuml
+title CREATE CATEGORY
+
+actor Client
+participant APIGateway
+participant Lambda
+participant CreateCategoryService
+participant CategoryDao
+participant ServiceUtility
+database Database
+
+Client -> APIGateway : POST / Item
+activate Client
+APIGateway -> Lambda
+activate Lambda
+Lambda -> CreateCategoryService :  handleRequest(Controller, Context)
+activate CreateCategoryService
+
+CreateCategoryService -> CategoryDao : find(name)
+activate CategoryDao
+CategoryDao -> Database : load
+
+alt if name Is Not In Use
+    CategoryDao <-- Database : false
+    CreateCategoryService <-- CategoryDao : false
+    Lambda <-- CreateCategoryService : throw CategoryAlreadyExistException
+    APIGateway <-- Lambda
+    Client <-- APIGateway : 4xx Response
+else otherwise, continue
+end
+
+CreateCategoryService -> ServiceUtility : isValid(String)
+activate ServiceUtility
+
+alt if name invalid
+    CreateCategoryService <-- ServiceUtility : false
+    Lambda <-- CreateCategoryService : throw InvalidAttributeException
+    APIGateway <-- Lambda
+    Client <-- APIGateway : 4xx Response
+else otherwise, continue
+end
+
+CreateCategoryService <-- ServiceUtility : Name is Valid
+deactivate ServiceUtility
+
+CreateCategoryService -> CreateCategoryService : Populate Category Object
+
+CreateCategoryService -> CategoryDao : save(Item)
+activate CategoryDao
+
+CategoryDao -> Database : save
+
+deactivate CategoryDao
+
+Lambda <-- CreateCategoryService : handleRequest(Controller, Context)
+deactivate CreateCategoryService
+APIGateway <-- Lambda
+deactivate Lambda
+Client <-- APIGateway : 200 Response
+deactivate Client
+
+@enduml

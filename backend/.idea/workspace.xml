@@ -5,11 +5,68 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3ecbdb82-9cea-4e96-a7ed-682a078805e5" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/configuration/awsglobalsecondaryindex/AwsGsiLocation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/dao/LocationDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/handler/CreateLocationHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/handler/DeleteLocationHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/model/LocationModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/result/LocationResult.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/service/CreateLocationService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/service/DeleteLocationService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/table/Location.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Diagrams/CreateCategory.puml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Diagrams/CreateLocation.puml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Diagrams/DeleteCategory.puml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Diagrams/DeleteLocation.puml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Diagrams/UpdateItem.puml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Documentation/Learned" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/inventorymanagement/test/dao/LocationDaoTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/inventorymanagement/test/service/CreateLocationServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/inventorymanagement/test/service/DeleteLocationServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/configuration/InventoryManagementAppComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/configuration/InventoryManagementAppComponent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/configuration/awsglobalsecondaryindex/AwsGsiCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/configuration/awsglobalsecondaryindex/AwsGsiCategory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/configuration/awsglobalsecondaryindex/AwsGsiItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/configuration/awsglobalsecondaryindex/AwsGsiItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/configuration/awsglobalsecondaryindex/AwsGsiModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/configuration/awsglobalsecondaryindex/AwsGsiModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/dao/CategoryDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/dao/CategoryDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/dao/DaoModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/dao/DaoModule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/model/ItemModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/model/ItemModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/dao/ItemDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/dao/ItemDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/exception/InventoryNotEmptyException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/exception/LocationAlreadyExistException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/exception/InventoryNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/exception/ItemListNotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/exception/ListEmptyException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/exception/LocationNotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/result/CategoryResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/result/CategoryResult.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/service/CreateCategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/service/CreateCategoryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/service/CreateItemService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/service/CreateItemService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/service/DeleteCategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/service/DeleteCategoryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/service/DeleteItemService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/service/DeleteItemService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/service/GetItemService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/service/GetItemService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/service/UpdateItemService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/service/UpdateItemService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/table/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/table/Category.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/table/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/table/Item.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/utility/ModelConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/utility/ModelConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/API/InventoryManagement-api.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/API/InventoryManagement-api.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/API/InventoryManagement-api.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/API/InventoryManagement-api.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Diagrams/CreateItem.puml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Diagrams/CreateItem.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Diagrams/DeleteItem.puml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Diagrams/DeleteItem.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Diagrams/GetItem.puml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Diagrams/GetItem.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Diagrams/Other/CreateWarehouse(To Review).puml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Diagrams/Other/DeleteWarehouse(To Review).puml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Diagrams/Other/GetWarehouse.puml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Documentation/Design_Document.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Documentation/Design_Document.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Documentation/Rubric.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Documentation/Rubric.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Other/GetItemService-RollbackFile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/cloudformation/CLICreateItemTable" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cloudformation/CLICreateItemTable" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/inventorymanagement/test/TestHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/inventorymanagement/test/TestHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/inventorymanagement/test/dao/CategoryDaoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/inventorymanagement/test/dao/CategoryDaoTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/inventorymanagement/test/dao/ItemDaoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/inventorymanagement/test/dao/ItemDaoTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/inventorymanagement/test/service/CreateCategoryServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/inventorymanagement/test/service/CreateCategoryServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/inventorymanagement/test/service/CreateItemServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/inventorymanagement/test/service/CreateItemServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/inventorymanagement/test/service/DeleteCategoryServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/inventorymanagement/test/service/DeleteCategoryServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/inventorymanagement/test/service/DeleteItemServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/inventorymanagement/test/service/DeleteItemServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/inventorymanagement/test/service/GetItemServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/inventorymanagement/test/service/GetItemServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/inventorymanagement/test/service/UpdateItemServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/inventorymanagement/test/service/UpdateItemServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/API/InventoryManagement-api.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/API/InventoryManagement-api.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,7 +84,17 @@
         <task path="$PROJECT_DIR$">
           <activation />
         </task>
-        <projects_view />
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Inventory-Management" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
       </state>
     </system>
   </component>
@@ -36,6 +103,8 @@
       <list>
         <option value="Interface" />
         <option value="Class" />
+        <option value="Enum" />
+        <option value="UML Sequence" />
       </list>
     </option>
   </component>
@@ -53,31 +122,42 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/sebas/Java-Projects/Inventory-Management&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultPlantUmlFileTemplate": "UML Sequence",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "C:/Users/sebas/BloomTech-Repo/My-Projects/Inventory-Management/backend/src/main/resources/Diagrams"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.inventorymanagement.table" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\sebas\BloomTech-Repo\My-Projects\Inventory-Management\backend\src\main\resources\Diagrams" />
       <recent name="C:\Users\sebas\Java-Projects\Inventory-Management\src\main\resources" />
       <recent name="C:\Users\sebas\Java-Projects\Inventory-Management\src\test\java" />
       <recent name="C:\Users\sebas\Java-Projects\Inventory-Management\src\main\java" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\sebas\BloomTech-Repo\My-Projects\Inventory-Management\backend\src\main\resources" />
+      <recent name="C:\Users\sebas\BloomTech-Repo\My-Projects\Inventory-Management\backend" />
+      <recent name="C:\Users\sebas\BloomTech-Repo\My-Projects\Inventory-Management\backend\src\main\resources\Diagrams" />
       <recent name="C:\Users\sebas\Java-Projects\Inventory-Management\src\main\java" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.inventorymanagement.dao" />
     </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.inventorymanagement.test.service" />
+      <recent name="com.inventorymanagement.test.dao" />
+      <recent name="com.inventorymanagement.result" />
+      <recent name="com.inventorymanagement.model" />
+    </key>
   </component>
-  <component name="RunManager" selected="Gradle.UpdateItemServiceTest">
-    <configuration name="GetItemServiceTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+  <component name="RunManager" selected="Gradle.Tests in 'com.inventorymanagement.test'">
+    <configuration name="CreateCategoryServiceTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -90,7 +170,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;com.inventorymanagement.test.service.GetItemServiceTest&quot;" />
+            <option value="&quot;com.inventorymanagement.test.service.CreateCategoryServiceTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -101,7 +181,7 @@
       <ForceTestExec>true</ForceTestExec>
       <method v="2" />
     </configuration>
-    <configuration name="GetItemServiceTest.handleRequest_findByAvailability_returnResult" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="CreateLocationServiceTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -114,7 +194,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;com.inventorymanagement.test.service.GetItemServiceTest.handleRequest_findByAvailability_returnResult&quot;" />
+            <option value="&quot;com.inventorymanagement.test.service.CreateLocationServiceTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -125,7 +205,7 @@
       <ForceTestExec>true</ForceTestExec>
       <method v="2" />
     </configuration>
-    <configuration name="GetItemServiceTest.handleRequest_findByCategory_returnResult" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="CreateLocationServiceTest.handleRequest_withValidLocationName_returnsLocationName" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -138,7 +218,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;com.inventorymanagement.test.service.GetItemServiceTest.handleRequest_findByCategory_returnResult&quot;" />
+            <option value="&quot;com.inventorymanagement.test.service.CreateLocationServiceTest.handleRequest_withValidLocationName_returnsLocationName&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -149,7 +229,7 @@
       <ForceTestExec>true</ForceTestExec>
       <method v="2" />
     </configuration>
-    <configuration name="GetItemServiceTest.handleRequest_withValidName_returnResult" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="DeleteLocationServiceTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -162,7 +242,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;com.inventorymanagement.test.service.GetItemServiceTest.handleRequest_withValidName_returnResult&quot;" />
+            <option value="&quot;com.inventorymanagement.test.service.DeleteLocationServiceTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -173,7 +253,7 @@
       <ForceTestExec>true</ForceTestExec>
       <method v="2" />
     </configuration>
-    <configuration name="UpdateItemServiceTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="Tests in 'com.inventorymanagement.test'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -186,7 +266,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;com.inventorymanagement.test.service.UpdateItemServiceTest&quot;" />
+            <option value="&quot;com.inventorymanagement.test.*&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -199,11 +279,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.UpdateItemServiceTest" />
-        <item itemvalue="Gradle.GetItemServiceTest" />
-        <item itemvalue="Gradle.GetItemServiceTest.handleRequest_withValidName_returnResult" />
-        <item itemvalue="Gradle.GetItemServiceTest.handleRequest_findByCategory_returnResult" />
-        <item itemvalue="Gradle.GetItemServiceTest.handleRequest_findByAvailability_returnResult" />
+        <item itemvalue="Gradle.Tests in 'com.inventorymanagement.test'" />
+        <item itemvalue="Gradle.DeleteLocationServiceTest" />
+        <item itemvalue="Gradle.CreateLocationServiceTest" />
+        <item itemvalue="Gradle.CreateCategoryServiceTest" />
+        <item itemvalue="Gradle.CreateLocationServiceTest.handleRequest_withValidLocationName_returnsLocationName" />
       </list>
     </recent_temporary>
   </component>
@@ -217,5 +297,8 @@
       <updated>1690918484713</updated>
     </task>
     <servers />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Inventory_Management$GetItemServiceTest_handleRequest_findByLocation_returnResult.ic" NAME="GetItemServiceTest.handleRequest_findByLocation_returnResult Coverage Results" MODIFIED="1691192437663" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

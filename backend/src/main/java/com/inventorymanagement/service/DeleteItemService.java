@@ -4,7 +4,6 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.inventorymanagement.controller.Controller;
 import com.inventorymanagement.dao.ItemDao;
-import com.inventorymanagement.exception.InvalidAttributeException;
 import com.inventorymanagement.exception.ItemNotFoundException;
 import com.inventorymanagement.result.ItemResult;
 import com.inventorymanagement.table.Item;
@@ -13,7 +12,7 @@ import com.inventorymanagement.utility.ModelConverter;
 import javax.inject.Inject;
 
 public class DeleteItemService implements RequestHandler<Controller, ItemResult> {
-    private ItemDao itemDao;
+    private final ItemDao itemDao;
 
     @Inject
     public DeleteItemService(ItemDao itemDao) {
@@ -23,22 +22,13 @@ public class DeleteItemService implements RequestHandler<Controller, ItemResult>
     @Override
     public ItemResult handleRequest(Controller input, Context context) {
         String itemName = input.getName();
-        String itemId = input.getId();
-        Item item = null;
+        Item item = itemDao.find(itemName);
 
-        if (itemName == null && itemId == null) throw new InvalidAttributeException
-                ("Please enter a valid item name.");
-
-        if (itemName != null) {
-            item = itemDao.find(itemName);
-            itemDao.delete(itemName);
-        } else {
-            item = itemDao.find(itemId);
-            itemDao.delete(item.getName());
-        }
-
+        // SafeGuard
         if (item == null) throw new ItemNotFoundException
-                ("Unable to find this item. It may not exist.");
+                ("Unable to find this item to delete. It may not exist.");
+
+        itemDao.delete(itemName);
 
         return ItemResult.builder()
                 .withItem(new ModelConverter().itemConverter(item))

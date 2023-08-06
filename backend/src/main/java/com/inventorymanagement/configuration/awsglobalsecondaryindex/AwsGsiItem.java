@@ -18,9 +18,20 @@ public class AwsGsiItem implements AwsGsiModule<Item, String> {
         Map<String, AttributeValue> list = new HashMap<>();
         list.put(":id", new AttributeValue().withS(id));
         return new DynamoDBQueryExpression<Item>()
-                .withIndexName("ID-Index")
+                .withIndexName("IdIndex")
                 .withConsistentRead(false)
                 .withKeyConditionExpression("id = :id")
+                .withExpressionAttributeValues(list);
+    }
+
+    @Override
+    public DynamoDBQueryExpression<Item> availableIndexQueryExpression(String available) {
+        Map<String, AttributeValue> list = new HashMap<>();
+        list.put(":available", new AttributeValue().withS(available));
+        return new DynamoDBQueryExpression<Item>()
+                .withIndexName("AvailableIndex")
+                .withConsistentRead(false)
+                .withKeyConditionExpression("available = :available")
                 .withExpressionAttributeValues(list);
     }
 
@@ -29,44 +40,43 @@ public class AwsGsiItem implements AwsGsiModule<Item, String> {
         Map<String, AttributeValue> list = new HashMap<>();
         list.put(":category", new AttributeValue().withS(category));
         return new DynamoDBQueryExpression<Item>()
-                .withIndexName("ID-Index")
+                .withIndexName("CategoryIndex")
                 .withConsistentRead(false)
-                .withKeyConditionExpression("id = :id")
+                .withKeyConditionExpression("category = :category")
                 .withExpressionAttributeValues(list);
     }
 
     @Override
-    public DynamoDBQueryExpression<Item> categoryIndexQueryExpression(String category, String name) {
+    public DynamoDBQueryExpression<Item> categoryIndexQueryExpression(String category, String available) {
         Map<String, AttributeValue> list = new HashMap<>();
         list.put(":category", new AttributeValue().withS(category));
-        list.put(":name", new AttributeValue().withS(name));
+        list.put(":available", new AttributeValue().withS(available));
         return new DynamoDBQueryExpression<Item>()
-                .withIndexName("ID-Index")
+                .withIndexName("CategoryIndex")
                 .withConsistentRead(false)
-                .withKeyConditionExpression("id = :id")
+                .withKeyConditionExpression("category = :category and available = :available")
                 .withExpressionAttributeValues(list);
     }
 
     @Override
-    public DynamoDBQueryExpression<Item> availableIndexQueryExpression(String availability) {
+    public DynamoDBQueryExpression<Item> locationIndexQueryExpression(String location) {
         Map<String, AttributeValue> list = new HashMap<>();
-        list.put(":available", new AttributeValue().withS(availability));
+        list.put(":location", new AttributeValue().withS(location));
         return new DynamoDBQueryExpression<Item>()
-                .withIndexName("ID-Index")
+                .withIndexName("AvailableIndex")
                 .withConsistentRead(false)
-                .withKeyConditionExpression("id = :id")
+                .withKeyConditionExpression("location = :location")
                 .withExpressionAttributeValues(list);
     }
-
-    @Override
-    public DynamoDBQueryExpression<Item> availableIndexQueryExpression(String availability, String name) {
+@Override
+    public DynamoDBQueryExpression<Item> locationIndexQueryExpression(String location, String category) {
         Map<String, AttributeValue> list = new HashMap<>();
-        list.put(":available", new AttributeValue().withS(availability));
-        list.put(":name", new AttributeValue().withS(name));
+        list.put(":location", new AttributeValue().withS(location));
+        list.put(":category", new AttributeValue().withS(category));
         return new DynamoDBQueryExpression<Item>()
-                .withIndexName("ID-Index")
+                .withIndexName("AvailableIndex")
                 .withConsistentRead(false)
-                .withKeyConditionExpression("id = :id")
+                .withKeyConditionExpression("available = :available and category = :category")
                 .withExpressionAttributeValues(list);
     }
 

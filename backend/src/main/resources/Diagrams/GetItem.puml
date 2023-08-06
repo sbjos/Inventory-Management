@@ -1,27 +1,27 @@
 @startuml
-title Get Item
+title GET ITEM
 
 actor Client
 participant APIGateway
 participant Lambda
-participant GetItem
+participant GetItemService
 participant ItemDao
-participant Converter
+participant ModelConverter
 database Database
 
 Client -> APIGateway : POST / Item
 activate Client
 APIGateway -> Lambda
 activate Lambda
-Lambda -> GetItem :  handleRequest(CreateItemRequest, Context)
-activate GetItem
-GetItem -> ItemDao : getItem(name)
+Lambda -> GetItemService :  handleRequest(Controller, Context)
+activate GetItemService
+GetItemService -> ItemDao : find(name)
 activate ItemDao
-ItemDao -> Database : get item
+ItemDao -> Database : load
 
 alt if name invalid
-    GetItem <-- Database : false
-    Lambda <-- GetItem : throw ItemNotFoundException
+    GetItemService <-- Database : false
+    Lambda <-- GetItemService : throw ItemNotFoundException
     APIGateway <-- Lambda
     Client <-- APIGateway : 4xx Response
 else otherwise, continue
@@ -29,17 +29,17 @@ end
 
 ItemDao <- Database : Item
 
-GetItem <-- ItemDao : Item
+GetItemService <-- ItemDao : Item
 deactivate ItemDao
 
-GetItem -> Converter : constructItem(Item)
-activate Converter
+GetItemService -> ModelConverter : itemConverter(item)
+activate ModelConverter
 
-GetItem <-- Converter : ItemModel(Item)
-deactivate Converter
+GetItemService <-- ModelConverter : ItemModel(Item)
+deactivate ModelConverter
 
-Lambda <-- GetItem : CreateItemResult
-deactivate GetItem
+Lambda <-- GetItemService : handleRequest(Controller, Context)
+deactivate GetItemService
 APIGateway <-- Lambda
 deactivate Lambda
 Client <-- APIGateway : 200 Response

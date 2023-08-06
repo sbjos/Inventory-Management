@@ -2,12 +2,13 @@ openapi: 3.0.3
 info:
   title: Inventory Management
   description: |-
+    Item - 
     Inventory Management API allows users to manage their inventories with the 
     possibility of adding, modifying or deleting inventory items. It also provide 
     the ability to filter by item name, category, availability.
   version: 1.0.0
 paths:
-  /inventory/add-item/:
+  /inventory/add:
     post:
       description: "Add an item to the inventory"
       parameters:
@@ -21,11 +22,6 @@ paths:
           required: true
           schema:
             type: string
-        - name: available
-          in: query
-          required: true
-          schema:
-            type: boolean
         - name: quantity
           in: query
           required: true
@@ -38,6 +34,16 @@ paths:
           schema:
             type: string
       responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                items:
+                  $ref: "#/components/schemas/ItemCreate"
+                example:
+                  message: "Item added successfully"
         "201":
           description: OK
           content:
@@ -45,9 +51,9 @@ paths:
               schema:
                 type: string
                 items:
-                  $ref: "#/components/schemas/ItemUpdate"
+                  $ref: "#/components/schemas/ItemCreate"
                 example:
-                  message: "Item Added Successfully"
+                  message: "Item added successfully"
         "400":
           description: "Invalid Input"
           content:
@@ -70,7 +76,86 @@ paths:
                 example:
                   code: 500
                   message: "Server Error"
-  /inventory/delete-item/:
+  /inventory/update:
+    put:
+      description: "Update an item from the inventory."
+      parameters:
+        - name: name
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: id
+          in: query
+          required: false
+          schema:
+            type: string
+            example: "ID"
+        - name: category
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: available
+          in: query
+          required: false
+          schema:
+            type: boolean
+        - name: quantity
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+        - name: location
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                items:
+                  $ref: "#/components/schemas/ItemCreate"
+                example:
+                  message: "Item updated successfully"
+        "201":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                items:
+                  $ref: "#/components/schemas/ItemCreate"
+                example:
+                  message: "Item Updated successfully"
+        "400":
+          description: "Item Not Found"
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Error"
+                example:
+                  code: 400
+                  message: "Item Not Found"
+        "500":
+          description: "Server Error"
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Error"
+                example:
+                  code: 500
+                  message: "Server Error"
+  /inventory/delete:
     delete:
       description: "Delete an item from the inventory"
       parameters:
@@ -87,7 +172,7 @@ paths:
               schema:
                 type: string
                 items:
-                  $ref: "#/components/schemas/ItemUpdate"
+                  $ref: "#/components/schemas/ItemCreate"
                 example:
                   message: "Item Deleted Successfully"
         "400":
@@ -112,18 +197,13 @@ paths:
                 example:
                   code: 500,
                   message: "Server Error"
-  /inventory/item/{name}:
+  /inventory/name/{name}:
     get:
       description: "Get an item from the inventory"
       parameters:
         - name: name
           in: path
-          required: false
-          schema:
-            type: string
-        - name: id
-          in: query
-          required: false
+          required: true
           schema:
             type: string
       responses:
@@ -134,7 +214,101 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/ItemUpdate"
+                  $ref: "#/components/schemas/ItemCreate"
+                example:
+                  name: "name"
+                  id: "id"
+                  category: "category"
+                  available: "true"
+                  quantity: 1
+                  location: "a12"
+        "400":
+          description: "Item Not Found"
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Error"
+                example:
+                  code: 400,
+                  message: "Item Not Found"
+        "500":
+          description: "Server Error"
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Error"
+                example:
+                  code: 500,
+                  message: "Server Error"
+  /inventory/id/{id}:
+    get:
+      description: "Get an item from the inventory"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ItemCreate"
+                example:
+                  name: "name"
+                  id: "id"
+                  category: "category"
+                  available: "true"
+                  quantity: 1
+                  location: "a12"
+        "400":
+          description: "Item Not Found"
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Error"
+                example:
+                  code: 400,
+                  message: "Item Not Found"
+        "500":
+          description: "Server Error"
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Error"
+                example:
+                  code: 500,
+                  message: "Server Error"
+  /inventory/available/{available}:
+    get:
+      description: "Get an item from the inventory"
+      parameters:
+        - name: available
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ItemList"
                 example:
                   name: "name"
                   id: "id"
@@ -211,15 +385,20 @@ paths:
                 example:
                   code: 500
                   message: "Server Error"
-  /inventory/available/{available}:
+  /inventory/category/{category}/{availabe}:
     get:
-      description: "Get a list of item from the inventory based on availability"
+      description: "Get a list of items from the inventory based on category"
       parameters:
-        - name: available
+        - name: category
           in: path
           required: true
           schema:
-            type: boolean
+            type: string
+        - name: availabe
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: OK
@@ -258,53 +437,83 @@ paths:
                 example:
                   code: 500
                   message: "Server Error"
-  /inventory/item/updateitem:
-    put:
-      description: "Update an item from the inventory."
+  /inventory/location/{location}:
+    get:
+      description: "Get a list of item from the inventory based on availability"
       parameters:
-        - name: name
-          in: query
-          required: false
-          schema:
-            type: string
-        - name: id
-          in: query
-          required: false
-          schema:
-            type: string
-            example: "ID"
-        - name: category
-          in: query
-          required: false
-          schema:
-            type: string
-        - name: available
-          in: query
-          required: false
-          schema:
-            type: boolean
-        - name: quantity
-          in: query
-          required: false
-          schema:
-            type: integer
-            minimum: 0
         - name: location
-          in: query
-          required: false
+          in: path
+          required: true
           schema:
             type: string
       responses:
-        "201":
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                type: string
+                type: object
                 items:
-                  $ref: "#/components/schemas/ItemUpdate"
+                  $ref: "#/components/schemas/ItemList"
                 example:
-                  message: "Item Updated successfully"
+                  name: "name"
+                  id: "id"
+                  category: "category"
+                  available: "true"
+                  quantity: 1
+                  location: "a12"
+        "400":
+          description: "Item Not Found"
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Error"
+                example:
+                  code: 400
+                  message: "Item Not Found"
+        "500":
+          description: "Server Error"
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Error"
+                example:
+                  code: 500
+                  message: "Server Error"
+  /inventory/location/{location}/{category}:
+    get:
+      description: "Get a list of item from the inventory based on availability"
+      parameters:
+        - name: location
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: category
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/ItemList"
+                example:
+                  name: "name"
+                  id: "id"
+                  category: "category"
+                  available: "true"
+                  quantity: 1
+                  location: "a12"
         "400":
           description: "Item Not Found"
           content:
@@ -330,7 +539,7 @@ paths:
 
 components:
   schemas:
-    ItemUpdate:
+    ItemCreate:
       properties:
         message:
           type: string

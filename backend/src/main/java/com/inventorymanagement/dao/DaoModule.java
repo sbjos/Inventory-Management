@@ -10,13 +10,15 @@ public interface DaoModule <Class, Type> {
 
     public PaginatedQueryList<Class> findById(Type id);
 
+    public PaginatedQueryList<Class> findByByAvailability(Type available);
+
     public PaginatedQueryList<Class> findByCategory(Type category);
 
-    public PaginatedQueryList<Class> findByCategory(Type category, Type name);
+    public PaginatedQueryList<Class> findByCategory(Type category, Type available);
 
-    public PaginatedQueryList<Class> findByByAvailability(Type name);
+    public PaginatedQueryList<Class> findByByLocation(Type location);
 
-    public PaginatedQueryList<Class> findByByAvailability(Type name, Type availability);
+    public PaginatedQueryList<Class> findByByLocation(Type location, Type category);
 
     public PaginatedQueryList<Class> findAll();
 
