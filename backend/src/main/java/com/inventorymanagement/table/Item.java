@@ -69,7 +69,7 @@ public class Item {
     }
 
     @DynamoDBAttribute(attributeName = "location")
-    @DynamoDBIndexHashKey(globalSecondaryIndexName = AVAILABLE_TYPE_INDEX, attributeName = "location")
+    @DynamoDBIndexHashKey(globalSecondaryIndexName = LOCATION_TYPE_INDEX, attributeName = "location")
     public String getLocation() {
         return location;
     }

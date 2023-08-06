@@ -76,6 +76,110 @@ paths:
                 example:
                   code: 500
                   message: "Server Error"
+  /category/add:
+    post:
+      description: "Add a category"
+      parameters:
+        - name: category
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                items:
+                  $ref: "#/components/schemas/Item"
+                example:
+                  message: "Item added successfully"
+        "201":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                items:
+                  $ref: "#/components/schemas/Item"
+                example:
+                  message: "Item added successfully"
+        "400":
+          description: "Invalid Input"
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Error"
+                example:
+                  code: 400
+                  message: "Invalid Input"
+        "500":
+          description: "Server Error"
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Error"
+                example:
+                  code: 500
+                  message: "Server Error"
+  /location/add:
+    post:
+      description: "Add a category"
+      parameters:
+        - name: location
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                items:
+                  $ref: "#/components/schemas/Item"
+                example:
+                  message: "Item added successfully"
+        "201":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                items:
+                  $ref: "#/components/schemas/Item"
+                example:
+                  message: "Item added successfully"
+        "400":
+          description: "Invalid Input"
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Error"
+                example:
+                  code: 400
+                  message: "Invalid Input"
+        "500":
+          description: "Server Error"
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Error"
+                example:
+                  code: 500
+                  message: "Server Error"
   /inventory/update:
     put:
       description: "Update an item from the inventory."
@@ -160,6 +264,90 @@ paths:
       description: "Delete an item from the inventory"
       parameters:
         - name: name
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                items:
+                  $ref: "#/components/schemas/Item"
+                example:
+                  message: "Item Deleted Successfully"
+        "400":
+          description: "Item Not Found"
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Error"
+                example:
+                  code: 400,
+                  message: "Item Not Found"
+        "500":
+          description: "Server Error"
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Error"
+                example:
+                  code: 500,
+                  message: "Server Error"
+  /category/delete:
+    delete:
+      description: "Delete an item from the inventory"
+      parameters:
+        - name: category
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                items:
+                  $ref: "#/components/schemas/Item"
+                example:
+                  message: "Item Deleted Successfully"
+        "400":
+          description: "Item Not Found"
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Error"
+                example:
+                  code: 400,
+                  message: "Item Not Found"
+        "500":
+          description: "Server Error"
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Error"
+                example:
+                  code: 500,
+                  message: "Server Error"
+  /location/delete:
+    delete:
+      description: "Delete an item from the inventory"
+      parameters:
+        - name: location
           in: query
           required: true
           schema:
@@ -536,7 +724,7 @@ paths:
                 example:
                   code: 500
                   message: "Server Error"
-  /item/all:
+  /inventory/all:
     get:
       description: "Get a list of item from the inventory based on availability"
       parameters:
