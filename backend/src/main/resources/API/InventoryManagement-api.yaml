@@ -385,7 +385,7 @@ paths:
                 example:
                   code: 500
                   message: "Server Error"
-  /inventory/category/{category}/{availabe}:
+  /inventory/category/{category}/{available}:
     get:
       description: "Get a list of items from the inventory based on category"
       parameters:
@@ -394,7 +394,7 @@ paths:
           required: true
           schema:
             type: string
-        - name: availabe
+        - name: available
           in: path
           required: true
           schema:
