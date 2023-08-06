@@ -1,4 +1,4 @@
-package com.inventorymanagement.test.service;
+package com.inventorymanagement.test.service.item;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedQueryList;
 import com.inventorymanagement.controller.Controller;
@@ -7,7 +7,7 @@ import com.inventorymanagement.exception.ItemAlreadyExistException;
 import com.inventorymanagement.dao.CategoryDao;
 import com.inventorymanagement.dao.ItemDao;
 import com.inventorymanagement.result.ItemResult;
-import com.inventorymanagement.service.CreateItemService;
+import com.inventorymanagement.service.item.CreateItemService;
 import com.inventorymanagement.table.Category;
 import com.inventorymanagement.table.Item;
 import com.inventorymanagement.test.TestHelper;
@@ -48,7 +48,7 @@ public class CreateItemServiceTest {
 
         item = new Item();
         item.setItemName(validName);
-        item.setCategory(food.getCategory());
+        item.setCategory(food.getCategoryName());
         item.setAvailable("Available");
         item.setQuantity(availQuantity);
         item.setLocation(location);
@@ -63,7 +63,7 @@ public class CreateItemServiceTest {
 
         controller = Controller.builder()
                 .withName(validName)
-                .withCategory(food.getCategory())
+                .withCategory(food.getCategoryName())
                 .withQuantity(availQuantity)
                 .withLocation(location)
                 .build();
@@ -74,14 +74,12 @@ public class CreateItemServiceTest {
         when(paginatedQueryList.stream()).thenReturn(existingItem.stream());
 
         when(itemDao.findById(any())).thenReturn(paginatedQueryList);
-        when(categoryDao.find(food.getCategory())).thenReturn(food);
+        when(categoryDao.find(food.getCategoryName())).thenReturn(food);
 
         // WHEN
         ItemResult result = createItemService.handleRequest(controller, null);
 
         // THEN
-        System.out.println(result.getItem());
-        System.out.println(result.getItem());
         assertEquals(item.getItemName(), result.getItem().getName());
         assertEquals(item.getCategory(), result.getItem().getCategory());
         assertEquals(item.isAvailable(), result.getItem().isAvailable());
@@ -96,7 +94,7 @@ public class CreateItemServiceTest {
         String invalidName = " ";
         controller = Controller.builder()
                 .withName(invalidName)
-                .withCategory(food.getCategory())
+                .withCategory(food.getCategoryName())
                 .withQuantity(availQuantity)
                 .withLocation(location)
                 .build();
@@ -116,7 +114,7 @@ public class CreateItemServiceTest {
 
         controller = Controller.builder()
                 .withName(validName)
-                .withCategory(food.getCategory())
+                .withCategory(food.getCategoryName())
                 .withQuantity(0)
                 .withLocation(location)
                 .build();
@@ -127,7 +125,7 @@ public class CreateItemServiceTest {
         when(paginatedQueryList.stream()).thenReturn(existingItem.stream());
 
         when(itemDao.findById(any())).thenReturn(paginatedQueryList);
-        when(categoryDao.find(food.getCategory())).thenReturn(food);
+        when(categoryDao.find(food.getCategoryName())).thenReturn(food);
 
         // WHEN
         ItemResult result = createItemService.handleRequest(controller, null);
@@ -145,7 +143,7 @@ public class CreateItemServiceTest {
 
         controller = Controller.builder()
                 .withName(ramen.getItemName())
-                .withCategory(food.getCategory())
+                .withCategory(food.getCategoryName())
                 .withQuantity(availQuantity)
                 .withLocation(location)
                 .build();
@@ -168,7 +166,7 @@ public class CreateItemServiceTest {
         controller = Controller
                 .builder()
                 .withName(validName)
-                .withCategory(food.getCategory())
+                .withCategory(food.getCategoryName())
                 .withQuantity(availQuantity)
                 .withLocation(location)
                 .build();

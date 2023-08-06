@@ -1,11 +1,13 @@
-package com.inventorymanagement.test.service;
+package com.inventorymanagement.test.service.item;
 
 import com.inventorymanagement.controller.Controller;
-import com.inventorymanagement.dao.ItemDao;
 import com.inventorymanagement.exception.ItemNotFoundException;
+import com.inventorymanagement.dao.ItemDao;
 import com.inventorymanagement.result.ItemResult;
-import com.inventorymanagement.service.DeleteItemService;
+import com.inventorymanagement.service.item.UpdateItemService;
+import com.inventorymanagement.table.Category;
 import com.inventorymanagement.table.Item;
+import com.inventorymanagement.table.Location;
 import com.inventorymanagement.test.TestHelper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,10 +19,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
-public class DeleteItemServiceTest {
+public class UpdateItemServiceTest {
     private final Item ramen = TestHelper.ramenNoodle();
+    private final Location locationR2 = TestHelper.locationR2();
     @InjectMocks
-    DeleteItemService deleteItemService;
+    private UpdateItemService updateItemService;
     @Mock
     private ItemDao itemDao;
     private Controller controller;
@@ -31,15 +34,21 @@ public class DeleteItemServiceTest {
     }
 
     @Test
-    void handleRequest_withValidName_deleteResult() {
+    void handleRequest_withValidName_ReturnUpdatedItem() {
         // GIVEN
+        Category category = new Category();
+        category.setCategoryName("Quick and Easy Food");
+
         controller = Controller.builder()
-                .withName(ramen.getItemName()).build();
+                .withName(ramen.getItemName())
+                .withCategory(category.getCategoryName())
+                .withLocation(locationR2.getLocationName())
+                .build();
 
         when(itemDao.find(controller.getName())).thenReturn(ramen);
 
         // WHEN
-        ItemResult result = deleteItemService.handleRequest(controller, null);
+        ItemResult result = updateItemService.handleRequest(controller, null);
 
         // THEN
         assertEquals(ramen.getItemName(), result.getItem().getName());
@@ -51,16 +60,25 @@ public class DeleteItemServiceTest {
     }
 
     @Test
-    void handleRequest_itemDoesNotExist_returnItemNotFoundException() {
+    void handleRequest_withInvalidName_throwsItemNotFoundException() {
         // GIVEN
+        int availQuantity = 5;
+
         controller = Controller.builder()
-                .withName("nonExistingItem").build();
+                .withName("invalidName")
+                .withQuantity(availQuantity)
+                .withLocation(locationR2.getLocationName())
+                .build();
 
         when(itemDao.find(controller.getName())).thenThrow(ItemNotFoundException.class);
 
+        ramen.setQuantity(availQuantity);
+        ramen.setLocation(locationR2.getLocationName());
+
+
         // WHEN - // THEN
         assertThrows(ItemNotFoundException.class, () ->
-                        deleteItemService.handleRequest(controller, null),
-                ("Unable to find this item to delete. It may not exist."));
+                updateItemService.handleRequest(controller, null),
+                ("Unable to find this item to update. It may not exist."));
     }
 }

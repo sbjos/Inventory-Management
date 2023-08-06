@@ -1,11 +1,11 @@
-package com.inventorymanagement.handler;
+package com.inventorymanagement.handler.category;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.inventorymanagement.configuration.DaggerInventoryManagementAppComponent;
 import com.inventorymanagement.controller.Controller;
 import com.inventorymanagement.result.CategoryResult;
-import com.inventorymanagement.service.CreateCategoryService;
+import com.inventorymanagement.service.category.CreateCategoryService;
 
 public class CreateCategoryHandler implements RequestHandler<Controller, CategoryResult> {
 

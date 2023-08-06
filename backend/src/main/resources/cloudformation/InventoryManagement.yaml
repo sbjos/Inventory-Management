@@ -31,7 +31,7 @@ Resources:
     Properties:
       FunctionName: "IM-CreateItem"
       CodeUri: s3://inventorymanagementapp-sj/
-      Handler: com.inventorymanagement.handler.CreateItemHandler::handleRequest
+      Handler: com.inventorymanagement.handler.item.CreateItemHandler::handleRequest
       Runtime: java11
       Description: "Java POST function"
       MemorySize: 512

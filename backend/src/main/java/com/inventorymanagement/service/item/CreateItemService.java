@@ -1,4 +1,4 @@
-package com.inventorymanagement.service;
+package com.inventorymanagement.service.item;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedQueryList;
 import com.amazonaws.services.lambda.runtime.Context;

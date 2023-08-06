@@ -1,11 +1,11 @@
-package com.inventorymanagement.test.service;
+package com.inventorymanagement.test.service.category;
 
 import com.inventorymanagement.controller.Controller;
 import com.inventorymanagement.exception.CategoryAlreadyExistException;
 import com.inventorymanagement.dao.CategoryDao;
 import com.inventorymanagement.exception.InvalidAttributeException;
 import com.inventorymanagement.result.CategoryResult;
-import com.inventorymanagement.service.CreateCategoryService;
+import com.inventorymanagement.service.category.CreateCategoryService;
 import com.inventorymanagement.table.Category;
 import com.inventorymanagement.test.TestHelper;
 import org.junit.jupiter.api.BeforeEach;
@@ -35,10 +35,10 @@ public class CreateCategoryServiceTest {
         // GIVEN
         controller = Controller
                 .builder()
-                .withCategory(food.getCategory())
+                .withCategory(food.getCategoryName())
                 .build();
 
-        when(categoryDao.find(food.getCategory())).thenReturn(food);
+        when(categoryDao.find(food.getCategoryName())).thenReturn(food);
 
         // WHEN - // THEN
         assertThrows(CategoryAlreadyExistException.class, () ->

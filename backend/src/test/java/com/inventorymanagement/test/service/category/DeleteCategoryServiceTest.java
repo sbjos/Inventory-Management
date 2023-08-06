@@ -1,11 +1,9 @@
-package com.inventorymanagement.test.service;
+package com.inventorymanagement.test.service.category;
 
 import com.inventorymanagement.controller.Controller;
-import com.inventorymanagement.exception.CategoryNotFoundException;
-import com.inventorymanagement.exception.ItemNotFoundException;
 import com.inventorymanagement.dao.CategoryDao;
 import com.inventorymanagement.result.CategoryResult;
-import com.inventorymanagement.service.DeleteCategoryService;
+import com.inventorymanagement.service.category.DeleteCategoryService;
 import com.inventorymanagement.table.Category;
 import com.inventorymanagement.test.TestHelper;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,7 +13,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 public class DeleteCategoryServiceTest {
@@ -35,7 +32,7 @@ public class DeleteCategoryServiceTest {
     void handleRequest_withValidCategory_deleteResult() {
         // GIVEN
         controller = Controller.builder()
-                .withCategory(food.getCategory()).build();
+                .withCategory(food.getCategoryName()).build();
 
         when(categoryDao.find(controller.getCategory())).thenReturn(food);
 
@@ -43,20 +40,6 @@ public class DeleteCategoryServiceTest {
         CategoryResult result = deleteCategoryService.handleRequest(controller, null);
 
         // THEN
-        assertEquals(food.getCategory(), result.getCategory().getCategory());
-    }
-
-    @Test
-    void handleRequest_CategoryDoesNotExist_returnCategoryNotFoundException() {
-        // GIVEN
-        controller = Controller.builder()
-                .withCategory("nonExistingCategory").build();
-
-        when(categoryDao.find(controller.getName())).thenThrow(ItemNotFoundException.class);
-
-        // WHEN - // THEN
-        assertThrows(CategoryNotFoundException.class, () ->
-                        deleteCategoryService.handleRequest(controller, null),
-                ("Unable to find this item. It may not exist."));
+        assertEquals(food.getCategoryName(), result.getCategory().getCategory());
     }
 }

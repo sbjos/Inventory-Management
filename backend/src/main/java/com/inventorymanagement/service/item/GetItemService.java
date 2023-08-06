@@ -1,4 +1,4 @@
-package com.inventorymanagement.service;
+package com.inventorymanagement.service.item;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedQueryList;
 import com.amazonaws.services.lambda.runtime.Context;
@@ -30,11 +30,16 @@ public class GetItemService implements RequestHandler<Controller, ItemResult> {
         String available = input.isAvailable();
         String category = input.getCategory();
         String location = input.getLocation();
+        boolean findAll = input.FindAll();
 
         if (location != null) return findByByLocation(location, category);
         if (category != null) return findByCategory(category, available);
         if (id != null) return findById(id);
         if (available != null) return findByByAvailability(available);
+        if (findAll) return findAll();
+
+        if (name == null) throw new ItemListNotFoundException
+                ("Unable to find the list of items");
 
         return find(name);
     }
@@ -72,7 +77,7 @@ public class GetItemService implements RequestHandler<Controller, ItemResult> {
     private ItemResult findByCategory(String category, String available) {
         PaginatedQueryList<Item> categoryList;
 
-        if (available != null) categoryList = itemDao.findByCategory(category, available);
+        if (available != null) categoryList = itemDao.findByCategoryAndAvailability(category, available);
          else categoryList = itemDao.findByCategory(category);
 
         // SafeGuard - Category will be provided as a list in the UI
@@ -92,7 +97,7 @@ public class GetItemService implements RequestHandler<Controller, ItemResult> {
     private ItemResult findByByLocation(String location, String category) {
         PaginatedQueryList<Item> locationList;
 
-        if (category != null) locationList = itemDao.findByByLocation(location, category);
+        if (category != null) locationList = itemDao.findByByLocationAndCategory(location, category);
         else locationList = itemDao.findByByLocation(location);
 
         // SafeGuard - Location will be provided as a list in the UI
@@ -106,6 +111,12 @@ public class GetItemService implements RequestHandler<Controller, ItemResult> {
 
         return ItemResult.builder()
                 .withItemList(new ModelConverter().itemListConverter(locationList))
+                .build();
+    }
+
+    private ItemResult findAll() {
+        return ItemResult.builder()
+                .withItemList(new ModelConverter().itemListConverter(itemDao.findAll()))
                 .build();
     }
 }

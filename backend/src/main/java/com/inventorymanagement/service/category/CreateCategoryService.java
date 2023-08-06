@@ -1,4 +1,4 @@
-package com.inventorymanagement.service;
+package com.inventorymanagement.service.category;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
@@ -33,7 +33,7 @@ public class CreateCategoryService implements RequestHandler<Controller, Categor
                 ("Please enter a valid category name.");
 
         Category category = new Category();
-        category.setCategory(categoryName);
+        category.setCategoryName(categoryName);
 
         categoryDao.save(category);
 

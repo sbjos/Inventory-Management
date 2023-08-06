@@ -1,9 +1,6 @@
 package com.inventorymanagement.utility;
 
-import com.inventorymanagement.model.CategoryModel;
-import com.inventorymanagement.model.ItemListModel;
-import com.inventorymanagement.model.ItemModel;
-import com.inventorymanagement.model.LocationModel;
+import com.inventorymanagement.model.*;
 import com.inventorymanagement.table.Category;
 import com.inventorymanagement.table.Item;
 import com.inventorymanagement.table.Location;
@@ -28,21 +25,32 @@ public class ModelConverter {
                 .build();
     }
 
-    public ItemListModel itemListConverter(List<Item> item) {
-        return ItemListModel.builder()
-                .withItemList(item)
-                .build();
-    }
-
     public CategoryModel categoryConverter(Category category) {
         return CategoryModel.builder()
-                .withCategory(category.getCategory())
+                .withCategory(category.getCategoryName())
                 .build();
     }
 
     public LocationModel locationConverter(Location location) {
         return LocationModel.builder()
                 .withLocation(location.getLocationName())
+                .build();
+    }
+
+    public ItemListModel itemListConverter(List<Item> item) {
+        return ItemListModel.builder()
+                .withItemList(item)
+                .build();
+    }
+
+    public CategoryListModel categoryListConverter(List<Category> category) {
+        return CategoryListModel.builder()
+                .withCategoryList(category)
+                .build();
+    }
+public LocationListModel locationListConverter(List<Location> location) {
+        return LocationListModel.builder()
+                .withLocationList(location)
                 .build();
     }
 }

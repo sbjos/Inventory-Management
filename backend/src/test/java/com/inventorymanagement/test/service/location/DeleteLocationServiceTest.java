@@ -1,10 +1,9 @@
-package com.inventorymanagement.test.service;
+package com.inventorymanagement.test.service.location;
 
 import com.inventorymanagement.controller.Controller;
 import com.inventorymanagement.dao.LocationDao;
-import com.inventorymanagement.exception.LocationNotFoundException;
 import com.inventorymanagement.result.LocationResult;
-import com.inventorymanagement.service.DeleteLocationService;
+import com.inventorymanagement.service.location.DeleteLocationService;
 import com.inventorymanagement.table.Location;
 import com.inventorymanagement.test.TestHelper;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,7 +13,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 public class DeleteLocationServiceTest {
@@ -44,19 +42,5 @@ public class DeleteLocationServiceTest {
 
         // THEN
         assertEquals(locationDF1.getLocationName(), result.getLocation().getLocation());
-    }
-
-    @Test
-    void handleRequest_locationDoesNotExist_returnLocationNotFoundException() {
-        // GIVEN
-        controller = Controller.builder()
-                .withCategory("nonExisting").build();
-
-        when(locationDao.find(controller.getName())).thenThrow(LocationNotFoundException.class);
-
-        // WHEN - // THEN
-        assertThrows(LocationNotFoundException.class, () ->
-                        deleteLocationService.handleRequest(controller, null),
-                ("Unable to find this location. It may not exist."));
     }
 }

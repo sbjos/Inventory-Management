@@ -45,9 +45,9 @@ public class ItemDao implements DaoModule<Item, String> {
     }
 
     @Override
-    public PaginatedQueryList<Item> findByCategory(String category, String available) {
+    public PaginatedQueryList<Item> findByCategoryAndAvailability(String category, String available) {
         return dynamoDBMapper.query(Item.class,
-                awsGsiItem.categoryIndexQueryExpression(category, available));
+                awsGsiItem.categoryAndAvailabilityIndexQueryExpression(category, available));
     }
 
     @Override
@@ -57,9 +57,9 @@ public class ItemDao implements DaoModule<Item, String> {
     }
 
     @Override
-    public PaginatedQueryList<Item> findByByLocation(String location, String category) {
+    public PaginatedQueryList<Item> findByByLocationAndCategory(String location, String category) {
         return dynamoDBMapper.query(Item.class,
-                awsGsiItem.locationIndexQueryExpression(location, category));
+                awsGsiItem.locationAndCategoryIndexQueryExpression(location, category));
     }
 
     @Override

@@ -1,9 +1,11 @@
 package com.inventorymanagement.result;
 
+import com.inventorymanagement.model.CategoryListModel;
 import com.inventorymanagement.model.CategoryModel;
 
 public class CategoryResult {
     private CategoryModel category;
+    private CategoryListModel categoryList;
 
     public CategoryResult (Builder builder) {
         this.category = builder.category;
@@ -17,15 +19,29 @@ public class CategoryResult {
         this.category = category;
     }
 
+    public CategoryListModel getCategoryList() {
+        return categoryList;
+    }
+
+    public void setCategoryList(CategoryListModel categoryList) {
+        this.categoryList = categoryList;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
 
     public static final class Builder {
         private CategoryModel category;
+        private CategoryListModel categoryList;
 
         public Builder withCategory(CategoryModel categoryToUse) {
             this.category = categoryToUse;
+            return this;
+        }
+
+        public Builder withCategoryList(CategoryListModel categoryListToUse) {
+            this.categoryList = categoryListToUse;
             return this;
         }
 

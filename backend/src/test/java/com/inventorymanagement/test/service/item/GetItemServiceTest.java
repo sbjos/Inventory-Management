@@ -1,4 +1,4 @@
-package com.inventorymanagement.test.service;
+package com.inventorymanagement.test.service.item;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedQueryList;
 import com.inventorymanagement.configuration.awsglobalsecondaryindex.AwsGsiItem;
@@ -9,7 +9,7 @@ import com.inventorymanagement.exception.ItemNotFoundException;
 import com.inventorymanagement.dao.ItemDao;
 import com.inventorymanagement.exception.LocationNotFoundException;
 import com.inventorymanagement.result.ItemResult;
-import com.inventorymanagement.service.GetItemService;
+import com.inventorymanagement.service.item.GetItemService;
 import com.inventorymanagement.table.Category;
 import com.inventorymanagement.table.Item;
 import com.inventorymanagement.table.Location;
@@ -32,7 +32,7 @@ public class GetItemServiceTest {
     private final Item computer = TestHelper.computer();
     private final Category music = TestHelper.music();
     private final Location locationDF1 = TestHelper.locationDF1();
-    private String nonExisting = "nonExisting";
+    private final String nonExisting = "nonExisting";
     @InjectMocks
     GetItemService getItemService;
     @Mock
@@ -45,9 +45,9 @@ public class GetItemServiceTest {
     @Mock
     private PaginatedQueryList<Item> paginatedQueryItemList;
     @Mock
-    private PaginatedQueryList<Category> paginatedQueryCategoryList;
+    private PaginatedQueryList<Category> categoryPaginatedQueryList;
     @Mock
-    private PaginatedQueryList<Location> paginatedQueryLocationList;
+    private PaginatedQueryList<Location> locationPaginatedQueryList;
     private Controller controller;
 
     @BeforeEach
@@ -164,7 +164,7 @@ public class GetItemServiceTest {
         when(paginatedQueryItemList.iterator()).thenReturn(existingItem.iterator());
         when(paginatedQueryItemList.stream()).thenReturn(existingItem.stream());
 
-        when(itemDao.findByCategory(controller.getCategory(), controller.isAvailable())).thenReturn(paginatedQueryItemList);
+        when(itemDao.findByCategoryAndAvailability(controller.getCategory(), controller.isAvailable())).thenReturn(paginatedQueryItemList);
 
         // WHEN
         ItemResult result = getItemService.handleRequest(controller, null);
@@ -203,22 +203,45 @@ public class GetItemServiceTest {
         existingItem.add(ramen);
 
         controller = Controller.builder()
-                .withLocation("A12")
-                .withCategory("Food").build();
+                .withLocation(ramen.getLocation())
+                .withCategory(ramen.getCategory()).build();
 
         when(paginatedQueryItemList.size()).thenReturn(existingItem.size());
         when(paginatedQueryItemList.isEmpty()).thenReturn(false);
         when(paginatedQueryItemList.iterator()).thenReturn(existingItem.iterator());
         when(paginatedQueryItemList.stream()).thenReturn(existingItem.stream());
 
-        when(itemDao.findByByLocation(controller.getLocation(), controller.getCategory())).thenReturn(paginatedQueryItemList);
+        when(itemDao.findByByLocationAndCategory(controller.getLocation(), controller.getCategory())).thenReturn(paginatedQueryItemList);
 
         // WHEN
         ItemResult result = getItemService.handleRequest(controller, null);
 
         // THEN
-        for (Item list: paginatedQueryItemList)
-            System.out.println(list);
+        assertNotNull(result);
+    }
+
+    @Test
+    void handleRequest_findAll_returnAllItems() {
+        //GIVEN
+        List<Item> existingItem = new ArrayList<>();
+        existingItem.add(ramen);
+        existingItem.add(lettuce);
+        existingItem.add(computer);
+
+        controller = Controller.builder()
+                .withFindAll(true).build();
+
+        when(paginatedQueryItemList.size()).thenReturn(existingItem.size());
+        when(paginatedQueryItemList.isEmpty()).thenReturn(false);
+        when(paginatedQueryItemList.iterator()).thenReturn(existingItem.iterator());
+        when(paginatedQueryItemList.stream()).thenReturn(existingItem.stream());
+
+        when(itemDao.findAll()).thenReturn(paginatedQueryItemList);
+
+        // WHEN
+        ItemResult result = getItemService.handleRequest(controller, null);
+
+        // THEN
         assertNotNull(result);
     }
 
@@ -257,12 +280,12 @@ public class GetItemServiceTest {
         existingItem.add(music);
 
         controller = Controller.builder()
-                .withCategory(music.getCategory()).build();
+                .withCategory(music.getCategoryName()).build();
 
-        when(paginatedQueryCategoryList.size()).thenReturn(existingItem.size());
-        when(paginatedQueryCategoryList.isEmpty()).thenReturn(false);
-        when(paginatedQueryCategoryList.iterator()).thenReturn(existingItem.iterator());
-        when(paginatedQueryCategoryList.stream()).thenReturn(existingItem.stream());
+        when(categoryPaginatedQueryList.size()).thenReturn(existingItem.size());
+        when(categoryPaginatedQueryList.isEmpty()).thenReturn(false);
+        when(categoryPaginatedQueryList.iterator()).thenReturn(existingItem.iterator());
+        when(categoryPaginatedQueryList.stream()).thenReturn(existingItem.stream());
 
         when(itemDao.findByCategory(controller.getCategory())).thenThrow(CategoryNotFoundException.class);
 
@@ -281,10 +304,10 @@ public class GetItemServiceTest {
         controller = Controller.builder()
                 .withLocation(nonExisting).build();
 
-        when(paginatedQueryLocationList.size()).thenReturn(existingItem.size());
-        when(paginatedQueryLocationList.isEmpty()).thenReturn(false);
-        when(paginatedQueryLocationList.iterator()).thenReturn(existingItem.iterator());
-        when(paginatedQueryLocationList.stream()).thenReturn(existingItem.stream());
+        when(locationPaginatedQueryList.size()).thenReturn(existingItem.size());
+        when(locationPaginatedQueryList.isEmpty()).thenReturn(false);
+        when(locationPaginatedQueryList.iterator()).thenReturn(existingItem.iterator());
+        when(locationPaginatedQueryList.stream()).thenReturn(existingItem.stream());
 
         when(itemDao.findByByLocation(controller.getLocation())).thenThrow(LocationNotFoundException.class);
 
@@ -308,7 +331,7 @@ public class GetItemServiceTest {
         when(paginatedQueryItemList.iterator()).thenReturn(existingItem.iterator());
         when(paginatedQueryItemList.stream()).thenReturn(existingItem.stream());
 
-        when(itemDao.findByCategory(controller.getCategory(), controller.isAvailable())).thenThrow(ItemListNotFoundException.class);
+        when(itemDao.findByCategoryAndAvailability(controller.getCategory(), controller.isAvailable())).thenThrow(ItemListNotFoundException.class);
 
         // WHEN - // THEN
         assertThrows(ItemListNotFoundException.class, () ->

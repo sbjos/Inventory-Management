@@ -1,10 +1,11 @@
-package com.inventorymanagement.service;
+package com.inventorymanagement.service.category;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.inventorymanagement.controller.Controller;
 import com.inventorymanagement.dao.CategoryDao;
 import com.inventorymanagement.exception.CategoryNotFoundException;
+import com.inventorymanagement.exception.ItemNotFoundException;
 import com.inventorymanagement.model.CategoryModel;
 import com.inventorymanagement.result.CategoryResult;
 import com.inventorymanagement.table.Category;
@@ -19,18 +20,15 @@ public class DeleteCategoryService implements RequestHandler<Controller, Categor
         this.categoryDao = categoryDao;
     }
 
+    // TODO: Check what happens if the item that is to be deleted does not exist
     @Override
     public CategoryResult handleRequest(Controller input, Context context) {
-        String categoryName = input.getCategory();
-        Category category = categoryDao.find(categoryName);
+        String category = input.getCategory();
 
-        if (category == null) throw new CategoryNotFoundException
-                ("Unable to find this item. It may not exist.");
+        categoryDao.delete(category);
 
         return CategoryResult.builder()
-                .withCategory(CategoryModel.builder()
-                        .withCategory(categoryName)
-                        .build())
+                .withCategory(CategoryModel.builder().withCategory(category).build())
                 .build();
     }
 }

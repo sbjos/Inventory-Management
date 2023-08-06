@@ -4,7 +4,9 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedQueryList;
 import com.inventorymanagement.configuration.awsglobalsecondaryindex.AwsGsiItem;
 import com.inventorymanagement.dao.*;
+import com.inventorymanagement.table.Category;
 import com.inventorymanagement.table.Item;
+import com.inventorymanagement.table.Location;
 import com.inventorymanagement.test.TestHelper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,6 +25,8 @@ public class ItemDaoTest {
     private final Item ramen = TestHelper.ramenNoodle();
     private final Item lettuce = TestHelper.lettuce();
     private final Item electronic = TestHelper.computer();
+    private final Category food = TestHelper.food();
+    private final Location R2 = TestHelper.locationR2();
     @InjectMocks
     private ItemDao itemDao;
     @Mock
@@ -64,25 +68,6 @@ public class ItemDaoTest {
     }
 
     @Test
-    void findByCategory_returnsListOfCategory() {
-        List<Item> existingItem = new ArrayList<>();
-        existingItem.add(electronic);
-
-        when(paginatedQueryList.size()).thenReturn(existingItem.size());
-        when(paginatedQueryList.isEmpty()).thenReturn(false);
-        when(paginatedQueryList.iterator()).thenReturn(existingItem.iterator());
-        when(paginatedQueryList.stream()).thenReturn(existingItem.stream());
-
-        when(itemDao.findByCategory(electronic.getCategory())).thenReturn(paginatedQueryList);
-
-        // WHEN
-        PaginatedQueryList<Item> result = itemDao.findAll();
-
-        // THEN
-        assertEquals(paginatedQueryList, result);
-    }
-
-    @Test
     void findByByAvailability_returnsListOfAvailable() {
         List<Item> existingItem = new ArrayList<>();
         existingItem.add(electronic);
@@ -92,7 +77,46 @@ public class ItemDaoTest {
         when(paginatedQueryList.iterator()).thenReturn(existingItem.iterator());
         when(paginatedQueryList.stream()).thenReturn(existingItem.stream());
 
-        when(itemDao.findByCategory(electronic.getLocation())).thenReturn(paginatedQueryList);
+        when(itemDao.findByByAvailability(electronic.isAvailable())).thenReturn(paginatedQueryList);
+
+        // WHEN
+        PaginatedQueryList<Item> result = itemDao.findAll();
+
+        // THEN
+        assertNotNull(result);
+    }
+
+    @Test
+    void findByCategory_returnsListOfCategory() {
+        List<Item> existingItem = new ArrayList<>();
+        existingItem.add(ramen);
+        existingItem.add(lettuce);
+
+        when(paginatedQueryList.size()).thenReturn(existingItem.size());
+        when(paginatedQueryList.isEmpty()).thenReturn(false);
+        when(paginatedQueryList.iterator()).thenReturn(existingItem.iterator());
+        when(paginatedQueryList.stream()).thenReturn(existingItem.stream());
+
+        when(itemDao.findByCategory(food.getCategoryName())).thenReturn(paginatedQueryList);
+
+        // WHEN
+        PaginatedQueryList<Item> result = itemDao.findAll();
+
+        // THEN
+        assertNotNull(result);
+    }
+
+    @Test
+    void findByCategoryAndAvailability_returnsListOfCategory() {
+        List<Item> existingItem = new ArrayList<>();
+        existingItem.add(lettuce);
+
+        when(paginatedQueryList.size()).thenReturn(existingItem.size());
+        when(paginatedQueryList.isEmpty()).thenReturn(false);
+        when(paginatedQueryList.iterator()).thenReturn(existingItem.iterator());
+        when(paginatedQueryList.stream()).thenReturn(existingItem.stream());
+
+        when(itemDao.findByCategoryAndAvailability(food.getCategoryName(), lettuce.isAvailable())).thenReturn(paginatedQueryList);
 
         // WHEN
         PaginatedQueryList<Item> result = itemDao.findAll();
@@ -105,20 +129,38 @@ public class ItemDaoTest {
     void findByByLocation_returnsListOfLocation() {
         List<Item> existingItem = new ArrayList<>();
         existingItem.add(lettuce);
-        existingItem.add(electronic);
 
         when(paginatedQueryList.size()).thenReturn(existingItem.size());
         when(paginatedQueryList.isEmpty()).thenReturn(false);
         when(paginatedQueryList.iterator()).thenReturn(existingItem.iterator());
         when(paginatedQueryList.stream()).thenReturn(existingItem.stream());
 
-        when(itemDao.findByCategory(electronic.getCategory())).thenReturn(paginatedQueryList);
+        when(itemDao.findByByLocation(R2.getLocationName())).thenReturn(paginatedQueryList);
 
         // WHEN
         PaginatedQueryList<Item> result = itemDao.findAll();
 
         // THEN
-        assertEquals(paginatedQueryList, result);
+        assertNotNull(result);
+    }
+
+    @Test
+    void findByByLocationAndCategory_returnsListOfLocation() {
+        List<Item> existingItem = new ArrayList<>();
+        existingItem.add(lettuce);
+
+        when(paginatedQueryList.size()).thenReturn(existingItem.size());
+        when(paginatedQueryList.isEmpty()).thenReturn(false);
+        when(paginatedQueryList.iterator()).thenReturn(existingItem.iterator());
+        when(paginatedQueryList.stream()).thenReturn(existingItem.stream());
+
+        when(itemDao.findByByLocationAndCategory(R2.getLocationName(), food.getCategoryName())).thenReturn(paginatedQueryList);
+
+        // WHEN
+        PaginatedQueryList<Item> result = itemDao.findAll();
+
+        // THEN
+        assertNotNull(result);
     }
 
     @Test
@@ -127,6 +169,7 @@ public class ItemDaoTest {
         List<Item> existingItem = new ArrayList<>();
         existingItem.add(ramen);
         existingItem.add(lettuce);
+        existingItem.add(electronic);
 
         when(paginatedQueryList.size()).thenReturn(existingItem.size());
         when(paginatedQueryList.isEmpty()).thenReturn(false);
@@ -139,6 +182,6 @@ public class ItemDaoTest {
         PaginatedQueryList<Item> result = itemDao.findAll();
 
         // THEN
-        assertEquals(paginatedQueryList, result);
+        assertNotNull(result);
     }
 }

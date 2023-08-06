@@ -29,7 +29,7 @@ public class AwsGsiCategory implements AwsGsiModule<Category, String> {
     }
 
     @Override
-    public DynamoDBQueryExpression<Category> categoryIndexQueryExpression(String category, String available) {
+    public DynamoDBQueryExpression<Category> categoryAndAvailabilityIndexQueryExpression(String category, String available) {
         return null;
     }
 
@@ -40,7 +40,7 @@ public class AwsGsiCategory implements AwsGsiModule<Category, String> {
     }
 
     @Override
-    public DynamoDBQueryExpression<Category> locationIndexQueryExpression(String location, String available) {
+    public DynamoDBQueryExpression<Category> locationAndCategoryIndexQueryExpression(String location, String available) {
         return null;
     }
 

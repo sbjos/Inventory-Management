@@ -47,7 +47,7 @@ public class AwsGsiItem implements AwsGsiModule<Item, String> {
     }
 
     @Override
-    public DynamoDBQueryExpression<Item> categoryIndexQueryExpression(String category, String available) {
+    public DynamoDBQueryExpression<Item> categoryAndAvailabilityIndexQueryExpression(String category, String available) {
         Map<String, AttributeValue> list = new HashMap<>();
         list.put(":category", new AttributeValue().withS(category));
         list.put(":available", new AttributeValue().withS(available));
@@ -69,7 +69,7 @@ public class AwsGsiItem implements AwsGsiModule<Item, String> {
                 .withExpressionAttributeValues(list);
     }
 @Override
-    public DynamoDBQueryExpression<Item> locationIndexQueryExpression(String location, String category) {
+    public DynamoDBQueryExpression<Item> locationAndCategoryIndexQueryExpression(String location, String category) {
         Map<String, AttributeValue> list = new HashMap<>();
         list.put(":location", new AttributeValue().withS(location));
         list.put(":category", new AttributeValue().withS(category));

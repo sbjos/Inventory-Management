@@ -9,18 +9,19 @@ public class Controller {
     private String available;
     private Integer quantity;
     private String location;
-
+    private boolean findAll;
 
     public Controller() {}
 
     public Controller(String name, String id, String category,
-                      String available, int quantity, String location) {
+                      String available, int quantity, String location, boolean findAll) {
         this.name = name;
         this.id = id;
         this.category = category;
         this.available = available;
         this.quantity = quantity;
         this.location = location;
+        this.findAll = findAll;
     }
 
     public Controller(Builder builder) {
@@ -30,6 +31,7 @@ public class Controller {
         this.available = builder.available;
         this.quantity = builder.quantity;
         this.location = builder.location;
+        this.findAll = builder.findAll;
     }
 
     public String getName() {
@@ -80,6 +82,14 @@ public class Controller {
         this.location = location;
     }
 
+    public boolean FindAll() {
+        return findAll;
+    }
+
+    public void setFindAll(boolean findAll) {
+        this.findAll = findAll;
+    }
+
     @Override
     public String toString() {
         return "ItemController{" +
@@ -116,6 +126,7 @@ public class Controller {
         private String available;
         private Integer quantity;
         private String location;
+        private boolean findAll;
 
         public Builder withName(String nameToUse) {
             this.name = nameToUse;
@@ -144,6 +155,11 @@ public class Controller {
 
         public Builder withLocation(String locationToUse) {
             this.location = locationToUse;
+            return this;
+        }
+
+        public Builder withFindAll(boolean findAll) {
+            this.findAll = findAll;
             return this;
         }
 

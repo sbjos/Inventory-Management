@@ -71,8 +71,6 @@ public class LocationDaoTest {
         PaginatedQueryList<Location> result = locationDao.findAll();
 
         // THEN
-        for (Location list : paginatedQueryList)
-            System.out.println(list);
         assertNotNull(result);
     }
 }

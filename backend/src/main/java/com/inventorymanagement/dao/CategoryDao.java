@@ -43,7 +43,7 @@ public class CategoryDao implements DaoModule<Category, String> {
     }
 
     @Override
-    public PaginatedQueryList<Category> findByCategory(String category, String available) {
+    public PaginatedQueryList<Category> findByCategoryAndAvailability(String category, String available) {
         return null;
     }
 
@@ -53,7 +53,7 @@ public class CategoryDao implements DaoModule<Category, String> {
     }
 
     @Override
-    public PaginatedQueryList<Category> findByByLocation(String location, String category) {
+    public PaginatedQueryList<Category> findByByLocationAndCategory(String location, String category) {
         return null;
     }
 

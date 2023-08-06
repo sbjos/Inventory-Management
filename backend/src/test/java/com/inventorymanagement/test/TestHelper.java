@@ -51,21 +51,21 @@ public final class TestHelper {
      */
     public static Category food() {
         Category category = new Category();
-        category.setCategory("Food");
+        category.setCategoryName("Food");
 
         return category;
     }
 
     public static Category electronic() {
         Category category = new Category();
-        category.setCategory("Electronic");
+        category.setCategoryName("Electronic");
 
         return category;
     }
 
     public static Category music() {
         Category category = new Category();
-        category.setCategory("Music");
+        category.setCategoryName("Music");
 
         return category;
     }

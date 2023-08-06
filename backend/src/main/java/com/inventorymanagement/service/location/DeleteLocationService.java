@@ -1,13 +1,11 @@
-package com.inventorymanagement.service;
+package com.inventorymanagement.service.location;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.inventorymanagement.controller.Controller;
 import com.inventorymanagement.dao.LocationDao;
-import com.inventorymanagement.exception.CategoryNotFoundException;
 import com.inventorymanagement.model.LocationModel;
 import com.inventorymanagement.result.LocationResult;
-import com.inventorymanagement.table.Location;
 
 import javax.inject.Inject;
 
@@ -23,15 +21,11 @@ public class DeleteLocationService implements RequestHandler<Controller, Locatio
     @Override
     public LocationResult handleRequest(Controller input, Context context) {
         String locationName = input.getLocation();
-        Location location = locationDao.find(locationName);
 
-        if (location == null) throw new CategoryNotFoundException
-                ("Unable to find this location. It may not exist.");
+        locationDao.delete(locationName);
 
         return LocationResult.builder()
-                .withLocation(LocationModel.builder()
-                        .withLocation(locationName)
-                        .build())
+                .withLocation(LocationModel.builder().withLocation(locationName).build())
                 .build();
     }
 }

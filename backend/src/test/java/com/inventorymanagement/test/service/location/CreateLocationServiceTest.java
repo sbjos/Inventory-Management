@@ -1,11 +1,11 @@
-package com.inventorymanagement.test.service;
+package com.inventorymanagement.test.service.location;
 
 import com.inventorymanagement.controller.Controller;
 import com.inventorymanagement.dao.LocationDao;
 import com.inventorymanagement.exception.LocationAlreadyExistException;
 import com.inventorymanagement.exception.InvalidAttributeException;
 import com.inventorymanagement.result.LocationResult;
-import com.inventorymanagement.service.CreateLocationService;
+import com.inventorymanagement.service.location.CreateLocationService;
 import com.inventorymanagement.table.Location;
 import com.inventorymanagement.test.TestHelper;
 import org.junit.jupiter.api.BeforeEach;
