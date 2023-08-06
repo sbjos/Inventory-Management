@@ -6,10 +6,10 @@ import java.util.Objects;
 
 @DynamoDBTable(tableName = "IM-Item")
 public class Item {
-
     public static final String ID_TYPE_INDEX = "IdIndex";
-    public static final String CATEGORY_TYPE_INDEX = "CategoryIndex";
     public static final String AVAILABLE_TYPE_INDEX = "AvailableIndex";
+    public static final String CATEGORY_TYPE_INDEX = "CategoryIndex";
+    public static final String LOCATION_TYPE_INDEX = "LocationIndex";
 
     private String itemName;
     private String id;
@@ -21,8 +21,6 @@ public class Item {
     public Item() {}
 
     @DynamoDBHashKey(attributeName = "itemName")
-    @DynamoDBIndexRangeKey(globalSecondaryIndexNames = {CATEGORY_TYPE_INDEX, AVAILABLE_TYPE_INDEX},
-                            attributeName = "itemName")
     public String getItemName() {
         return itemName;
     }
@@ -41,6 +39,7 @@ public class Item {
     }
 
     @DynamoDBIndexHashKey(globalSecondaryIndexName = CATEGORY_TYPE_INDEX, attributeName = "category")
+    @DynamoDBIndexRangeKey(globalSecondaryIndexNames = {LOCATION_TYPE_INDEX}, attributeName = "category")
     public String getCategory() {
         return category;
     }
@@ -51,6 +50,7 @@ public class Item {
 
     @DynamoDBAttribute(attributeName = "available")
     @DynamoDBIndexHashKey(globalSecondaryIndexName = AVAILABLE_TYPE_INDEX, attributeName = "available")
+    @DynamoDBIndexRangeKey(globalSecondaryIndexNames = {CATEGORY_TYPE_INDEX}, attributeName = "available")
     public String isAvailable() {
         return available;
     }
@@ -69,6 +69,7 @@ public class Item {
     }
 
     @DynamoDBAttribute(attributeName = "location")
+    @DynamoDBIndexHashKey(globalSecondaryIndexName = AVAILABLE_TYPE_INDEX, attributeName = "location")
     public String getLocation() {
         return location;
     }

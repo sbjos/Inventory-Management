@@ -14,30 +14,38 @@ Resources:
           AttributeType: "S"
         - AttributeName: "available"
           AttributeType: "B"
+        - AttributeName: "location"
+          AttributeType: "B"
       KeySchema:
         - AttributeName: "name"
           KeyType: "HASH"
       BillingMode: PAY_PER_REQUEST
       GlobalSecondaryIndexes:
-        - IndexName: "ID-Index"
+        - IndexName: "IDIndex"
           KeySchema:
             - AttributeName: "id"
               KeyType: "HASH"
           Projection:
             ProjectionType: ALL
-        - IndexName: "Category-Index"
-          KeySchema:
-            - AttributeName: "category"
-              KeyType: "HASH"
-            - AttributeName: "name"
-              KeyType: "RANGE"
-          Projection:
-            ProjectionType: ALL
-        - IndexName: "Available-Index"
+        - IndexName: "AvailableIndex"
           KeySchema:
             - AttributeName: "available"
               KeyType: "HASH"
-            - AttributeName: "name"
+          Projection:
+            ProjectionType: ALL
+        - IndexName: "CategoryIndex"
+          KeySchema:
+            - AttributeName: "category"
+              KeyType: "HASH"
+            - AttributeName: "available"
+              KeyType: "RANGE"
+          Projection:
+            ProjectionType: ALL
+        - IndexName: "LocationIndex"
+          KeySchema:
+            - AttributeName: "location"
+              KeyType: "HASH"
+            - AttributeName: "category"
               KeyType: "RANGE"
           Projection:
             ProjectionType: ALL

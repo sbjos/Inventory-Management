@@ -11,7 +11,7 @@ public class Location {
 
     public Location() {}
 
-    @DynamoDBHashKey(attributeName = "locationName")
+    @DynamoDBHashKey(attributeName = "location")
     public String getLocationName() {
         return location;
     }

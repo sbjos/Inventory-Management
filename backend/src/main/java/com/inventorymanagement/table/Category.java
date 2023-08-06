@@ -6,31 +6,23 @@ import java.util.Objects;
 
 @DynamoDBTable(tableName = "IM-Category")
 public class Category {
-
-    private String categoryName
-            ;
+    private String category;
 
     public Category() {}
 
-    @DynamoDBHashKey(attributeName = "name")
+    @DynamoDBHashKey(attributeName = "category")
     public String getCategoryName() {
-        return categoryName
-                ;
+        return category;
     }
 
-    public void setCategoryName(String categoryName
-    ) {
-        this.categoryName
-                = categoryName
-        ;
+    public void setCategoryName(String category) {
+        this.category = category;
     }
 
     @Override
     public String toString() {
         return "Category{" +
-                "categoryName" +
-                "='" + categoryName
-                + '\'' +
+                "category='" + category + '\'' +
                 '}';
     }
 
@@ -39,14 +31,11 @@ public class Category {
         if (this == o) return true;
         if (o == null || this.getClass() != o.getClass()) return false;
         Category that = (Category) o;
-        return Objects.equals(categoryName
-                , that.categoryName
-        );
+        return Objects.equals(category, that.category);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(categoryName
-        );
+        return Objects.hash(category);
     }
 }
