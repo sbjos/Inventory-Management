@@ -6,32 +6,33 @@ public class Controller {
     private String name;
     private String id;
     private String category;
-    private String available;
+    private String availability;
     private Integer quantity;
     private String location;
-    private boolean findAll;
+    private boolean all;
 
     public Controller() {}
 
-    public Controller(String name, String id, String category,
-                      String available, int quantity, String location, boolean findAll) {
+
+    public Controller(String name, String Id, String category,
+                      String availability, int quantity, String location, boolean all) {
         this.name = name;
-        this.id = id;
+        this.id = Id;
         this.category = category;
-        this.available = available;
+        this.availability = availability;
         this.quantity = quantity;
         this.location = location;
-        this.findAll = findAll;
+        this.all = all;
     }
 
     public Controller(Builder builder) {
         this.name = builder.name;
         this.id = builder.id;
         this.category = builder.category;
-        this.available = builder.available;
+        this.availability = builder.availability;
         this.quantity = builder.quantity;
         this.location = builder.location;
-        this.findAll = builder.findAll;
+        this.all = builder.all;
     }
 
     public String getName() {
@@ -58,12 +59,12 @@ public class Controller {
         this.category = category;
     }
 
-    public String isAvailable() {
-        return available;
+    public String getAvailability() {
+        return availability;
     }
 
-    public void setAvailable(String available) {
-        this.available = available;
+    public void setAvailability(String availability) {
+        this.availability = availability;
     }
 
     public Integer getQuantity() {
@@ -82,23 +83,23 @@ public class Controller {
         this.location = location;
     }
 
-    public boolean FindAll() {
-        return findAll;
+    public boolean isAll() {
+        return all;
     }
 
-    public void setFindAll(boolean findAll) {
-        this.findAll = findAll;
+    public void setAll(boolean all) {
+        this.all = all;
     }
 
     @Override
     public String toString() {
-        return "ItemController{" +
-                "name='" + name + '\'' +
-                ", id='" + id + '\'' +
-                ", category='" + category + '\'' +
-                ", available=" + available +
-                ", quantity=" + quantity +
-                ", location='" + location + '\'' +
+        return "Controller{" +
+                "Name='" + name + '\'' +
+                ", ID='" + id + '\'' +
+                ", Category='" + category + '\'' +
+                ", Available=" + availability +
+                ", Quantity=" + quantity +
+                ", Location='" + location + '\'' +
                 '}';
     }
 
@@ -123,10 +124,10 @@ public class Controller {
         private String name;
         private String id;
         private String category;
-        private String available;
+        private String availability;
         private Integer quantity;
         private String location;
-        private boolean findAll;
+        private boolean all;
 
         public Builder withName(String nameToUse) {
             this.name = nameToUse;
@@ -143,8 +144,8 @@ public class Controller {
             return this;
         }
 
-        public Builder withAvailable(String availableToUse) {
-            this.available = availableToUse;
+        public Builder withAvailability(String availabilityToUse) {
+            this.availability = availabilityToUse;
             return this;
         }
 
@@ -158,8 +159,8 @@ public class Controller {
             return this;
         }
 
-        public Builder withFindAll(boolean findAll) {
-            this.findAll = findAll;
+        public Builder withAll(boolean findAll) {
+            this.all = findAll;
             return this;
         }
 

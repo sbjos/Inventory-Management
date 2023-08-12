@@ -48,10 +48,10 @@ public class CreateItemServiceTest {
 
         item = new Item();
         item.setItemName(validName);
-        item.setCategory(food.getCategoryName());
-        item.setAvailable("Available");
-        item.setQuantity(availQuantity);
-        item.setLocation(location);
+        item.setItemCategory(food.getCategoryName());
+        item.setAvailability("Available");
+        item.setItemQuantity(availQuantity);
+        item.setItemLocation(location);
     }
 
     @Test
@@ -73,27 +73,27 @@ public class CreateItemServiceTest {
         when(paginatedQueryList.iterator()).thenReturn(existingItem.iterator());
         when(paginatedQueryList.stream()).thenReturn(existingItem.stream());
 
-        when(itemDao.findById(any())).thenReturn(paginatedQueryList);
+        when(itemDao.findById(ramen.getItemId())).thenReturn(paginatedQueryList);
         when(categoryDao.find(food.getCategoryName())).thenReturn(food);
 
         // WHEN
         ItemResult result = createItemService.handleRequest(controller, null);
 
         // THEN
-        assertEquals(item.getItemName(), result.getItem().getName());
-        assertEquals(item.getCategory(), result.getItem().getCategory());
-        assertEquals(item.isAvailable(), result.getItem().isAvailable());
-        assertEquals(item.getQuantity(), result.getItem().getQuantity());
-        assertEquals(item.getLocation(), result.getItem().getLocation());
-        assertNotNull(result.getItem().getId());
+        assertEquals(item.getItemName(), result.getItem().getItemName());
+        assertEquals(item.getItemCategory(), result.getItem().getItemCategory());
+        assertEquals(item.getAvailability(), result.getItem().getAvailability());
+        assertEquals(item.getItemQuantity(), result.getItem().getItemQuantity());
+        assertEquals(item.getItemLocation(), result.getItem().getItemLocation());
+        assertNotNull(result.getItem().getItemId());
     }
 
     @Test
-    void handleRequest_withInvalidName_returnInvalidAttributeException() {
+    void handleRequest_withEmptyName_returnInvalidAttributeException() {
         // GIVEN
-        String invalidName = " ";
+        String empty = " ";
         controller = Controller.builder()
-                .withName(invalidName)
+                .withName(empty)
                 .withCategory(food.getCategoryName())
                 .withQuantity(availQuantity)
                 .withLocation(location)
@@ -106,7 +106,25 @@ public class CreateItemServiceTest {
     }
 
     @Test
-    void handleRequest_withQuantityLessThanOne_setsAvailabilityToFalse() {
+    void handleRequest_withInvalidName_changesFirstLetterToUpperCase() {
+        // GIVEN
+        String invalidName = "ramen Noodle";
+        controller = Controller.builder()
+                .withName(invalidName)
+                .withCategory(food.getCategoryName())
+                .withQuantity(availQuantity)
+                .withLocation(location)
+                .build();
+
+        // WHEN
+        ItemResult result = createItemService.handleRequest(controller, null);
+
+        // THEN
+        assertEquals(ramen.getItemName(), result.getItem().getItemName());
+    }
+
+    @Test
+    void handleRequest_withQuantityLessThanOne_setsAvailabilityToUnavailable() {
         // GIVEN
         List<Item> existingItem = new ArrayList<>();
         existingItem.add(ramen);
@@ -131,7 +149,7 @@ public class CreateItemServiceTest {
         ItemResult result = createItemService.handleRequest(controller, null);
 
         // THEN
-        assertEquals("Unavailable", result.getItem().isAvailable());
+        assertEquals("Unavailable", result.getItem().getAvailability());
     }
 
     @Test
@@ -148,7 +166,7 @@ public class CreateItemServiceTest {
                 .withLocation(location)
                 .build();
 
-        when(itemDao.find(controller.getName())).thenReturn(ramen);
+        when(itemDao.find(ramen.getItemName())).thenReturn(ramen);
 
         // WHEN - THEN
         assertThrows(ItemAlreadyExistException.class, () ->
@@ -176,14 +194,14 @@ public class CreateItemServiceTest {
         when(paginatedQueryList.iterator()).thenReturn(existingItem.iterator());
         when(paginatedQueryList.stream()).thenReturn(existingItem.stream());
 
-        when(categoryDao.find(controller.getCategory())).thenReturn(food);
-        when(itemDao.findById(any())).thenReturn(paginatedQueryList);
+        when(categoryDao.find(food.getCategoryName())).thenReturn(food);
+        when(itemDao.findById(ramen.getItemId())).thenReturn(paginatedQueryList);
 
         // WHEN
         ItemResult result = createItemService.handleRequest(controller, null);
 
         // THEN
-        assertNotEquals(ramen.getId(), result.getItem().getId());
-        assertNotEquals(lettuce.getId(), result.getItem().getId());
+        assertNotEquals(ramen.getItemId(), result.getItem().getItemId());
+        assertNotEquals(lettuce.getItemId(), result.getItem().getItemId());
     }
 }

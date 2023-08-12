@@ -36,7 +36,7 @@ public class CreateLocationServiceTest {
         controller = Controller.builder()
                 .withLocation(locationDF1.getLocationName()).build();
 
-        when(locationDao.find(controller.getLocation())).thenThrow(LocationAlreadyExistException.class);
+        when(locationDao.find(controller.getLocation())).thenReturn(locationDF1);
 
         // WHEN - // THEN
         assertThrows(LocationAlreadyExistException.class, () ->
@@ -58,11 +58,11 @@ public class CreateLocationServiceTest {
         LocationResult result = createLocationService.handleRequest(controller, null);
 
         // THEN
-        assertEquals(newLocation, result.getLocation().getLocation());
+        assertEquals(newLocation, result.getLocation().getLocationName());
     }
 
     @Test
-    void handleRequest_withInvalidLocationName_throwsInvalidAttributeException() {
+    void handleRequest_withEmptyLocationName_throwsInvalidAttributeException() {
         // GIVEN
         controller = Controller
                 .builder()
@@ -73,5 +73,22 @@ public class CreateLocationServiceTest {
         assertThrows(InvalidAttributeException.class, () ->
                 createLocationService.handleRequest(controller, null),
                 ("Please enter a valid location name."));
+    }
+
+    @Test
+    void handleRequest_withLowerCaseLocationName_throwsInvalidAttributeException() {
+        // GIVEN
+        String upperCase = "RZ1";
+
+        controller = Controller
+                .builder()
+                .withLocation("rz1")
+                .build();
+
+        // WHEN
+        LocationResult result = createLocationService.handleRequest(controller, null);
+
+        // THEN
+        assertEquals(upperCase, result.getLocation().getLocationName());
     }
 }

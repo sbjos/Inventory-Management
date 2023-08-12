@@ -3,24 +3,24 @@ package com.inventorymanagement.model;
 import java.util.Objects;
 
 public class CategoryModel {
-    private String category;
+    private String categoryName;
 
     public CategoryModel(Builder builder) {
-        this.category = builder.category;
+        this.categoryName = builder.categoryName;
     }
 
-    public String getCategory() {
-        return category;
+    public String getCategoryName() {
+        return categoryName;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
     @Override
     public String toString() {
         return "CategoryModel{" +
-                "category='" + category + '\'' +
+                "Category='" + categoryName + '\'' +
                 '}';
     }
 
@@ -29,12 +29,12 @@ public class CategoryModel {
         if (this == o) return true;
         if (o == null ||this.getClass() != o.getClass()) return false;
         CategoryModel that = (CategoryModel) o;
-        return Objects.equals(category, that.category);
+        return Objects.equals(categoryName, that.categoryName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(category);
+        return Objects.hash(categoryName);
     }
 
     public static Builder builder() {
@@ -42,10 +42,10 @@ public class CategoryModel {
     }
 
     public static final class Builder {
-        private String category;
+        private String categoryName;
 
-        public Builder withCategory(String categoryToUse) {
-            this.category = categoryToUse;
+        public Builder withCategoryName(String categoryNameToUse) {
+            this.categoryName = categoryNameToUse;
             return this;
         }
 

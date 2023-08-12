@@ -1,6 +1,7 @@
 package com.inventorymanagement.test.service.item;
 
 import com.inventorymanagement.controller.Controller;
+import com.inventorymanagement.exception.InvalidAttributeException;
 import com.inventorymanagement.exception.ItemNotFoundException;
 import com.inventorymanagement.dao.ItemDao;
 import com.inventorymanagement.result.ItemResult;
@@ -15,6 +16,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import static com.inventorymanagement.test.TestHelper.locationDF1;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
@@ -45,18 +47,18 @@ public class UpdateItemServiceTest {
                 .withLocation(locationR2.getLocationName())
                 .build();
 
-        when(itemDao.find(controller.getName())).thenReturn(ramen);
+        when(itemDao.find(ramen.getItemName())).thenReturn(ramen);
 
         // WHEN
         ItemResult result = updateItemService.handleRequest(controller, null);
 
         // THEN
-        assertEquals(ramen.getItemName(), result.getItem().getName());
-        assertEquals(ramen.getId(), result.getItem().getId());
-        assertEquals(ramen.getCategory(), result.getItem().getCategory());
-        assertEquals(ramen.isAvailable(), result.getItem().isAvailable());
-        assertEquals(ramen.getQuantity(), result.getItem().getQuantity());
-        assertEquals(ramen.getLocation(), result.getItem().getLocation());
+        assertEquals(ramen.getItemName(), result.getItem().getItemName());
+        assertEquals(ramen.getItemId(), result.getItem().getItemId());
+        assertEquals(ramen.getItemCategory(), result.getItem().getItemCategory());
+        assertEquals(ramen.getAvailability(), result.getItem().getAvailability());
+        assertEquals(ramen.getItemQuantity(), result.getItem().getItemQuantity());
+        assertEquals(ramen.getItemLocation(), result.getItem().getItemLocation());
     }
 
     @Test
@@ -70,15 +72,72 @@ public class UpdateItemServiceTest {
                 .withLocation(locationR2.getLocationName())
                 .build();
 
-        when(itemDao.find(controller.getName())).thenThrow(ItemNotFoundException.class);
+        when(itemDao.find(ramen.getItemName())).thenThrow(ItemNotFoundException.class);
 
-        ramen.setQuantity(availQuantity);
-        ramen.setLocation(locationR2.getLocationName());
+        ramen.setItemQuantity(availQuantity);
+        ramen.setItemLocation(locationR2.getLocationName());
 
 
         // WHEN - // THEN
         assertThrows(ItemNotFoundException.class, () ->
                 updateItemService.handleRequest(controller, null),
                 ("Unable to find this item to update. It may not exist."));
+    }
+
+    @Test
+    void handleRequest_withEmptyName_throwsInvalidAttributeException() {
+        // GIVEN
+        int availQuantity = 5;
+
+        controller = Controller.builder()
+                .withName(" ")
+                .withQuantity(availQuantity)
+                .withLocation(locationR2.getLocationName())
+                .build();
+
+        when(itemDao.find(ramen.getItemName())).thenReturn(ramen);
+
+        ramen.setItemQuantity(availQuantity);
+        ramen.setItemLocation(locationR2.getLocationName());
+
+        // WHEN - // THEN
+        assertThrows(InvalidAttributeException.class, () ->
+                        updateItemService.handleRequest(controller, null),
+                ("Please enter a valid input"));
+    }
+
+    @Test
+    void handleRequest_withEmptyAttribute_keepsPreviousValueAssigned() {
+        Category category = new Category();
+        category.setCategoryName("");
+
+        Item item = new Item();
+        item.setItemName("Ramen Noodle");
+        item.setItemId("A125");
+        item.setItemCategory("Food");
+        item.setAvailability("Unavailable");
+        item.setItemQuantity(0);
+        item.setItemLocation(locationDF1().getLocationName());
+
+        controller = Controller.builder()
+                .withName(ramen.getItemName())
+                .withCategory(category.getCategoryName())
+                .withLocation(locationDF1().getLocationName())
+                .build();
+
+        when(itemDao.find(ramen.getItemName())).thenReturn(ramen);
+
+        // WHEN
+        ItemResult result = updateItemService.handleRequest(controller, null);
+
+        // THEN
+        System.out.println(result.getItem());
+        System.out.println(item);
+        assertEquals(item.getItemName(), result.getItem().getItemName());
+        assertEquals(item.getItemId(), result.getItem().getItemId());
+        assertEquals(item.getItemCategory(), result.getItem().getItemCategory());
+        assertEquals(item.getAvailability(), result.getItem().getAvailability());
+        assertEquals(item.getItemQuantity(), result.getItem().getItemQuantity());
+        assertEquals(item.getItemLocation(), result.getItem().getItemLocation());
     }
 }

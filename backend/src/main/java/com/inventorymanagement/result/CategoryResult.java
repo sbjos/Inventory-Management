@@ -8,7 +8,8 @@ public class CategoryResult {
     private CategoryListModel categoryList;
 
     public CategoryResult (Builder builder) {
-        this.category = builder.category;
+        this.category = builder.categoryName;
+        this.categoryList = builder.categoryList;
     }
 
     public CategoryModel getCategory() {
@@ -32,11 +33,11 @@ public class CategoryResult {
     }
 
     public static final class Builder {
-        private CategoryModel category;
+        private CategoryModel categoryName;
         private CategoryListModel categoryList;
 
-        public Builder withCategory(CategoryModel categoryToUse) {
-            this.category = categoryToUse;
+        public Builder withCategoryName(CategoryModel categoryNameToUse) {
+            this.categoryName = categoryNameToUse;
             return this;
         }
 

@@ -4,7 +4,7 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.inventorymanagement.controller.Controller;
 import com.inventorymanagement.dao.LocationDao;
-import com.inventorymanagement.exception.ItemListNotFoundException;
+import com.inventorymanagement.exception.InvalidAttributeException;
 import com.inventorymanagement.exception.LocationNotFoundException;
 import com.inventorymanagement.result.LocationResult;
 import com.inventorymanagement.table.Location;
@@ -12,6 +12,7 @@ import com.inventorymanagement.utility.ModelConverter;
 
 import javax.inject.Inject;
 
+import static com.inventorymanagement.utility.ServiceUtility.*;
 
 public class GetLocationService implements RequestHandler<Controller, LocationResult> {
     private final LocationDao locationDao;
@@ -23,13 +24,12 @@ public class GetLocationService implements RequestHandler<Controller, LocationRe
 
     @Override
     public LocationResult handleRequest(Controller input, Context context) {
-        String location = input.getLocation();
-        boolean findAll = input.FindAll();
+        if (input.isAll()) return findAll();
 
-        if (findAll) return findAll();
+        String location = input.getLocation().toUpperCase();
 
-        if (location == null) throw new ItemListNotFoundException
-                ("Unable to find the list of items");
+        if (isEmpty(location)) throw new InvalidAttributeException
+                ("Please enter a valid input");
 
         return find(location);
     }
@@ -41,12 +41,11 @@ public class GetLocationService implements RequestHandler<Controller, LocationRe
                 (String.format("Unable to find %s location. It may not exist.", locationName));
 
         return LocationResult.builder()
-                .withLocation(new ModelConverter().locationConverter(location))
+                .withLocationName(new ModelConverter().locationConverter(location))
                 .build();
     }
 
     private LocationResult findAll() {
-
         return LocationResult.builder()
                 .withLocationList(new ModelConverter().locationListConverter(locationDao.findAll()))
                 .build();

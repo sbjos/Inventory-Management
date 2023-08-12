@@ -2,13 +2,17 @@ package com.inventorymanagement.dao;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.*;
 import com.inventorymanagement.configuration.awsglobalsecondaryindex.AwsGsiItem;
+import com.inventorymanagement.service.item.CreateItemService;
 import com.inventorymanagement.table.Item;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
 
 public class ItemDao implements DaoModule<Item, String> {
     private final DynamoDBMapper dynamoDBMapper;
     private final AwsGsiItem awsGsiItem;
+    private final Logger log = LogManager.getLogger(CreateItemService.class);
 
     @Inject
     public ItemDao(DynamoDBMapper dynamoDBMapper, AwsGsiItem awsGsiItem) {
@@ -16,9 +20,14 @@ public class ItemDao implements DaoModule<Item, String> {
         this.awsGsiItem = awsGsiItem;
     }
 
+    // TODO: Review
     @Override
     public void save(Item item) {
-        dynamoDBMapper.save(item);
+        try {
+            dynamoDBMapper.save(item);
+        } catch (DynamoDBMappingException e) {
+            log.error("Please enter a valid item name.");
+        }
     }
 
     @Override
@@ -63,13 +72,12 @@ public class ItemDao implements DaoModule<Item, String> {
     }
 
     @Override
-    public PaginatedQueryList<Item> findAll() {
-        return dynamoDBMapper.query(Item.class,
-                awsGsiItem.findAll());
+    public PaginatedScanList<Item> findAll() {
+        return dynamoDBMapper.scan(Item.class, awsGsiItem.findAll());
     }
 
     @Override
-    public void delete(String nameOrId) {
-        dynamoDBMapper.delete(nameOrId);
+    public void delete(Item item) {
+        dynamoDBMapper.delete(item);
     }
 }

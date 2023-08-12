@@ -20,8 +20,7 @@ public class DeleteLocationServiceTest {
     @InjectMocks
     DeleteLocationService deleteLocationService;
     @Mock
-    private LocationDao locationDao
-            ;
+    private LocationDao locationDao;
     private Controller controller;
 
     @BeforeEach
@@ -35,12 +34,31 @@ public class DeleteLocationServiceTest {
         controller = Controller.builder()
                 .withLocation(locationDF1.getLocationName()).build();
 
-        when(locationDao.find(controller.getLocation())).thenReturn(locationDF1);
+        when(locationDao.find(locationDF1.getLocationName())).thenReturn(locationDF1);
 
         // WHEN
         LocationResult result = deleteLocationService.handleRequest(controller, null);
 
         // THEN
-        assertEquals(locationDF1.getLocationName(), result.getLocation().getLocation());
+        assertEquals(locationDF1.getLocationName(), result.getLocation().getLocationName());
+    }
+
+    @Test
+    void handleRequest_withLowerCaseLocationName_throwsInvalidAttributeException() {
+        // GIVEN
+        String lowerCase = "df1";
+
+        controller = Controller
+                .builder()
+                .withLocation(lowerCase)
+                .build();
+
+        when(locationDao.find(locationDF1.getLocationName())).thenReturn(locationDF1);
+
+        // WHEN
+        LocationResult result = deleteLocationService.handleRequest(controller, null);
+
+        // THEN
+        assertEquals(lowerCase.toUpperCase(), result.getLocation().getLocationName());
     }
 }

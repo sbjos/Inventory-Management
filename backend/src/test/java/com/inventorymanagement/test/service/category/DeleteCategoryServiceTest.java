@@ -2,6 +2,8 @@ package com.inventorymanagement.test.service.category;
 
 import com.inventorymanagement.controller.Controller;
 import com.inventorymanagement.dao.CategoryDao;
+import com.inventorymanagement.exception.CategoryNotFoundException;
+import com.inventorymanagement.exception.InvalidAttributeException;
 import com.inventorymanagement.result.CategoryResult;
 import com.inventorymanagement.service.category.DeleteCategoryService;
 import com.inventorymanagement.table.Category;
@@ -13,6 +15,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 public class DeleteCategoryServiceTest {
@@ -29,17 +32,62 @@ public class DeleteCategoryServiceTest {
     }
 
     @Test
-    void handleRequest_withValidCategory_deleteResult() {
+    void handleRequest_withValidCategoryName_deleteResult() {
         // GIVEN
         controller = Controller.builder()
                 .withCategory(food.getCategoryName()).build();
 
-        when(categoryDao.find(controller.getCategory())).thenReturn(food);
+        when(categoryDao.find(food.getCategoryName())).thenReturn(food);
 
         // WHEN
         CategoryResult result = deleteCategoryService.handleRequest(controller, null);
 
         // THEN
-        assertEquals(food.getCategoryName(), result.getCategory().getCategory());
+        assertEquals(food.getCategoryName(), result.getCategory().getCategoryName());
+    }
+
+    @Test
+    void handleRequest_lowerCaseCategoryName_changesFirstLetterToUpperCase() {
+        // GIVEN
+        controller = Controller
+                .builder()
+                .withCategory("food").build();
+
+        when(categoryDao.find(food.getCategoryName())).thenReturn(food);
+
+        // WHEN
+        CategoryResult result = deleteCategoryService.handleRequest(controller, null);
+
+        // THEN
+        assertEquals(food.getCategoryName(), result.getCategory().getCategoryName());
+    }
+
+    @Test
+    void handleRequest_withNonExistentCategory_throwsCategoryNotFoundException() {
+        // GIVEN
+        controller = Controller
+                .builder()
+                .withCategory("nonexistant").build();
+
+        when(categoryDao.find(food.getCategoryName())).thenReturn(food);
+
+        // WHEN - THEN
+        assertThrows(CategoryNotFoundException.class, () ->
+                deleteCategoryService.handleRequest(controller, null),
+                ("Unable to find this category to delete. It may not exist."));
+    }
+
+    @Test
+    void handleRequest_emptyCategoryName_throwsInvalidAttributeException() {
+        // GIVEN
+        controller = Controller.builder()
+                .withCategory(" ").build();
+
+        when(categoryDao.find(food.getCategoryName())).thenReturn(food);
+
+        // WHEN - // THEN
+        assertThrows(InvalidAttributeException.class, () ->
+                        deleteCategoryService.handleRequest(controller, null),
+                ("Please enter a valid input"));
     }
 }

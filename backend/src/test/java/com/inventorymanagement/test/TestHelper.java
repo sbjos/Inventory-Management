@@ -12,11 +12,11 @@ public final class TestHelper {
     public static Item ramenNoodle() {
         Item item = new Item();
         item.setItemName("Ramen Noodle");
-        item.setId("A125");
-        item.setCategory("Food");
-        item.setAvailable("Unavailable");
-        item.setQuantity(0);
-        item.setLocation(locationDF1().getLocationName());
+        item.setItemId("A125");
+        item.setItemCategory("Food");
+        item.setAvailability("Unavailable");
+        item.setItemQuantity(0);
+        item.setItemLocation(locationDF1().getLocationName());
 
         return item;
     }
@@ -24,11 +24,11 @@ public final class TestHelper {
     public static Item lettuce() {
         Item item = new Item();
         item.setItemName("Lettuce");
-        item.setId("R212");
-        item.setCategory("Food");
-        item.setAvailable("Available");
-        item.setQuantity(17);
-        item.setLocation(locationR2().getLocationName());
+        item.setItemId("R212");
+        item.setItemCategory("Food");
+        item.setAvailability("Available");
+        item.setItemQuantity(17);
+        item.setItemLocation(locationR2().getLocationName());
 
         return item;
     }
@@ -36,11 +36,11 @@ public final class TestHelper {
     public static Item computer() {
         Item item = new Item();
         item.setItemName("Computer");
-        item.setId("R212");
-        item.setCategory("Electronic");
-        item.setAvailable("Available");
-        item.setQuantity(17);
-        item.setLocation(locationE4().getLocationName());
+        item.setItemId("R212");
+        item.setItemCategory("Electronic");
+        item.setAvailability("Available");
+        item.setItemQuantity(17);
+        item.setItemLocation(locationE4().getLocationName());
 
         return item;
     }

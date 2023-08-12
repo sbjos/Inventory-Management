@@ -2,8 +2,10 @@ package com.inventorymanagement.dao;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedQueryList;
+import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedScanList;
 import com.inventorymanagement.configuration.awsglobalsecondaryindex.AwsGsiCategory;
 import com.inventorymanagement.table.Category;
+import com.inventorymanagement.table.Item;
 
 import javax.inject.Inject;
 
@@ -58,13 +60,12 @@ public class CategoryDao implements DaoModule<Category, String> {
     }
 
     @Override
-    public PaginatedQueryList<Category> findAll() {
-        return dynamoDBMapper.query(Category.class,
-                awsGsiCategory.findAll());
+    public PaginatedScanList<Category> findAll() {
+        return dynamoDBMapper.scan(Category.class, awsGsiCategory.findAll());
     }
 
     @Override
-    public void delete(String name) {
-        dynamoDBMapper.delete(name);
+    public void delete(Category category) {
+        dynamoDBMapper.delete(category);
     }
 }

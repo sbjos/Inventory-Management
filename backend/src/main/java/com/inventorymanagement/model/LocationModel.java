@@ -3,24 +3,24 @@ package com.inventorymanagement.model;
 import java.util.Objects;
 
 public class LocationModel {
-    private String location;
+    private String locationName;
 
     public LocationModel(Builder builder) {
-        this.location = builder.location;
+        this.locationName = builder.locationName;
     }
 
-    public String getLocation() {
-        return location;
+    public String getLocationName() {
+        return locationName;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setLocationName(String locationName) {
+        this.locationName = locationName;
     }
 
     @Override
     public String toString() {
-        return "CategoryModel{" +
-                "location='" + location + '\'' +
+        return "LocationModel{" +
+                "LocationName='" + locationName + '\'' +
                 '}';
     }
 
@@ -29,12 +29,12 @@ public class LocationModel {
         if (this == o) return true;
         if (o == null ||this.getClass() != o.getClass()) return false;
         LocationModel that = (LocationModel) o;
-        return Objects.equals(location, that.location);
+        return Objects.equals(locationName, that.locationName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(location);
+        return Objects.hash(locationName);
     }
 
     public static Builder builder() {
@@ -42,10 +42,10 @@ public class LocationModel {
     }
 
     public static final class Builder {
-        private String location;
+        private String locationName;
 
-        public Builder withLocation(String locationToUse) {
-            this.location = locationToUse;
+        public Builder withLocationName(String locationNameToUse) {
+            this.locationName = locationNameToUse;
             return this;
         }
 

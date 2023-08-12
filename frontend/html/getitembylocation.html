@@ -4,21 +4,18 @@
     <link rel="stylesheet" href="styles.css">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="playlist.js" defer></script>
-    <title>IM - Find by Availability</title>
+    <title>IM - Find by Location</title>
   </head>
   <body>
-    <table id="availability-table">
+    <table id="category-table">
     </table>
     <div class="card">
-      <h2>find items availability</h2>
-      <form class="card-content" id="find-by-availability-form">
+      <h2>Find items location</h2>
+      <form class="card-content" id="find-by-category-form">
           <p class="form-field">
-            <label for="availability">Choose an option:</label>
-
-            <select id="cars">
-              <option value="available">Available</option>
-              <option value="unavailable">Unvailable</option>
-            </select>
+            <label>Location
+              <input type="text" required class="validated-field" id="name" autofocus>
+            </label>
           </p>
           <input type="submit" id="add-album-track">
       </form>

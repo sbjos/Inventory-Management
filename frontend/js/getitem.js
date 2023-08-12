@@ -1,21 +1,18 @@
-const addItemForm = document.querySelector("#add-item-form");
-const itemTable = document.querySelector("#add-item-table");
+const addAlbumTrackForm = document.querySelector("#add-album-track-form");
+const albumTrackTable = document.querySelector("#album-track-table");
 const urlParams = new URLSearchParams(window.location.search);
 const id = urlParams.get('id');
 
-addItemForm.onsubmit = function(evt) {
+addAlbumTrackForm.onsubmit = function(evt) {
   evt.preventDefault();
-  const itemName = document.querySelector("#item-name").value;
-  const itemCategory = document.querySelector("#Item-category").value;
-  const itemQuantity = document.querySelector("#Item-quantity").value;
-  const itemLocation = document.querySelector("#Item-location").value;
-  const newItem = {
-    "itemName": itemName,
-    "itemCategory": itemCategory,
-    "itemQuantity": itemQuantity,
-    "itemLocation": itemLocation,
+  const asin = document.querySelector("#album-asin").value;
+  const trackNumber = document.querySelector("#track-number").value;
+  const newSong = {
+    "asin": asin,
+    "trackNumber": trackNumber,
+    "queueNext": false
   }
-  axios.post(`https://svebsuap66.execute-api.us-west-2.amazonaws.com/prod/playlists/${id}/songs`, newItem, {
+  axios.post(`https://svebsuap66.execute-api.us-west-2.amazonaws.com/prod/playlists/${id}/songs`, newSong, {
     authorization: {
       'x-api-key': 'K7CHRL6aqt1C6eGJ9EHyFaZCn86G0fyI2sTZKSkW'
     }
@@ -39,29 +36,29 @@ window.onload = async function(evt) {
       throw "No data for playlist with id:" + id;
     }
 
-    if (res.data.itemList.length > 0) {
-      populateitemList(res.data.itemList);
+    if (res.data.songList.length > 0) {
+      populateAlbumTracks(res.data.songList);
     }
   })
 }
 
-function populateitemList(itemListData) {
-  let thead = itemListTable.createTHead();
-  let tbody = itemListTable.createTBody();
+function populateAlbumTracks(albumTracksData) {
+  let thead = albumTrackTable.createTHead();
+  let tbody = albumTrackTable.createTBody();
   let row = thead.insertRow();
 
-  for (let key in itemListData[0]) {
+  for (let key in albumTracksData[0]) {
     let th = document.createElement("th");
     let text = document.createTextNode(key);
     th.appendChild(text);
     row.appendChild(th);
   }
 
-  for (let itemList of itemListTable) {
+  for (let albumTrack of albumTracksData) {
     let row = tbody.insertRow();
     for (key in albumTrack) {
       let cell = row.insertCell();
-      let text = document.createTextNode(itemList[key]);
+      let text = document.createTextNode(albumTrack[key]);
       cell.appendChild(text);
     }
   }

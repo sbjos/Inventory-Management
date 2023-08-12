@@ -60,11 +60,11 @@ public class CreateCategoryServiceTest {
         CategoryResult result = createCategoryService.handleRequest(controller, null);
 
         // THEN
-        assertEquals(newCategory, result.getCategory().getCategory());
+        assertEquals(newCategory, result.getCategory().getCategoryName());
     }
 
     @Test
-    void handleRequest_withInvalidCategoryName_throwsInvalidAttributeException() {
+    void handleRequest_withEmptyCategoryName_throwsInvalidAttributeException() {
         // GIVEN
         controller = Controller
                 .builder()
@@ -75,5 +75,20 @@ public class CreateCategoryServiceTest {
         assertThrows(InvalidAttributeException.class, () ->
                 createCategoryService.handleRequest(controller, null),
                 ("Please enter a valid category name."));
+    }
+
+    @Test
+    void handleRequest_withInvalidCategoryName_changesFirstLetterToUpperCase() {
+        // GIVEN
+        controller = Controller
+                .builder()
+                .withCategory("food")
+                .build();
+
+        // WHEN
+        CategoryResult result = createCategoryService.handleRequest(controller, null);
+
+        // THEN
+        assertEquals(food.getCategoryName(), result.getCategory().getCategoryName());
     }
 }

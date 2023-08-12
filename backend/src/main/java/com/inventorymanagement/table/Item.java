@@ -6,21 +6,21 @@ import java.util.Objects;
 
 @DynamoDBTable(tableName = "IM-Item")
 public class Item {
-    public static final String ID_TYPE_INDEX = "IdIndex";
-    public static final String AVAILABLE_TYPE_INDEX = "AvailableIndex";
-    public static final String CATEGORY_TYPE_INDEX = "CategoryIndex";
-    public static final String LOCATION_TYPE_INDEX = "LocationIndex";
+    public static final String ID_TYPE_INDEX = "ID-Index";
+    public static final String AVAILABLE_TYPE_INDEX = "Available-Index";
+    public static final String CATEGORY_TYPE_INDEX = "Category-Index";
+    public static final String LOCATION_TYPE_INDEX = "Location-Index";
 
     private String itemName;
-    private String id;
-    private String category;
-    private String available;
-    private int quantity;
-    private String location;
+    private String itemId;
+    private String itemCategory;
+    private String availability;
+    private int itemQuantity;
+    private String itemLocation;
 
     public Item() {}
 
-    @DynamoDBHashKey(attributeName = "itemName")
+    @DynamoDBHashKey(attributeName = "ItemName")
     public String getItemName() {
         return itemName;
     }
@@ -29,64 +29,66 @@ public class Item {
         this.itemName = itemName;
     }
 
-    @DynamoDBIndexHashKey(globalSecondaryIndexName = ID_TYPE_INDEX, attributeName = "id")
-    public String getId() {
-        return id;
+    @DynamoDBAttribute(attributeName = "ItemID")
+    @DynamoDBIndexHashKey(globalSecondaryIndexName = ID_TYPE_INDEX, attributeName = "ItemID")
+    public String getItemId() {
+        return itemId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setItemId(String itemId) {
+        this.itemId = itemId;
     }
 
-    @DynamoDBIndexHashKey(globalSecondaryIndexName = CATEGORY_TYPE_INDEX, attributeName = "category")
-    @DynamoDBIndexRangeKey(globalSecondaryIndexNames = {LOCATION_TYPE_INDEX}, attributeName = "category")
-    public String getCategory() {
-        return category;
+    @DynamoDBAttribute(attributeName = "ItemCategory")
+    @DynamoDBIndexHashKey(globalSecondaryIndexName = CATEGORY_TYPE_INDEX, attributeName = "ItemCategory")
+    @DynamoDBIndexRangeKey(globalSecondaryIndexNames = {LOCATION_TYPE_INDEX}, attributeName = "ItemCategory")
+    public String getItemCategory() {
+        return itemCategory;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setItemCategory(String itemCategory) {
+        this.itemCategory = itemCategory;
     }
 
-    @DynamoDBAttribute(attributeName = "available")
-    @DynamoDBIndexHashKey(globalSecondaryIndexName = AVAILABLE_TYPE_INDEX, attributeName = "available")
-    @DynamoDBIndexRangeKey(globalSecondaryIndexNames = {CATEGORY_TYPE_INDEX}, attributeName = "available")
-    public String isAvailable() {
-        return available;
+    @DynamoDBAttribute(attributeName = "Availability")
+    @DynamoDBIndexHashKey(globalSecondaryIndexName = AVAILABLE_TYPE_INDEX, attributeName = "Availability")
+    @DynamoDBIndexRangeKey(globalSecondaryIndexNames = {CATEGORY_TYPE_INDEX}, attributeName = "Availability")
+    public String getAvailability() {
+        return availability;
     }
 
-    public void setAvailable(String available) {
-        this.available = available;
+    public void setAvailability(String availability) {
+        this.availability = availability;
     }
 
-    @DynamoDBAttribute(attributeName = "quantity")
-    public int getQuantity() {
-        return quantity;
+    @DynamoDBAttribute(attributeName = "ItemQuantity")
+    public int getItemQuantity() {
+        return itemQuantity;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setItemQuantity(int itemQuantity) {
+        this.itemQuantity = itemQuantity;
     }
 
-    @DynamoDBAttribute(attributeName = "location")
-    @DynamoDBIndexHashKey(globalSecondaryIndexName = LOCATION_TYPE_INDEX, attributeName = "location")
-    public String getLocation() {
-        return location;
+    @DynamoDBAttribute(attributeName = "ItemLocation")
+    @DynamoDBIndexHashKey(globalSecondaryIndexName = LOCATION_TYPE_INDEX, attributeName = "ItemLocation")
+    public String getItemLocation() {
+        return itemLocation;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setItemLocation(String itemLocation) {
+        this.itemLocation = itemLocation;
     }
 
     @Override
     public String toString() {
         return "Item{" +
-                "itemName='" + itemName + '\'' +
-                ", id='" + id + '\'' +
-                ", category='" + category + '\'' +
-                ", available'=" + available +
-                ", quantity=" + quantity +
-                ", location='" + location + '\'' +
+                "Name='" + itemName + '\'' +
+                ", ID='" + itemId + '\'' +
+                ", Category='" + itemCategory + '\'' +
+                ", Available'=" + availability +
+                ", Quantity=" + itemQuantity +
+                ", Location='" + itemLocation + '\'' +
                 '}' +  "\n";
     }
 
@@ -95,11 +97,11 @@ public class Item {
         if (this == o) return true;
         if (o == null || this.getClass() != o.getClass()) return false;
         Item that = (Item) o;
-        return Objects.equals(id, that.id) && Objects.equals(itemName, that.itemName);
+        return Objects.equals(itemId, that.itemId) && Objects.equals(itemName, that.itemName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, itemName);
+        return Objects.hash(itemId, itemName);
     }
 }

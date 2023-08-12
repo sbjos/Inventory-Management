@@ -9,9 +9,10 @@ import com.inventorymanagement.exception.InvalidAttributeException;
 import com.inventorymanagement.result.CategoryResult;
 import com.inventorymanagement.table.Category;
 import com.inventorymanagement.utility.ModelConverter;
-import com.inventorymanagement.utility.ServiceUtility;
 
 import javax.inject.Inject;
+
+import static com.inventorymanagement.utility.ServiceUtility.*;
 
 public class CreateCategoryService implements RequestHandler<Controller, CategoryResult> {
     private final CategoryDao categoryDao;
@@ -23,14 +24,14 @@ public class CreateCategoryService implements RequestHandler<Controller, Categor
 
     @Override
     public CategoryResult handleRequest(Controller input, Context context) {
-        String categoryName = input.getCategory();
+        String categoryName = capitalizeFirstChar(input.getCategory());
         Category existingCategory = categoryDao.find(categoryName);
 
-        if (existingCategory != null) throw new CategoryAlreadyExistException
-                (String.format("%s already exist. Please choose a different category.", existingCategory));
+        if (isEmpty(categoryName)) throw new InvalidAttributeException
+                ("Please enter a valid input.");
 
-        if (ServiceUtility.isValid(categoryName)) throw new InvalidAttributeException
-                ("Please enter a valid category name.");
+        if (existingCategory != null) throw new CategoryAlreadyExistException
+                (String.format("%s already exist. Please choose a different category.", existingCategory.getCategoryName()));
 
         Category category = new Category();
         category.setCategoryName(categoryName);
@@ -38,7 +39,7 @@ public class CreateCategoryService implements RequestHandler<Controller, Categor
         categoryDao.save(category);
 
         return new CategoryResult.Builder()
-                .withCategory(new ModelConverter().categoryConverter(category))
+                .withCategoryName(new ModelConverter().categoryConverter(category))
                 .build();
     }
 }

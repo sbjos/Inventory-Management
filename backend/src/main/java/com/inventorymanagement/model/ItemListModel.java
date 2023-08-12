@@ -22,7 +22,7 @@ public class ItemListModel {
     @Override
     public String toString() {
         return "ItemListModel{" +
-                "itemList=" + "\n" + itemList + '\'' +
+                "ItemList=" + "\n" + itemList + '\'' +
                 '}';
     }
 

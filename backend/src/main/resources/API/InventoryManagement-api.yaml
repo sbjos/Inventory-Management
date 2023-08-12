@@ -4,8 +4,8 @@ info:
   description: |-
     Item - 
     Inventory Management API allows users to manage their inventories with the 
-    possibility of adding, modifying or deleting inventory items. It also provide 
-    the ability to filter by item name, category, availability.
+    possibility of adding, modifying or deleting inventory items. Also provides the 
+    the ability to filter by item name, category and availability.
   version: 1.0.0
 paths:
   /inventory/add:
@@ -43,7 +43,12 @@ paths:
                 items:
                   $ref: "#/components/schemas/Item"
                 example:
-                  message: "Item added successfully"
+                  name: "name"
+                  itemId: "itemId"
+                  category: "category"
+                  availability: "true"
+                  quantity: 1
+                  section: "a12"
         "201":
           description: OK
           content:
@@ -53,9 +58,14 @@ paths:
                 items:
                   $ref: "#/components/schemas/Item"
                 example:
-                  message: "Item added successfully"
+                  name: "name"
+                  itemId: "itemId"
+                  category: "category"
+                  availability: "true"
+                  quantity: 1
+                  location: "a12"
         "400":
-          description: "Invalid Input"
+          description: "InvalitemId Input"
           content:
             application/json:
               schema:
@@ -64,7 +74,7 @@ paths:
                   $ref: "#/components/schemas/Error"
                 example:
                   code: 400
-                  message: "Invalid Input"
+                  message: "InvalitemId Input"
         "500":
           description: "Server Error"
           content:
@@ -78,7 +88,7 @@ paths:
                   message: "Server Error"
   /category/add:
     post:
-      description: "Add a category"
+      description: "Add a category for an item to use"
       parameters:
         - name: category
           in: query
@@ -95,7 +105,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/Item"
                 example:
-                  message: "Item added successfully"
+                  category: "name"
         "201":
           description: OK
           content:
@@ -105,9 +115,9 @@ paths:
                 items:
                   $ref: "#/components/schemas/Item"
                 example:
-                  message: "Item added successfully"
+                  category: "name"
         "400":
-          description: "Invalid Input"
+          description: "InvalitemId Input"
           content:
             application/json:
               schema:
@@ -116,7 +126,7 @@ paths:
                   $ref: "#/components/schemas/Error"
                 example:
                   code: 400
-                  message: "Invalid Input"
+                  message: "InvalitemId Input"
         "500":
           description: "Server Error"
           content:
@@ -130,7 +140,7 @@ paths:
                   message: "Server Error"
   /location/add:
     post:
-      description: "Add a category"
+      description: "Add a location for an item to use"
       parameters:
         - name: location
           in: query
@@ -147,7 +157,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/Item"
                 example:
-                  message: "Item added successfully"
+                  location: "name"
         "201":
           description: OK
           content:
@@ -157,9 +167,9 @@ paths:
                 items:
                   $ref: "#/components/schemas/Item"
                 example:
-                  message: "Item added successfully"
+                  location: "name"
         "400":
-          description: "Invalid Input"
+          description: "InvalitemId Input"
           content:
             application/json:
               schema:
@@ -168,7 +178,7 @@ paths:
                   $ref: "#/components/schemas/Error"
                 example:
                   code: 400
-                  message: "Invalid Input"
+                  message: "InvalitemId Input"
         "500":
           description: "Server Error"
           content:
@@ -189,22 +199,21 @@ paths:
           required: false
           schema:
             type: string
-        - name: id
+        - name: itemId
           in: query
           required: false
           schema:
             type: string
-            example: "ID"
         - name: category
           in: query
           required: false
           schema:
             type: string
-        - name: available
+        - name: availability
           in: query
           required: false
           schema:
-            type: boolean
+            type: string
         - name: quantity
           in: query
           required: false
@@ -226,7 +235,12 @@ paths:
                 items:
                   $ref: "#/components/schemas/Item"
                 example:
-                  message: "Item updated successfully"
+                  name: "name"
+                  itemId: "itemId"
+                  category: "category"
+                  availability: "true"
+                  quantity: 1
+                  location: "a12"
         "201":
           description: OK
           content:
@@ -236,7 +250,12 @@ paths:
                 items:
                   $ref: "#/components/schemas/Item"
                 example:
-                  message: "Item Updated successfully"
+                  name: "name"
+                  itemId: "itemId"
+                  category: "category"
+                  availability: "true"
+                  quantity: 1
+                  location: "a12"
         "400":
           description: "Item Not Found"
           content:
@@ -303,7 +322,7 @@ paths:
                   message: "Server Error"
   /category/delete:
     delete:
-      description: "Delete an item from the inventory"
+      description: "Delete a category"
       parameters:
         - name: category
           in: query
@@ -320,7 +339,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/Item"
                 example:
-                  message: "Item Deleted Successfully"
+                  message: "category Deleted Successfully"
         "400":
           description: "Item Not Found"
           content:
@@ -345,7 +364,7 @@ paths:
                   message: "Server Error"
   /location/delete:
     delete:
-      description: "Delete an item from the inventory"
+      description: "Delete a location"
       parameters:
         - name: location
           in: query
@@ -362,7 +381,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/Item"
                 example:
-                  message: "Item Deleted Successfully"
+                  message: "location Deleted Successfully"
         "400":
           description: "Item Not Found"
           content:
@@ -387,7 +406,7 @@ paths:
                   message: "Server Error"
   /inventory/name/{name}:
     get:
-      description: "Get an item from the inventory"
+      description: "Get an item by name from the inventory"
       parameters:
         - name: name
           in: path
@@ -405,9 +424,9 @@ paths:
                   $ref: "#/components/schemas/Item"
                 example:
                   name: "name"
-                  id: "id"
+                  itemId: "itemId"
                   category: "category"
-                  available: "true"
+                  availability: "true"
                   quantity: 1
                   location: "a12"
         "400":
@@ -432,11 +451,11 @@ paths:
                 example:
                   code: 500,
                   message: "Server Error"
-  /inventory/id/{id}:
+  /inventory/id/{itemId}:
     get:
-      description: "Get an item from the inventory"
+      description: "Get an item by ID from the inventory"
       parameters:
-        - name: id
+        - name: itemId
           in: path
           required: true
           schema:
@@ -452,9 +471,9 @@ paths:
                   $ref: "#/components/schemas/Item"
                 example:
                   name: "name"
-                  id: "id"
+                  itemId: "itemId"
                   category: "category"
-                  available: "true"
+                  availability: "true"
                   quantity: 1
                   location: "a12"
         "400":
@@ -479,11 +498,11 @@ paths:
                 example:
                   code: 500,
                   message: "Server Error"
-  /inventory/available/{available}:
+  /inventory/available/{availability}:
     get:
-      description: "Get an item from the inventory"
+      description: "Get a list of items from the inventory based on availability"
       parameters:
-        - name: available
+        - name: availability
           in: path
           required: true
           schema:
@@ -499,9 +518,9 @@ paths:
                   $ref: "#/components/schemas/ItemList"
                 example:
                   name: "name"
-                  id: "id"
+                  itemId: "itemId"
                   category: "category"
-                  available: "true"
+                  availability: "true"
                   quantity: 1
                   location: "a12"
         "400":
@@ -546,9 +565,9 @@ paths:
                   $ref: "#/components/schemas/ItemList"
                 example:
                   name: "name"
-                  id: "id"
+                  itemId: "itemId"
                   category: "category"
-                  available: "true"
+                  availability: "true"
                   quantity: 1
                   location: "a12"
         "400":
@@ -573,16 +592,16 @@ paths:
                 example:
                   code: 500
                   message: "Server Error"
-  /inventory/category/{category}/{available}:
+  /inventory/category/{category}/{availability}:
     get:
-      description: "Get a list of items from the inventory based on category"
+      description: "Get a list of items from the inventory based on availability in a category"
       parameters:
         - name: category
           in: path
           required: true
           schema:
             type: string
-        - name: available
+        - name: availability
           in: path
           required: true
           schema:
@@ -598,9 +617,9 @@ paths:
                   $ref: "#/components/schemas/ItemList"
                 example:
                   name: "name"
-                  id: "id"
+                  itemId: "itemId"
                   category: "category"
-                  available: "true"
+                  availability: "true"
                   quantity: 1
                   location: "a12"
         "400":
@@ -627,7 +646,7 @@ paths:
                   message: "Server Error"
   /inventory/location/{location}:
     get:
-      description: "Get a list of item from the inventory based on availability"
+      description: "Get a list of item from the inventory based on location"
       parameters:
         - name: location
           in: path
@@ -645,9 +664,9 @@ paths:
                   $ref: "#/components/schemas/ItemList"
                 example:
                   name: "name"
-                  id: "id"
+                  itemId: "itemId"
                   category: "category"
-                  available: "true"
+                  availability: "true"
                   quantity: 1
                   location: "a12"
         "400":
@@ -674,7 +693,7 @@ paths:
                   message: "Server Error"
   /inventory/location/{location}/{category}:
     get:
-      description: "Get a list of item from the inventory based on availability"
+      description: "Get a list of item from the inventory based on category in a location"
       parameters:
         - name: location
           in: path
@@ -697,9 +716,9 @@ paths:
                   $ref: "#/components/schemas/ItemList"
                 example:
                   name: "name"
-                  id: "id"
+                  itemId: "itemId"
                   category: "category"
-                  available: "true"
+                  availability: "true"
                   quantity: 1
                   location: "a12"
         "400":
@@ -726,9 +745,9 @@ paths:
                   message: "Server Error"
   /inventory/all:
     get:
-      description: "Get a list of item from the inventory based on availability"
+      description: "Get a list of all items in the inventory"
       parameters:
-        - name: findAll
+        - name: all
           in: query
           required: false
           schema:
@@ -744,9 +763,9 @@ paths:
                   $ref: "#/components/schemas/ItemList"
                 example:
                   name: "name"
-                  id: "id"
+                  itemId: "itemId"
                   category: "category"
-                  available: "true"
+                  availability: "true"
                   quantity: 1
                   location: "a12"
         "400":
@@ -773,7 +792,7 @@ paths:
                   message: "Server Error"
   /category/{category}:
     get:
-      description: "Get a list of item from the inventory based on availability"
+      description: "Get a category"
       parameters:
         - name: category
           in: path
@@ -791,11 +810,11 @@ paths:
                   $ref: "#/components/schemas/Item"
                 example:
                   name: "name"
-                  id: "id"
+                  itemId: "itemId"
                   category: "category"
-                  available: "true"
+                  availability: "true"
                   quantity: 1
-                  location: "a12"
+                  itemlocation: "a12"
         "400":
           description: "Item Not Found"
           content:
@@ -820,9 +839,9 @@ paths:
                   message: "Server Error"
   /category/all:
     get:
-      description: "Get a list of item from the inventory based on availability"
+      description: "Get a list of all categories"
       parameters:
-        - name: findAll
+        - name: all
           in: query
           required: false
           schema:
@@ -838,11 +857,11 @@ paths:
                   $ref: "#/components/schemas/ItemList"
                 example:
                   name: "name"
-                  id: "id"
+                  itemId: "itemId"
                   category: "category"
-                  available: "true"
+                  availability: "true"
                   quantity: 1
-                  location: "a12"
+                  itemlocation: "a12"
         "400":
           description: "Item Not Found"
           content:
@@ -867,7 +886,7 @@ paths:
                   message: "Server Error"
   /location/{location}:
     get:
-      description: "Get a list of item from the inventory based on availability"
+      description: "Get a list location"
       parameters:
         - name: location
           in: path
@@ -885,9 +904,9 @@ paths:
                   $ref: "#/components/schemas/Item"
                 example:
                   name: "name"
-                  id: "id"
+                  itemId: "itemId"
                   category: "category"
-                  available: "true"
+                  availability: "true"
                   quantity: 1
                   location: "a12"
         "400":
@@ -914,9 +933,9 @@ paths:
                   message: "Server Error"
   /location/all:
     get:
-      description: "Get a list of item from the inventory based on availability"
+      description: "Get a list of all locations"
       parameters:
-        - name: findAll
+        - name: all
           in: query
           required: false
           schema:
@@ -932,9 +951,9 @@ paths:
                   $ref: "#/components/schemas/ItemList"
                 example:
                   name: "name"
-                  id: "id"
+                  itemId: "itemId"
                   category: "category"
-                  available: "true"
+                  availability: "true"
                   quantity: 1
                   location: "a12"
         "400":
@@ -964,19 +983,29 @@ components:
   schemas:
     Item:
       properties:
-        message:
+        name:
+          type: string
+        itemId:
+          type: string
+        category:
+          type: string
+        availability:
+          type: string
+        quantity:
+          type: integer
+        location:
           type: string
     ItemList:
       type: object
       properties:
         name:
           type: string
-        id:
+        itemId:
           type: string
         category:
           type: string
-        available:
-          type: boolean
+        availability:
+          type: string
         quantity:
           type: integer
         location:

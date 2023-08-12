@@ -9,31 +9,26 @@ import java.util.List;
 
 public class ModelConverter {
 
-    /**
-     * Converts a provided {@link Item} into a {@link ItemModel} representation.
-     * @param item the playlist to convert
-     * @return the converted playlist
-     */
     public ItemModel itemConverter(Item item) {
         return ItemModel.builder()
-                .withName(item.getItemName())
-                .withId(item.getId())
-                .withCategory(item.getCategory())
-                .withAvailable(item.isAvailable())
-                .withQuantity(item.getQuantity())
-                .withLocation(item.getLocation())
+                .withItemName(item.getItemName())
+                .withId(item.getItemId())
+                .withCategory(item.getItemCategory())
+                .withAvailability(item.getAvailability())
+                .withQuantity(item.getItemQuantity())
+                .withItemLocation(item.getItemLocation())
                 .build();
     }
 
     public CategoryModel categoryConverter(Category category) {
         return CategoryModel.builder()
-                .withCategory(category.getCategoryName())
+                .withCategoryName(category.getCategoryName())
                 .build();
     }
 
     public LocationModel locationConverter(Location location) {
         return LocationModel.builder()
-                .withLocation(location.getLocationName())
+                .withLocationName(location.getLocationName())
                 .build();
     }
 

@@ -8,7 +8,7 @@ public class LocationResult {
     private LocationListModel locationList;
 
     public LocationResult(Builder builder) {
-        this.location = builder.location;
+        this.location = builder.locationName;
         this.locationList = builder.locationList;
     }
 
@@ -33,16 +33,16 @@ public class LocationResult {
     }
 
     public static final class Builder {
-        private LocationModel location;
+        private LocationModel locationName;
         private LocationListModel locationList;
 
-        public Builder withLocation(LocationModel locationToUse) {
-            this.location = locationToUse;
+        public Builder withLocationName(LocationModel itemLocationToUse) {
+            this.locationName = itemLocationToUse;
             return this;
         }
 
-        public Builder withLocationList(LocationListModel locationListToUse) {
-            this.locationList = locationListToUse;
+        public Builder withLocationList(LocationListModel locationListListToUse) {
+            this.locationList = locationListListToUse;
             return this;
         }
 

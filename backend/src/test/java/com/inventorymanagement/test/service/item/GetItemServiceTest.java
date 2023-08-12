@@ -1,10 +1,11 @@
 package com.inventorymanagement.test.service.item;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedQueryList;
+import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedScanList;
 import com.inventorymanagement.configuration.awsglobalsecondaryindex.AwsGsiItem;
 import com.inventorymanagement.controller.Controller;
 import com.inventorymanagement.exception.CategoryNotFoundException;
-import com.inventorymanagement.exception.ItemListNotFoundException;
+import com.inventorymanagement.exception.InvalidAttributeException;
 import com.inventorymanagement.exception.ItemNotFoundException;
 import com.inventorymanagement.dao.ItemDao;
 import com.inventorymanagement.exception.LocationNotFoundException;
@@ -30,7 +31,7 @@ public class GetItemServiceTest {
     private final Item ramen = TestHelper.ramenNoodle();
     private final Item lettuce = TestHelper.lettuce();
     private final Item computer = TestHelper.computer();
-    private final Category music = TestHelper.music();
+    private final Category food = TestHelper.food();
     private final Location locationDF1 = TestHelper.locationDF1();
     private final String nonExisting = "nonExisting";
     @InjectMocks
@@ -41,13 +42,10 @@ public class GetItemServiceTest {
     private Category category;
     @Mock
     private AwsGsiItem awsGsiItem;
-
     @Mock
-    private PaginatedQueryList<Item> paginatedQueryItemList;
+    private PaginatedQueryList<Item> itemPaginatedQueryList;
     @Mock
-    private PaginatedQueryList<Category> categoryPaginatedQueryList;
-    @Mock
-    private PaginatedQueryList<Location> locationPaginatedQueryList;
+    private PaginatedScanList<Item> itemPaginatedScanList;
     private Controller controller;
 
     @BeforeEach
@@ -61,18 +59,33 @@ public class GetItemServiceTest {
         controller = Controller.builder()
                 .withName(ramen.getItemName()).build();
 
-        when(itemDao.find(controller.getName())).thenReturn(ramen);
+        when(itemDao.find(ramen.getItemName())).thenReturn(ramen);
 
         // WHEN
         ItemResult result = getItemService.handleRequest(controller, null);
 
         // THEN
-        assertEquals(ramen.getItemName(), result.getItem().getName());
-        assertEquals(ramen.getId(), result.getItem().getId());
-        assertEquals(ramen.getCategory(), result.getItem().getCategory());
-        assertEquals(ramen.isAvailable(), result.getItem().isAvailable());
-        assertEquals(ramen.getQuantity(), result.getItem().getQuantity());
-        assertEquals(ramen.getLocation(), result.getItem().getLocation());
+        assertEquals(ramen.getItemName(), result.getItem().getItemName());
+        assertEquals(ramen.getItemId(), result.getItem().getItemId());
+        assertEquals(ramen.getItemCategory(), result.getItem().getItemCategory());
+        assertEquals(ramen.getAvailability(), result.getItem().getAvailability());
+        assertEquals(ramen.getItemQuantity(), result.getItem().getItemQuantity());
+        assertEquals(ramen.getItemLocation(), result.getItem().getItemLocation());
+    }
+
+    @Test
+    void handleRequest_findByLowerCaseName_changesFirstLetterToUpperCase() {
+        // GIVEN
+        controller = Controller.builder()
+                .withName("ramen Noodle").build();
+
+        when(itemDao.find(ramen.getItemName())).thenReturn(ramen);
+
+        // WHEN
+        ItemResult result = getItemService.handleRequest(controller, null);
+
+        // THEN
+        assertEquals(ramen.getItemName(), result.getItem().getItemName());
     }
 
     @Test
@@ -82,16 +95,16 @@ public class GetItemServiceTest {
         existingItem.add(ramen);
 
         controller = Controller.builder()
-                .withId(ramen.getId()).build();
+                .withId(ramen.getItemId()).build();
 
-        when(itemDao.find(controller.getId())).thenReturn(ramen);
+        when(itemDao.find(ramen.getItemId())).thenReturn(ramen);
 
-        when(paginatedQueryItemList.size()).thenReturn(existingItem.size());
-        when(paginatedQueryItemList.isEmpty()).thenReturn(false);
-        when(paginatedQueryItemList.iterator()).thenReturn(existingItem.iterator());
-        when(paginatedQueryItemList.stream()).thenReturn(existingItem.stream());
+        when(itemPaginatedQueryList.size()).thenReturn(existingItem.size());
+        when(itemPaginatedQueryList.isEmpty()).thenReturn(false);
+        when(itemPaginatedQueryList.iterator()).thenReturn(existingItem.iterator());
+        when(itemPaginatedQueryList.stream()).thenReturn(existingItem.stream());
 
-        when(itemDao.findById(controller.getId())).thenReturn(paginatedQueryItemList);
+        when(itemDao.findById(ramen.getItemId())).thenReturn(itemPaginatedQueryList);
 
         // WHEN
         ItemResult result = getItemService.handleRequest(controller, null);
@@ -109,14 +122,14 @@ public class GetItemServiceTest {
         existingItem.add(computer);
 
         controller = Controller.builder()
-                .withAvailable("Available").build();
+                .withAvailability("Available").build();
 
-        when(paginatedQueryItemList.size()).thenReturn(existingItem.size());
-        when(paginatedQueryItemList.isEmpty()).thenReturn(false);
-        when(paginatedQueryItemList.iterator()).thenReturn(existingItem.iterator());
-        when(paginatedQueryItemList.stream()).thenReturn(existingItem.stream());
+        when(itemPaginatedQueryList.size()).thenReturn(existingItem.size());
+        when(itemPaginatedQueryList.isEmpty()).thenReturn(false);
+        when(itemPaginatedQueryList.iterator()).thenReturn(existingItem.iterator());
+        when(itemPaginatedQueryList.stream()).thenReturn(existingItem.stream());
 
-        when(itemDao.findByByAvailability(controller.isAvailable())).thenReturn(paginatedQueryItemList);
+        when(itemDao.findByByAvailability("Available")).thenReturn(itemPaginatedQueryList);
 
         // WHEN
         ItemResult result = getItemService.handleRequest(controller, null);
@@ -133,14 +146,14 @@ public class GetItemServiceTest {
         existingItem.add(lettuce);
 
         controller = Controller.builder()
-                .withCategory("Food").build();
+                .withCategory(food.getCategoryName()).build();
 
-        when(paginatedQueryItemList.size()).thenReturn(existingItem.size());
-        when(paginatedQueryItemList.isEmpty()).thenReturn(false);
-        when(paginatedQueryItemList.iterator()).thenReturn(existingItem.iterator());
-        when(paginatedQueryItemList.stream()).thenReturn(existingItem.stream());
+        when(itemPaginatedQueryList.size()).thenReturn(existingItem.size());
+        when(itemPaginatedQueryList.isEmpty()).thenReturn(false);
+        when(itemPaginatedQueryList.iterator()).thenReturn(existingItem.iterator());
+        when(itemPaginatedQueryList.stream()).thenReturn(existingItem.stream());
 
-        when(itemDao.findByCategory(controller.getCategory())).thenReturn(paginatedQueryItemList);
+        when(itemDao.findByCategory(food.getCategoryName())).thenReturn(itemPaginatedQueryList);
 
         // WHEN
         ItemResult result = getItemService.handleRequest(controller, null);
@@ -157,14 +170,14 @@ public class GetItemServiceTest {
 
         controller = Controller.builder()
                 .withCategory("Food")
-                .withAvailable("True").build();
+                .withAvailability("Available").build();
 
-        when(paginatedQueryItemList.size()).thenReturn(existingItem.size());
-        when(paginatedQueryItemList.isEmpty()).thenReturn(false);
-        when(paginatedQueryItemList.iterator()).thenReturn(existingItem.iterator());
-        when(paginatedQueryItemList.stream()).thenReturn(existingItem.stream());
+        when(itemPaginatedQueryList.size()).thenReturn(existingItem.size());
+        when(itemPaginatedQueryList.isEmpty()).thenReturn(false);
+        when(itemPaginatedQueryList.iterator()).thenReturn(existingItem.iterator());
+        when(itemPaginatedQueryList.stream()).thenReturn(existingItem.stream());
 
-        when(itemDao.findByCategoryAndAvailability(controller.getCategory(), controller.isAvailable())).thenReturn(paginatedQueryItemList);
+        when(itemDao.findByCategoryAndAvailability(food.getCategoryName(), "Available")).thenReturn(itemPaginatedQueryList);
 
         // WHEN
         ItemResult result = getItemService.handleRequest(controller, null);
@@ -180,14 +193,14 @@ public class GetItemServiceTest {
         existingItem.add(ramen);
 
         controller = Controller.builder()
-                .withLocation(ramen.getLocation()).build();
+                .withLocation(ramen.getItemLocation()).build();
 
-        when(paginatedQueryItemList.size()).thenReturn(existingItem.size());
-        when(paginatedQueryItemList.isEmpty()).thenReturn(false);
-        when(paginatedQueryItemList.iterator()).thenReturn(existingItem.iterator());
-        when(paginatedQueryItemList.stream()).thenReturn(existingItem.stream());
+        when(itemPaginatedQueryList.size()).thenReturn(existingItem.size());
+        when(itemPaginatedQueryList.isEmpty()).thenReturn(false);
+        when(itemPaginatedQueryList.iterator()).thenReturn(existingItem.iterator());
+        when(itemPaginatedQueryList.stream()).thenReturn(existingItem.stream());
 
-        when(itemDao.findByByLocation(controller.getLocation())).thenReturn(paginatedQueryItemList);
+        when(itemDao.findByByLocation(ramen.getItemLocation())).thenReturn(itemPaginatedQueryList);
 
         // WHEN
         ItemResult result = getItemService.handleRequest(controller, null);
@@ -203,15 +216,15 @@ public class GetItemServiceTest {
         existingItem.add(ramen);
 
         controller = Controller.builder()
-                .withLocation(ramen.getLocation())
-                .withCategory(ramen.getCategory()).build();
+                .withLocation(ramen.getItemLocation())
+                .withCategory(ramen.getItemCategory()).build();
 
-        when(paginatedQueryItemList.size()).thenReturn(existingItem.size());
-        when(paginatedQueryItemList.isEmpty()).thenReturn(false);
-        when(paginatedQueryItemList.iterator()).thenReturn(existingItem.iterator());
-        when(paginatedQueryItemList.stream()).thenReturn(existingItem.stream());
+        when(itemPaginatedQueryList.size()).thenReturn(existingItem.size());
+        when(itemPaginatedQueryList.isEmpty()).thenReturn(false);
+        when(itemPaginatedQueryList.iterator()).thenReturn(existingItem.iterator());
+        when(itemPaginatedQueryList.stream()).thenReturn(existingItem.stream());
 
-        when(itemDao.findByByLocationAndCategory(controller.getLocation(), controller.getCategory())).thenReturn(paginatedQueryItemList);
+        when(itemDao.findByByLocationAndCategory(ramen.getItemLocation(), ramen.getItemCategory())).thenReturn(itemPaginatedQueryList);
 
         // WHEN
         ItemResult result = getItemService.handleRequest(controller, null);
@@ -229,14 +242,14 @@ public class GetItemServiceTest {
         existingItem.add(computer);
 
         controller = Controller.builder()
-                .withFindAll(true).build();
+                .withAll(true).build();
 
-        when(paginatedQueryItemList.size()).thenReturn(existingItem.size());
-        when(paginatedQueryItemList.isEmpty()).thenReturn(false);
-        when(paginatedQueryItemList.iterator()).thenReturn(existingItem.iterator());
-        when(paginatedQueryItemList.stream()).thenReturn(existingItem.stream());
+        when(itemPaginatedScanList.size()).thenReturn(existingItem.size());
+        when(itemPaginatedScanList.isEmpty()).thenReturn(false);
+        when(itemPaginatedScanList.iterator()).thenReturn(existingItem.iterator());
+        when(itemPaginatedScanList.stream()).thenReturn(existingItem.stream());
 
-        when(itemDao.findAll()).thenReturn(paginatedQueryItemList);
+        when(itemDao.findAll()).thenReturn(itemPaginatedScanList);
 
         // WHEN
         ItemResult result = getItemService.handleRequest(controller, null);
@@ -251,7 +264,7 @@ public class GetItemServiceTest {
         controller = Controller.builder()
                 .withName(nonExisting).build();
 
-        when(itemDao.find(controller.getName())).thenThrow(ItemNotFoundException.class);
+        when(itemDao.find(ramen.getItemName())).thenReturn(ramen);
 
         // WHEN - // THEN
         assertThrows(ItemNotFoundException.class, () ->
@@ -265,29 +278,29 @@ public class GetItemServiceTest {
         controller = Controller.builder()
                 .withId(nonExisting).build();
 
-        when(itemDao.find(controller.getId())).thenThrow(ItemNotFoundException.class);
+        when(itemDao.find(ramen.getItemId())).thenReturn(ramen);
 
         // WHEN - // THEN
         assertThrows(ItemNotFoundException.class, () ->
                         getItemService.handleRequest(controller, null),
-                (String.format("Unable to find item ID %s. It may not exist.", nonExisting)));
+                (String.format("Unable to find an item with item ID %s. It may not exist.", nonExisting)));
     }
 
     @Test
     void handleRequest_findByCategory_categoryDoesNotExit_returnCategoryNotFoundException() {
         // GIVEN
-        List<Category> existingItem = new ArrayList<>();
-        existingItem.add(music);
+        List<Item> existingItem = new ArrayList<>();
+        existingItem.add(ramen);
 
         controller = Controller.builder()
-                .withCategory(music.getCategoryName()).build();
+                .withCategory(nonExisting).build();
 
-        when(categoryPaginatedQueryList.size()).thenReturn(existingItem.size());
-        when(categoryPaginatedQueryList.isEmpty()).thenReturn(false);
-        when(categoryPaginatedQueryList.iterator()).thenReturn(existingItem.iterator());
-        when(categoryPaginatedQueryList.stream()).thenReturn(existingItem.stream());
+        when(itemPaginatedQueryList.size()).thenReturn(existingItem.size());
+        when(itemPaginatedQueryList.isEmpty()).thenReturn(false);
+        when(itemPaginatedQueryList.iterator()).thenReturn(existingItem.iterator());
+        when(itemPaginatedQueryList.stream()).thenReturn(existingItem.stream());
 
-        when(itemDao.findByCategory(controller.getCategory())).thenThrow(CategoryNotFoundException.class);
+        when(itemDao.findByCategory(food.getCategoryName())).thenReturn(itemPaginatedQueryList);
 
         // WHEN - // THEN
         assertThrows(CategoryNotFoundException.class, () ->
@@ -296,20 +309,28 @@ public class GetItemServiceTest {
     }
 
     @Test
+    void handleRequest_findByCategoryAndAvailability_listIsEmpty_returnCategoryNotFoundException() {
+        // GIVEN
+        controller = Controller.builder()
+                .withCategory(nonExisting)
+                .withAvailability(nonExisting).build();
+
+        when(itemDao.findByCategoryAndAvailability(food.getCategoryName(), "Available"))
+                .thenReturn(itemPaginatedQueryList);
+
+        // WHEN - // THEN
+        assertThrows(CategoryNotFoundException.class, () ->
+                        getItemService.handleRequest(controller, null),
+                (String.format("Unable to find the list of items with the %s category.", category)));
+    }
+
+    @Test
     void handleRequest_findByLocation_locationDoesNotExist_throwsLocationNotFoundException() {
         // GIVEN
-        List<Location> existingItem = new ArrayList<>();
-        existingItem.add(locationDF1);
-
         controller = Controller.builder()
                 .withLocation(nonExisting).build();
 
-        when(locationPaginatedQueryList.size()).thenReturn(existingItem.size());
-        when(locationPaginatedQueryList.isEmpty()).thenReturn(false);
-        when(locationPaginatedQueryList.iterator()).thenReturn(existingItem.iterator());
-        when(locationPaginatedQueryList.stream()).thenReturn(existingItem.stream());
-
-        when(itemDao.findByByLocation(controller.getLocation())).thenThrow(LocationNotFoundException.class);
+        when(itemDao.findByByLocation(locationDF1.getLocationName())).thenReturn(itemPaginatedQueryList);
 
         // WHEN - // THEN
         assertThrows(LocationNotFoundException.class, () ->
@@ -318,38 +339,63 @@ public class GetItemServiceTest {
     }
 
     @Test
-    void handleRequest_findByCategoryAndAvailability_itemListIsEmpty_returnItemListNotFoundException() {
+    void handleRequest_findByLocationAndCategory_listIsEmpty_returnLocationNotFoundException() {
         // GIVEN
-        List<Item> existingItem = new ArrayList<>();
-
         controller = Controller.builder()
-                .withCategory("Food")
-                .withAvailable("Available").build();
+                .withLocation(nonExisting)
+                .withCategory(nonExisting).build();
 
-        when(paginatedQueryItemList.size()).thenReturn(existingItem.size());
-        when(paginatedQueryItemList.isEmpty()).thenReturn(false);
-        when(paginatedQueryItemList.iterator()).thenReturn(existingItem.iterator());
-        when(paginatedQueryItemList.stream()).thenReturn(existingItem.stream());
-
-        when(itemDao.findByCategoryAndAvailability(controller.getCategory(), controller.isAvailable())).thenThrow(ItemListNotFoundException.class);
+        when(itemDao.findByByLocationAndCategory(locationDF1.getLocationName(), food.getCategoryName()))
+                .thenReturn(itemPaginatedQueryList);
 
         // WHEN - // THEN
-        assertThrows(ItemListNotFoundException.class, () ->
+        assertThrows(LocationNotFoundException.class, () ->
                         getItemService.handleRequest(controller, null),
-                (String.format("Unable to find the list of items in the %s category.", category)));
+                (String.format("Unable to find the list of items in the %s location.", category)));
     }
 
     @Test
-    void handleRequest_findByLocationAndCategory_itemListIsEmpty_returnItemListNotFoundException() {
+    void handleRequest_ifNameIsEmpty_throwsInvalidAttributeException() {
         // GIVEN
         controller = Controller.builder()
-                .withCategory(nonExisting).build();
+                .withName(" ").build();
 
-        when(itemDao.find(controller.getCategory())).thenThrow(CategoryNotFoundException.class);
+        when(itemDao.find(ramen.getItemName())).thenReturn(ramen);
 
-        // WHEN - // THEN
-        assertThrows(CategoryNotFoundException.class, () ->
+        // WHEN - THEN
+        assertThrows(InvalidAttributeException.class, () ->
+                getItemService.handleRequest(controller, null),
+                ("Please enter a valid input"));
+
+    }
+
+    @Test
+    void handleRequest_ifAvailabilityIsEmpty_throwsInvalidAttributeException() {
+        // GIVEN
+        controller = Controller.builder()
+                .withAvailability(" ").build();
+
+        when(itemDao.find(ramen.getAvailability())).thenReturn(ramen);
+
+        // WHEN - THEN
+        assertThrows(InvalidAttributeException.class, () ->
                         getItemService.handleRequest(controller, null),
-                (String.format("Unable to find the %s category.", category)));
+                ("Please enter a valid input"));
+
+    }
+
+    @Test
+    void handleRequest_ifLocationIsEmpty_throwsInvalidAttributeException() {
+        // GIVEN
+        controller = Controller.builder()
+                .withLocation(" ").build();
+
+        when(itemDao.find(ramen.getItemLocation())).thenReturn(ramen);
+
+        // WHEN - THEN
+        assertThrows(InvalidAttributeException.class, () ->
+                        getItemService.handleRequest(controller, null),
+                ("Please enter a valid input"));
+
     }
 }

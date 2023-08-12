@@ -1,12 +1,14 @@
 package com.inventorymanagement.test.service.location;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedQueryList;
+import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedScanList;
 import com.inventorymanagement.configuration.awsglobalsecondaryindex.AwsGsiItem;
 import com.inventorymanagement.controller.Controller;
 import com.inventorymanagement.dao.LocationDao;
 import com.inventorymanagement.exception.LocationNotFoundException;
 import com.inventorymanagement.result.LocationResult;
 import com.inventorymanagement.service.location.GetLocationService;
+import com.inventorymanagement.table.Item;
 import com.inventorymanagement.table.Location;
 import com.inventorymanagement.test.TestHelper;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,8 +24,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 public class GetLocationServiceTest {
-    private final Location DF1 = TestHelper.locationDF1();
-    private final Location R2 = TestHelper.locationR2();
+    private final Location locationDF1 = TestHelper.locationDF1();
+    private final Location locationR2 = TestHelper.locationR2();
     @InjectMocks
     GetLocationService getLocationService;
     @Mock
@@ -32,6 +34,8 @@ public class GetLocationServiceTest {
     private AwsGsiItem awsGsiItem;
     @Mock
     private PaginatedQueryList<Location> locationPaginatedQueryList;
+    @Mock
+    private PaginatedScanList<Location> locationPaginatedScanList;
     private Controller controller;
 
     @BeforeEach
@@ -43,32 +47,32 @@ public class GetLocationServiceTest {
     void handleRequest_validLocationName_returnResult() {
         // GIVEN
         controller = Controller.builder()
-                .withLocation(DF1.getLocationName()).build();
+                .withLocation(locationDF1.getLocationName()).build();
 
-        when(locationDao.find(controller.getLocation())).thenReturn(DF1);
+        when(locationDao.find(locationDF1.getLocationName())).thenReturn(locationDF1);
 
         // WHEN
         LocationResult result = getLocationService.handleRequest(controller, null);
 
         // THEN
-        assertEquals(DF1.getLocationName(), result.getLocation().getLocation());
+        assertEquals(locationDF1.getLocationName(), result.getLocation().getLocationName());
     }
     @Test
     void handleRequest_findAll_returnAllItems() {
         //GIVEN
         List<Location> existingItem = new ArrayList<>();
-        existingItem.add(DF1);
-        existingItem.add(R2);
+        existingItem.add(locationDF1);
+        existingItem.add(locationR2);
 
         controller = Controller.builder()
-                .withFindAll(true).build();
+                .withAll(true).build();
 
-        when(locationPaginatedQueryList.size()).thenReturn(existingItem.size());
-        when(locationPaginatedQueryList.isEmpty()).thenReturn(false);
-        when(locationPaginatedQueryList.iterator()).thenReturn(existingItem.iterator());
-        when(locationPaginatedQueryList.stream()).thenReturn(existingItem.stream());
+        when(locationPaginatedScanList.size()).thenReturn(existingItem.size());
+        when(locationPaginatedScanList.isEmpty()).thenReturn(false);
+        when(locationPaginatedScanList.iterator()).thenReturn(existingItem.iterator());
+        when(locationPaginatedScanList.stream()).thenReturn(existingItem.stream());
 
-        when(locationDao.findAll()).thenReturn(locationPaginatedQueryList);
+        when(locationDao.findAll()).thenReturn(locationPaginatedScanList);
 
         // WHEN
         LocationResult result = getLocationService.handleRequest(controller, null);
@@ -85,7 +89,7 @@ public class GetLocationServiceTest {
         controller = Controller.builder()
                 .withLocation(nonExisting).build();
 
-        when(locationDao.find(controller.getLocation())).thenThrow(LocationNotFoundException.class);
+        when(locationDao.find(locationDF1.getLocationName())).thenThrow(LocationNotFoundException.class);
 
         // WHEN - // THEN
         assertThrows(LocationNotFoundException.class, () ->

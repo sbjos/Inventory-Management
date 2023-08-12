@@ -1,7 +1,7 @@
 package com.inventorymanagement.test.dao;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
-import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedQueryList;
+import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedScanList;
 import com.inventorymanagement.configuration.awsglobalsecondaryindex.AwsGsiCategory;
 import com.inventorymanagement.dao.CategoryDao;
 import com.inventorymanagement.table.Category;
@@ -30,7 +30,7 @@ public class CategoryDaoTest {
     @Mock
     private AwsGsiCategory awsGsiCategory;
     @Mock
-    private PaginatedQueryList<Category> paginatedQueryList;
+    private PaginatedScanList<Category> paginatedScanList;
 
     @BeforeEach
     // FIXME: Check what is that openMock "auto-closable" thing is.
@@ -58,15 +58,15 @@ public class CategoryDaoTest {
         existingItem.add(food);
         existingItem.add(electronic);
 
-        when(paginatedQueryList.iterator()).thenReturn(existingItem.iterator());
-        when(paginatedQueryList.size()).thenReturn(existingItem.size());
-        when(paginatedQueryList.isEmpty()).thenReturn(false);
-        when(paginatedQueryList.stream()).thenReturn(existingItem.stream());
+        when(paginatedScanList.iterator()).thenReturn(existingItem.iterator());
+        when(paginatedScanList.size()).thenReturn(existingItem.size());
+        when(paginatedScanList.isEmpty()).thenReturn(false);
+        when(paginatedScanList.stream()).thenReturn(existingItem.stream());
 
-        when(categoryDao.findAll()).thenReturn(paginatedQueryList);
+        when(categoryDao.findAll()).thenReturn(paginatedScanList);
 
         // WHEN
-        PaginatedQueryList<Category> result = categoryDao.findAll();
+        PaginatedScanList<Category> result = categoryDao.findAll();
 
         // THEN
         assertNotNull(result);

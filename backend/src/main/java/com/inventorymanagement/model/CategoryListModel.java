@@ -6,24 +6,24 @@ import java.util.List;
 import java.util.Objects;
 
 public class CategoryListModel {
-    private List<Category> withCategoryList;
+    private List<Category> categoryList;
 
     public CategoryListModel(Builder builder) {
-        this.withCategoryList = builder.withCategoryList;
+        this.categoryList = builder.categoryList;
     }
 
-    public List<Category> getCategory() {
-        return withCategoryList;
+    public List<Category> getCategoryList() {
+        return categoryList;
     }
 
-    public void setCategory(List<Category> withCategoryList) {
-        this.withCategoryList = withCategoryList;
+    public void setCategoryList(List<Category> categoryList) {
+        this.categoryList = categoryList;
     }
 
     @Override
     public String toString() {
-        return "CategoryModel{" +
-                "withCategoryList='" + withCategoryList + '\'' +
+        return "CategoryListModel{" +
+                "CategoryList='" + categoryList + '\'' +
                 '}';
     }
 
@@ -32,12 +32,12 @@ public class CategoryListModel {
         if (this == o) return true;
         if (o == null ||this.getClass() != o.getClass()) return false;
         CategoryListModel that = (CategoryListModel) o;
-        return Objects.equals(withCategoryList, that.withCategoryList);
+        return Objects.equals(categoryList, that.categoryList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(withCategoryList);
+        return Objects.hash(categoryList);
     }
 
     public static Builder builder() {
@@ -45,10 +45,10 @@ public class CategoryListModel {
     }
 
     public static final class Builder {
-        private List<Category> withCategoryList;
+        private List<Category> categoryList;
 
-        public Builder withCategoryList(List<Category> withCategoryListToUse) {
-            this.withCategoryList = withCategoryListToUse;
+        public Builder withCategoryList(List<Category> categoryListToUse) {
+            this.categoryList = categoryListToUse;
             return this;
         }
 

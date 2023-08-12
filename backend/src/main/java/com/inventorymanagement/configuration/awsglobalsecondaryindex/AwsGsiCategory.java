@@ -1,12 +1,10 @@
 package com.inventorymanagement.configuration.awsglobalsecondaryindex;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
-import com.amazonaws.services.dynamodbv2.model.AttributeValue;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 import com.inventorymanagement.table.Category;
 
 import javax.inject.Inject;
-import java.util.HashMap;
-import java.util.Map;
 
 public class AwsGsiCategory implements AwsGsiModule<Category, String> {
 
@@ -45,9 +43,8 @@ public class AwsGsiCategory implements AwsGsiModule<Category, String> {
     }
 
     @Override
-    public DynamoDBQueryExpression<Category> findAll() {
-        Map<String, AttributeValue> list = new HashMap<>();
-        return new DynamoDBQueryExpression<Category>()
+    public DynamoDBScanExpression findAll() {
+        return new DynamoDBScanExpression()
                 .withConsistentRead(false);
     }
 }

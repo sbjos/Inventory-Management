@@ -2,6 +2,7 @@ package com.inventorymanagement.dao;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedQueryList;
+import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedScanList;
 import com.inventorymanagement.configuration.awsglobalsecondaryindex.AwsGsiLocation;
 import com.inventorymanagement.table.Location;
 
@@ -18,8 +19,8 @@ public class LocationDao implements DaoModule<Location, String> {
     }
 
     @Override
-    public void save(Location item) {
-        dynamoDBMapper.save(item);
+    public void save(Location location) {
+        dynamoDBMapper.save(location);
     }
 
     @Override
@@ -58,13 +59,12 @@ public class LocationDao implements DaoModule<Location, String> {
     }
 
     @Override
-    public PaginatedQueryList<Location> findAll() {
-        return dynamoDBMapper.query(Location.class,
-                awsGsiLocation.findAll());
+    public PaginatedScanList<Location> findAll() {
+        return dynamoDBMapper.scan(Location.class, awsGsiLocation.findAll());
     }
 
     @Override
-    public void delete(String name) {
-        dynamoDBMapper.delete(name);
+    public void delete(Location location) {
+        dynamoDBMapper.delete(location);
     }
 }

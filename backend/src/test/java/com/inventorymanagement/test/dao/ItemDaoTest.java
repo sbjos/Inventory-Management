@@ -2,6 +2,7 @@ package com.inventorymanagement.test.dao;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedQueryList;
+import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedScanList;
 import com.inventorymanagement.configuration.awsglobalsecondaryindex.AwsGsiItem;
 import com.inventorymanagement.dao.*;
 import com.inventorymanagement.table.Category;
@@ -24,9 +25,9 @@ import static org.mockito.Mockito.when;
 public class ItemDaoTest {
     private final Item ramen = TestHelper.ramenNoodle();
     private final Item lettuce = TestHelper.lettuce();
-    private final Item electronic = TestHelper.computer();
+    private final Item computer = TestHelper.computer();
     private final Category food = TestHelper.food();
-    private final Location R2 = TestHelper.locationR2();
+    private final Location locationR2 = TestHelper.locationR2();
     @InjectMocks
     private ItemDao itemDao;
     @Mock
@@ -35,6 +36,8 @@ public class ItemDaoTest {
     private AwsGsiItem awsGsiItem;
     @Mock
     private PaginatedQueryList<Item> paginatedQueryList;
+    @Mock
+    private PaginatedScanList<Item> paginatedScanList;
 
     @BeforeEach
     // FIXME: Check what is that openMock "auto-closable" thing is.
@@ -58,10 +61,10 @@ public class ItemDaoTest {
     @Test
     void findById_returnsItem() {
         // GIVEN
-        when(dynamoDBMapper.load(Item.class, ramen.getId())).thenReturn(ramen);
+        when(dynamoDBMapper.load(Item.class, ramen.getItemId())).thenReturn(ramen);
 
         // WHEN
-        Item result = itemDao.find(ramen.getId());
+        Item result = itemDao.find(ramen.getItemId());
 
         // THEN
         assertEquals(ramen, result);
@@ -70,17 +73,17 @@ public class ItemDaoTest {
     @Test
     void findByByAvailability_returnsListOfAvailable() {
         List<Item> existingItem = new ArrayList<>();
-        existingItem.add(electronic);
+        existingItem.add(computer);
 
         when(paginatedQueryList.size()).thenReturn(existingItem.size());
         when(paginatedQueryList.isEmpty()).thenReturn(false);
         when(paginatedQueryList.iterator()).thenReturn(existingItem.iterator());
         when(paginatedQueryList.stream()).thenReturn(existingItem.stream());
 
-        when(itemDao.findByByAvailability(electronic.isAvailable())).thenReturn(paginatedQueryList);
+        when(itemDao.findByByAvailability(computer.getAvailability())).thenReturn(paginatedQueryList);
 
         // WHEN
-        PaginatedQueryList<Item> result = itemDao.findAll();
+        PaginatedQueryList<Item> result = itemDao.findByByAvailability(computer.getAvailability());
 
         // THEN
         assertNotNull(result);
@@ -100,7 +103,7 @@ public class ItemDaoTest {
         when(itemDao.findByCategory(food.getCategoryName())).thenReturn(paginatedQueryList);
 
         // WHEN
-        PaginatedQueryList<Item> result = itemDao.findAll();
+        PaginatedQueryList<Item> result = itemDao.findByCategory(food.getCategoryName());
 
         // THEN
         assertNotNull(result);
@@ -116,10 +119,10 @@ public class ItemDaoTest {
         when(paginatedQueryList.iterator()).thenReturn(existingItem.iterator());
         when(paginatedQueryList.stream()).thenReturn(existingItem.stream());
 
-        when(itemDao.findByCategoryAndAvailability(food.getCategoryName(), lettuce.isAvailable())).thenReturn(paginatedQueryList);
+        when(itemDao.findByCategoryAndAvailability(food.getCategoryName(), lettuce.getAvailability())).thenReturn(paginatedQueryList);
 
         // WHEN
-        PaginatedQueryList<Item> result = itemDao.findAll();
+        PaginatedQueryList<Item> result = itemDao.findByCategoryAndAvailability(food.getCategoryName(), "Available");
 
         // THEN
         assertNotNull(result);
@@ -135,10 +138,10 @@ public class ItemDaoTest {
         when(paginatedQueryList.iterator()).thenReturn(existingItem.iterator());
         when(paginatedQueryList.stream()).thenReturn(existingItem.stream());
 
-        when(itemDao.findByByLocation(R2.getLocationName())).thenReturn(paginatedQueryList);
+        when(itemDao.findByByLocation(locationR2.getLocationName())).thenReturn(paginatedQueryList);
 
         // WHEN
-        PaginatedQueryList<Item> result = itemDao.findAll();
+        PaginatedQueryList<Item> result = itemDao.findByByLocation(locationR2.getLocationName());
 
         // THEN
         assertNotNull(result);
@@ -154,10 +157,10 @@ public class ItemDaoTest {
         when(paginatedQueryList.iterator()).thenReturn(existingItem.iterator());
         when(paginatedQueryList.stream()).thenReturn(existingItem.stream());
 
-        when(itemDao.findByByLocationAndCategory(R2.getLocationName(), food.getCategoryName())).thenReturn(paginatedQueryList);
+        when(itemDao.findByByLocationAndCategory(locationR2.getLocationName(), food.getCategoryName())).thenReturn(paginatedQueryList);
 
         // WHEN
-        PaginatedQueryList<Item> result = itemDao.findAll();
+        PaginatedQueryList<Item> result = itemDao.findByByLocationAndCategory(locationR2.getLocationName(), food.getCategoryName());
 
         // THEN
         assertNotNull(result);
@@ -169,17 +172,17 @@ public class ItemDaoTest {
         List<Item> existingItem = new ArrayList<>();
         existingItem.add(ramen);
         existingItem.add(lettuce);
-        existingItem.add(electronic);
+        existingItem.add(computer);
 
-        when(paginatedQueryList.size()).thenReturn(existingItem.size());
-        when(paginatedQueryList.isEmpty()).thenReturn(false);
-        when(paginatedQueryList.iterator()).thenReturn(existingItem.iterator());
-        when(paginatedQueryList.stream()).thenReturn(existingItem.stream());
+        when(paginatedScanList.size()).thenReturn(existingItem.size());
+        when(paginatedScanList.isEmpty()).thenReturn(false);
+        when(paginatedScanList.iterator()).thenReturn(existingItem.iterator());
+        when(paginatedScanList.stream()).thenReturn(existingItem.stream());
 
-        when(itemDao.findAll()).thenReturn(paginatedQueryList);
+        when(itemDao.findAll()).thenReturn(paginatedScanList);
 
         // WHEN
-        PaginatedQueryList<Item> result = itemDao.findAll();
+        PaginatedScanList<Item> result = itemDao.findAll();
 
         // THEN
         assertNotNull(result);

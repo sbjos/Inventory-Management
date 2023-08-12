@@ -3,80 +3,80 @@ package com.inventorymanagement.model;
 import java.util.Objects;
 
 public class ItemModel {
-    private String name;
-    private String id;
-    private String category;
-    private String available;
-    private long quantity;
-    private String location;
+    private String itemName;
+    private String itemId;
+    private String itemCategory;
+    private String availability;
+    private long itemQuantity;
+    private String itemLocation;
 
     public ItemModel(Builder builder) {
-        this.name = builder.name;
-        this.id = builder.id;
-        this.category = builder.category;
-        this.available = builder.available;
-        this.quantity = builder.quantity;
-        this.location = builder.location;
+        this.itemName = builder.itemName;
+        this.itemId = builder.id;
+        this.itemCategory = builder.category;
+        this.availability = builder.availability;
+        this.itemQuantity = builder.quantity;
+        this.itemLocation = builder.itemLocation;
     }
 
-    public String getName() {
-        return name;
+    public String getItemName() {
+        return itemName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
     }
 
-    public String getId() {
-        return id;
+    public String getItemId() {
+        return itemId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setItemId(String itemId) {
+        this.itemId = itemId;
     }
 
-    public String getCategory() {
-        return category;
+    public String getItemCategory() {
+        return itemCategory;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setItemCategory(String itemCategory) {
+        this.itemCategory = itemCategory;
     }
 
-    public String isAvailable() {
-        return available;
+    public String getAvailability() {
+        return availability;
     }
 
-    public void setAvailable(String available) {
-        this.available = available;
+    public void setAvailability(String availability) {
+        this.availability = availability;
     }
 
-    public long getQuantity() {
-        return quantity;
+    public long getItemQuantity() {
+        return itemQuantity;
     }
 
-    public void setQuantity(long quantity) {
-        this.quantity = quantity;
+    public void setItemQuantity(long itemQuantity) {
+        this.itemQuantity = itemQuantity;
     }
 
-    public String getLocation() {
-        return location;
+    public String getItemLocation() {
+        return itemLocation;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setItemLocation(String itemLocation) {
+        this.itemLocation = itemLocation;
     }
 
     @Override
     public String toString() {
         return "ItemModel{" +
-                "name='" + name + '\'' +
-                ", id='" + id + '\'' +
-                ", category='" + category + '\'' +
-                ", available'=" + available +
-                ", quantity=" + quantity +
-                ", location='" + location + '\'' +
-                '}';
+                "Name='" + itemName + '\'' +
+                ", ID='" + itemId + '\'' +
+                ", Category='" + itemCategory + '\'' +
+                ", Available'=" + availability +
+                ", Quantity=" + itemQuantity +
+                ", Location='" + itemLocation + '\'' +
+                '}' +  "\n";
     }
 
     @Override
@@ -84,12 +84,12 @@ public class ItemModel {
         if (this == o) return true;
         if (o == null ||this.getClass() != o.getClass()) return false;
         ItemModel that = (ItemModel) o;
-        return Objects.equals(name, that.name) && Objects.equals(id, that.id);
+        return Objects.equals(itemName, that.itemName) && Objects.equals(itemId, that.itemId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, id);
+        return Objects.hash(itemName, itemId);
     }
 
     public static Builder builder() {
@@ -97,15 +97,15 @@ public class ItemModel {
     }
 
     public static final class Builder {
-        private String name;
+        private String itemName;
         private String id;
         private String category;
-        private String available;
+        private String availability;
         private int quantity;
-        private String location;
+        private String itemLocation;
 
-        public Builder withName(String nameToUse) {
-            this.name = nameToUse;
+        public Builder withItemName(String itemNameToUse) {
+            this.itemName = itemNameToUse;
             return this;
         }
 
@@ -119,8 +119,8 @@ public class ItemModel {
             return this;
         }
 
-        public Builder withAvailable(String availableToUse) {
-            this.available = availableToUse;
+        public Builder withAvailability(String availabilityToUse) {
+            this.availability = availabilityToUse;
             return this;
         }
 
@@ -129,8 +129,8 @@ public class ItemModel {
             return this;
         }
 
-        public Builder withLocation(String locationToUse) {
-            this.location = locationToUse;
+        public Builder withItemLocation(String itemLocationToUse) {
+            this.itemLocation = itemLocationToUse;
             return this;
         }
 

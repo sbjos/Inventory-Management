@@ -1,10 +1,12 @@
 package com.inventorymanagement.test.service.category;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedQueryList;
+import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedScanList;
 import com.inventorymanagement.configuration.awsglobalsecondaryindex.AwsGsiItem;
 import com.inventorymanagement.controller.Controller;
 import com.inventorymanagement.dao.CategoryDao;
 import com.inventorymanagement.exception.CategoryNotFoundException;
+import com.inventorymanagement.exception.InvalidAttributeException;
 import com.inventorymanagement.result.CategoryResult;
 import com.inventorymanagement.service.category.GetCategoryService;
 import com.inventorymanagement.table.Category;
@@ -32,6 +34,8 @@ public class GetCategoryServiceTest {
     private AwsGsiItem awsGsiItem;
     @Mock
     private PaginatedQueryList<Category> categoryPaginatedQueryList;
+    @Mock
+    private PaginatedScanList<Category> categoryPaginatedScanList;
     private Controller controller;
 
     @BeforeEach
@@ -45,14 +49,45 @@ public class GetCategoryServiceTest {
         controller = Controller.builder()
                 .withCategory(food.getCategoryName()).build();
 
-        when(categoryDao.find(controller.getCategory())).thenReturn(food);
+        when(categoryDao.find(food.getCategoryName())).thenReturn(food);
 
         // WHEN
         CategoryResult result = getCategoryService.handleRequest(controller, null);
 
         // THEN
-        assertEquals(food.getCategoryName(), result.getCategory().getCategory());
+        assertEquals(food.getCategoryName(), result.getCategory().getCategoryName());
     }
+
+    @Test
+    void handleRequest_emptyCategoryName_throwsInvalidAttributeException() {
+        // GIVEN
+        controller = Controller.builder()
+                .withCategory(" ").build();
+
+        when(categoryDao.find(food.getCategoryName())).thenReturn(food);
+
+        // WHEN - // THEN
+        assertThrows(InvalidAttributeException.class, () ->
+                getCategoryService.handleRequest(controller, null),
+                ("Please enter a valid input"));
+    }
+
+    @Test
+    void handleRequest_lowerCaseCategoryName_changesFirstLetterToUpperCase() {
+        // GIVEN
+        controller = Controller.builder()
+                .withCategory("food").build();
+
+        when(categoryDao.find(food.getCategoryName())).thenReturn(food);
+
+        // WHEN
+        CategoryResult result = getCategoryService.handleRequest(controller, null);
+
+        // THEN
+        System.out.println(result.getCategory().getCategoryName());
+        assertEquals(food.getCategoryName(), result.getCategory().getCategoryName());
+    }
+
     @Test
     void handleRequest_findAll_returnAllItems() {
         //GIVEN
@@ -61,14 +96,14 @@ public class GetCategoryServiceTest {
         existingItem.add(music);
 
         controller = Controller.builder()
-                .withFindAll(true).build();
+                .withAll(true).build();
 
-        when(categoryPaginatedQueryList.size()).thenReturn(existingItem.size());
-        when(categoryPaginatedQueryList.isEmpty()).thenReturn(false);
-        when(categoryPaginatedQueryList.iterator()).thenReturn(existingItem.iterator());
-        when(categoryPaginatedQueryList.stream()).thenReturn(existingItem.stream());
+        when(categoryPaginatedScanList.size()).thenReturn(existingItem.size());
+        when(categoryPaginatedScanList.isEmpty()).thenReturn(false);
+        when(categoryPaginatedScanList.iterator()).thenReturn(existingItem.iterator());
+        when(categoryPaginatedScanList.stream()).thenReturn(existingItem.stream());
 
-        when(categoryDao.findAll()).thenReturn(categoryPaginatedQueryList);
+        when(categoryDao.findAll()).thenReturn(categoryPaginatedScanList);
 
         // WHEN
         CategoryResult result = getCategoryService.handleRequest(controller, null);
@@ -85,7 +120,7 @@ public class GetCategoryServiceTest {
         controller = Controller.builder()
                 .withCategory(nonExisting).build();
 
-        when(categoryDao.find(controller.getCategory())).thenThrow(CategoryNotFoundException.class);
+        when(categoryDao.find(food.getCategoryName())).thenReturn(food);
 
         // WHEN - // THEN
         assertThrows(CategoryNotFoundException.class, () ->

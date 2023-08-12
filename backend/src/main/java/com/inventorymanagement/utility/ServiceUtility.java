@@ -2,19 +2,33 @@ package com.inventorymanagement.utility;
 
 import org.apache.commons.lang3.RandomStringUtils;
 
-import java.util.regex.Pattern;
-
 public class ServiceUtility {
-    private static final Pattern INVALID_CHARACTER = Pattern.compile("[\"\'\\\\]");
 
     private static final int ID_LENGTH = 5;
 
-    public static boolean isValid(final String itemName) {
-        if (itemName.isBlank() || itemName.isEmpty()) {
-            return true;
+    public static boolean isEmpty(String name) {
+        return name.isBlank() || name.isEmpty();
+    }
+
+    /**
+     * Capitalizes the first letter of each word
+     */
+    public static String capitalizeFirstChar(String name) {
+        char[] chars = name.toLowerCase().toCharArray();
+        boolean found = false;
+
+        for (int i = 0; i < chars.length; i++) {
+            if (Character.isLetter(chars[i])) {
+                if (!found) {
+                    chars[i] = Character.toUpperCase(chars[i]);
+                }
+                found = true;
+            } else {
+                found = false;
+            }
         }
 
-        return INVALID_CHARACTER.matcher(itemName).find();
+        return String.valueOf(chars);
     }
 
     public static String generateId() {

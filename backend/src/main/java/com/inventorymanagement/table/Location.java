@@ -7,23 +7,23 @@ import java.util.Objects;
 @DynamoDBTable(tableName = "IM-Location")
 public class Location {
 
-    private String location;
+    private String locationName;
 
     public Location() {}
 
-    @DynamoDBHashKey(attributeName = "location")
+    @DynamoDBHashKey(attributeName = "LocationName")
     public String getLocationName() {
-        return location;
+        return locationName;
     }
 
     public void setLocationName(String categoryName) {
-        this.location = categoryName;
+        this.locationName = categoryName;
     }
 
     @Override
     public String toString() {
         return "Location{" +
-                "location='" + location + '\'' +
+                "Location='" + locationName + '\'' +
                 '}';
     }
 
@@ -32,11 +32,11 @@ public class Location {
         if (this == o) return true;
         if (o == null || this.getClass() != o.getClass()) return false;
         Location that = (Location) o;
-        return Objects.equals(location, that.location);
+        return Objects.equals(locationName, that.locationName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(location);
+        return Objects.hash(locationName);
     }
 }

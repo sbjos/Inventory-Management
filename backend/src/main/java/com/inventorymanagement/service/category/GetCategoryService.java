@@ -5,12 +5,14 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.inventorymanagement.controller.Controller;
 import com.inventorymanagement.dao.CategoryDao;
 import com.inventorymanagement.exception.CategoryNotFoundException;
-import com.inventorymanagement.exception.ItemListNotFoundException;
+import com.inventorymanagement.exception.InvalidAttributeException;
 import com.inventorymanagement.result.CategoryResult;
 import com.inventorymanagement.table.Category;
 import com.inventorymanagement.utility.ModelConverter;
 
 import javax.inject.Inject;
+
+import static com.inventorymanagement.utility.ServiceUtility.*;
 
 public class GetCategoryService implements RequestHandler<Controller, CategoryResult> {
     private final CategoryDao categoryDao;
@@ -22,15 +24,14 @@ public class GetCategoryService implements RequestHandler<Controller, CategoryRe
 
     @Override
     public CategoryResult handleRequest(Controller input, Context context) {
-        String category = input.getCategory();
-        boolean findAll = input.FindAll();
+        if (input.isAll()) return findAll();
 
-        if (findAll) return findAll();
+        String categoryName = capitalizeFirstChar(input.getCategory());
 
-        if (category == null) throw new ItemListNotFoundException
-                ("Unable to find the list of items");
+        if (isEmpty(categoryName)) throw new InvalidAttributeException
+                ("Please enter a valid input.");
 
-        return find(category);
+        return find(categoryName);
     }
 
     private CategoryResult find(String categoryName) {
@@ -40,12 +41,11 @@ public class GetCategoryService implements RequestHandler<Controller, CategoryRe
                 (String.format("Unable to find %s category. It may not exist.", categoryName));
 
         return CategoryResult.builder()
-                .withCategory(new ModelConverter().categoryConverter(category))
+                .withCategoryName(new ModelConverter().categoryConverter(category))
                 .build();
     }
 
     private CategoryResult findAll() {
-
         return CategoryResult.builder()
                 .withCategoryList(new ModelConverter().categoryListConverter(categoryDao.findAll()))
                 .build();

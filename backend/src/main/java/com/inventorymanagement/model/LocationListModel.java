@@ -6,24 +6,24 @@ import java.util.List;
 import java.util.Objects;
 
 public class LocationListModel {
-    private List<Location> withLocationList;
+    private List<Location> locationList;
 
     public LocationListModel(Builder builder) {
-        this.withLocationList = builder.withLocationList;
+        this.locationList = builder.LocationList;
     }
 
-    public List<Location> getLocation() {
-        return withLocationList;
+    public List<Location> getSectionList() {
+        return locationList;
     }
 
-    public void setLocation(List<Location> withLocationList) {
-        this.withLocationList = withLocationList;
+    public void setSectionList(List<Location> withLocationList) {
+        this.locationList = withLocationList;
     }
 
     @Override
     public String toString() {
-        return "LocationModel{" +
-                "withLocationList='" + withLocationList + '\'' +
+        return "LocationListModel{" +
+                "LocationList='" + locationList + '\'' +
                 '}';
     }
 
@@ -32,12 +32,12 @@ public class LocationListModel {
         if (this == o) return true;
         if (o == null ||this.getClass() != o.getClass()) return false;
         LocationListModel that = (LocationListModel) o;
-        return Objects.equals(withLocationList, that.withLocationList);
+        return Objects.equals(locationList, that.locationList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(withLocationList);
+        return Objects.hash(locationList);
     }
 
     public static Builder builder() {
@@ -45,10 +45,10 @@ public class LocationListModel {
     }
 
     public static final class Builder {
-        private List<Location> withLocationList;
+        private List<Location> LocationList;
 
-        public Builder withLocationList(List<Location> withLocationListToUse) {
-            this.withLocationList = withLocationListToUse;
+        public Builder withLocationList(List<Location> locationListToUse) {
+            this.LocationList = locationListToUse;
             return this;
         }
 

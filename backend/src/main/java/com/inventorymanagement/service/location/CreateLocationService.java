@@ -9,9 +9,10 @@ import com.inventorymanagement.exception.LocationAlreadyExistException;
 import com.inventorymanagement.result.LocationResult;
 import com.inventorymanagement.table.Location;
 import com.inventorymanagement.utility.ModelConverter;
-import com.inventorymanagement.utility.ServiceUtility;
 
 import javax.inject.Inject;
+
+import static com.inventorymanagement.utility.ServiceUtility.*;
 
 // TODO: Create test method
 public class CreateLocationService implements RequestHandler<Controller, LocationResult> {
@@ -24,13 +25,13 @@ public class CreateLocationService implements RequestHandler<Controller, Locatio
 
     @Override
     public LocationResult handleRequest(Controller input, Context context) {
-        String locationName = input.getLocation();
+        String locationName = input.getLocation().toUpperCase();
         Location existingLocation = locationDao.find(locationName);
 
         if (existingLocation != null) throw new LocationAlreadyExistException
-                (String.format("%s already exist. Please choose a different location.", existingLocation));
+                (String.format("%s already exist. Please choose a different location.", existingLocation.getLocationName()));
 
-        if (ServiceUtility.isValid(locationName)) throw new InvalidAttributeException
+        if (isEmpty(locationName)) throw new InvalidAttributeException
                 ("Please enter a valid location name.");
 
         Location location = new Location();
@@ -39,7 +40,7 @@ public class CreateLocationService implements RequestHandler<Controller, Locatio
         locationDao.save(location);
 
         return new LocationResult.Builder()
-                .withLocation(new ModelConverter().locationConverter(location))
+                .withLocationName(new ModelConverter().locationConverter(location))
                 .build();
     }
 }

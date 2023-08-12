@@ -1,6 +1,7 @@
 package com.inventorymanagement.configuration.awsglobalsecondaryindex;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.inventorymanagement.table.Item;
 
@@ -16,74 +17,73 @@ public class AwsGsiItem implements AwsGsiModule<Item, String> {
     @Override
     public DynamoDBQueryExpression<Item> idIndexQueryExpression(String id) {
         Map<String, AttributeValue> list = new HashMap<>();
-        list.put(":id", new AttributeValue().withS(id));
+        list.put(":ItemID", new AttributeValue().withS(id));
         return new DynamoDBQueryExpression<Item>()
-                .withIndexName("IdIndex")
+                .withIndexName("ID-Index")
                 .withConsistentRead(false)
-                .withKeyConditionExpression("id = :id")
+                .withKeyConditionExpression("ItemID = :ItemID")
                 .withExpressionAttributeValues(list);
     }
 
     @Override
     public DynamoDBQueryExpression<Item> availableIndexQueryExpression(String available) {
         Map<String, AttributeValue> list = new HashMap<>();
-        list.put(":available", new AttributeValue().withS(available));
+        list.put(":Availability", new AttributeValue().withS(available));
         return new DynamoDBQueryExpression<Item>()
-                .withIndexName("AvailableIndex")
+                .withIndexName("Available-Index")
                 .withConsistentRead(false)
-                .withKeyConditionExpression("available = :available")
+                .withKeyConditionExpression("Availability = :Availability")
                 .withExpressionAttributeValues(list);
     }
 
     @Override
     public DynamoDBQueryExpression<Item> categoryIndexQueryExpression(String category) {
         Map<String, AttributeValue> list = new HashMap<>();
-        list.put(":category", new AttributeValue().withS(category));
+        list.put(":ItemCategory", new AttributeValue().withS(category));
         return new DynamoDBQueryExpression<Item>()
-                .withIndexName("CategoryIndex")
+                .withIndexName("Category-Index")
                 .withConsistentRead(false)
-                .withKeyConditionExpression("category = :category")
+                .withKeyConditionExpression("ItemCategory = :ItemCategory")
                 .withExpressionAttributeValues(list);
     }
 
     @Override
     public DynamoDBQueryExpression<Item> categoryAndAvailabilityIndexQueryExpression(String category, String available) {
         Map<String, AttributeValue> list = new HashMap<>();
-        list.put(":category", new AttributeValue().withS(category));
-        list.put(":available", new AttributeValue().withS(available));
+        list.put(":ItemCategory", new AttributeValue().withS(category));
+        list.put(":Availability", new AttributeValue().withS(available));
         return new DynamoDBQueryExpression<Item>()
-                .withIndexName("CategoryIndex")
+                .withIndexName("Category-Index")
                 .withConsistentRead(false)
-                .withKeyConditionExpression("category = :category and available = :available")
+                .withKeyConditionExpression("ItemCategory = :ItemCategory and Availability = :Availability")
                 .withExpressionAttributeValues(list);
     }
 
     @Override
     public DynamoDBQueryExpression<Item> locationIndexQueryExpression(String location) {
         Map<String, AttributeValue> list = new HashMap<>();
-        list.put(":location", new AttributeValue().withS(location));
+        list.put(":ItemLocation", new AttributeValue().withS(location));
         return new DynamoDBQueryExpression<Item>()
-                .withIndexName("AvailableIndex")
+                .withIndexName("Location-Index")
                 .withConsistentRead(false)
-                .withKeyConditionExpression("location = :location")
+                .withKeyConditionExpression("ItemLocation = :ItemLocation")
                 .withExpressionAttributeValues(list);
     }
 @Override
     public DynamoDBQueryExpression<Item> locationAndCategoryIndexQueryExpression(String location, String category) {
         Map<String, AttributeValue> list = new HashMap<>();
-        list.put(":location", new AttributeValue().withS(location));
-        list.put(":category", new AttributeValue().withS(category));
+        list.put(":ItemLocation", new AttributeValue().withS(location));
+        list.put(":ItemCategory", new AttributeValue().withS(category));
         return new DynamoDBQueryExpression<Item>()
-                .withIndexName("AvailableIndex")
+                .withIndexName("Location-Index")
                 .withConsistentRead(false)
-                .withKeyConditionExpression("available = :available and category = :category")
+                .withKeyConditionExpression("ItemLocation = :ItemLocation and ItemCategory = :ItemCategory")
                 .withExpressionAttributeValues(list);
     }
 
     @Override
-    public DynamoDBQueryExpression<Item> findAll() {
-        Map<String, AttributeValue> list = new HashMap<>();
-        return new DynamoDBQueryExpression<Item>()
+    public DynamoDBScanExpression findAll() {
+        return new DynamoDBScanExpression()
                 .withConsistentRead(false);
     }
 }

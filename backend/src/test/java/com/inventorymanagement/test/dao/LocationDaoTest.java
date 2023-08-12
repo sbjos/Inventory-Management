@@ -1,9 +1,9 @@
 package com.inventorymanagement.test.dao;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
-import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedQueryList;
-import com.inventorymanagement.table.Location;
+import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedScanList;
 import com.inventorymanagement.configuration.awsglobalsecondaryindex.AwsGsiLocation;
+import com.inventorymanagement.table.Location;
 import com.inventorymanagement.dao.LocationDao;
 import com.inventorymanagement.test.TestHelper;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,7 +31,7 @@ public class LocationDaoTest {
     @Mock
     private AwsGsiLocation awsGsiLocation;
     @Mock
-    private PaginatedQueryList<Location> paginatedQueryList;
+    private PaginatedScanList<Location> paginatedScanList;
 
     @BeforeEach
     // FIXME: Check what is that openMock "auto-closable" thing is.
@@ -60,15 +60,15 @@ public class LocationDaoTest {
         existingItem.add(R2);
         existingItem.add(E4);
 
-        when(paginatedQueryList.iterator()).thenReturn(existingItem.iterator());
-        when(paginatedQueryList.size()).thenReturn(existingItem.size());
-        when(paginatedQueryList.isEmpty()).thenReturn(false);
-        when(paginatedQueryList.stream()).thenReturn(existingItem.stream());
+        when(paginatedScanList.iterator()).thenReturn(existingItem.iterator());
+        when(paginatedScanList.size()).thenReturn(existingItem.size());
+        when(paginatedScanList.isEmpty()).thenReturn(false);
+        when(paginatedScanList.stream()).thenReturn(existingItem.stream());
 
-        when(locationDao.findAll()).thenReturn(paginatedQueryList);
+        when(locationDao.findAll()).thenReturn(paginatedScanList);
 
         // WHEN
-        PaginatedQueryList<Location> result = locationDao.findAll();
+        PaginatedScanList<Location> result = locationDao.findAll();
 
         // THEN
         assertNotNull(result);
