@@ -24,11 +24,11 @@ public class GetItemService implements RequestHandler<Controller, ItemResult> {
 
     @Override
     public ItemResult handleRequest(Controller input, Context context) {
-        String name = input.getName();
+        String name = capitalizeFirstChar(input.getName());
         String id = input.getId();
-        String available = input.getAvailability();
-        String category = input.getCategory();
-        String location = input.getLocation();
+        String available = capitalizeFirstChar(input.getAvailability());
+        String category = capitalizeFirstChar(input.getCategory());
+        String location = toUpperCase(input.getLocation());
         boolean findAll = input.isAll();
 
         if (location != null) return findByByLocation(location, category);
@@ -44,7 +44,7 @@ public class GetItemService implements RequestHandler<Controller, ItemResult> {
     }
 
     private ItemResult find(String name) {
-        Item item = itemDao.find(capitalizeFirstChar(name));
+        Item item = itemDao.find(name);
 
         if (item == null) throw new ItemNotFoundException
                 (String.format("Unable to find %s. It may not exist.", name));
@@ -69,15 +69,13 @@ public class GetItemService implements RequestHandler<Controller, ItemResult> {
     }
 
     private ItemResult findByByAvailability(String available) {
-        String availability = capitalizeFirstChar(available);
+        PaginatedQueryList<Item> availableList = itemDao.findByByAvailability(available);
 
-        PaginatedQueryList<Item> availableList = itemDao.findByByAvailability(availability);
-
-        if (isEmpty(availability)) throw new InvalidAttributeException
+        if (isEmpty(available)) throw new InvalidAttributeException
                 ("Please enter a valid input.");
 
         if (availableList == null) throw new ItemNotFoundException
-                (String.format("Unable to find item ID %s. It may not exist.", availability));
+                (String.format("Unable to find item ID %s. It may not exist.", available));
 
         return ItemResult.builder()
                 .withItemList(new ModelConverter().itemListConverter(availableList))
@@ -85,25 +83,19 @@ public class GetItemService implements RequestHandler<Controller, ItemResult> {
     }
 
     private ItemResult findByCategory(String category, String available) {
-        String validCategoryName;
-        String validAvailability;
         PaginatedQueryList<Item> categoryList;
 
         if (available != null) {
-            validCategoryName = capitalizeFirstChar(category);
-            validAvailability = capitalizeFirstChar(available);
-
-            if (isEmpty(validCategoryName) || isEmpty(validAvailability)) throw new InvalidAttributeException
+            if (isEmpty(category) || isEmpty(available)) throw new InvalidAttributeException
                     ("Please enter a valid input.");
 
-            categoryList = itemDao.findByCategoryAndAvailability(validCategoryName, validAvailability);
+            categoryList = itemDao.findByCategoryAndAvailability(category, available);
         } else {
 
-            validCategoryName = capitalizeFirstChar(category);
-            categoryList = itemDao.findByCategory(validCategoryName);
+            categoryList = itemDao.findByCategory(category);
         }
 
-        if (isEmpty(validCategoryName)) throw new InvalidAttributeException
+        if (isEmpty(category)) throw new InvalidAttributeException
                 ("Please enter a valid input.");
 
         if (categoryList == null || categoryList.isEmpty()) throw new CategoryNotFoundException
@@ -115,29 +107,23 @@ public class GetItemService implements RequestHandler<Controller, ItemResult> {
     }
 
     private ItemResult findByByLocation(String location, String category) {
-        String validLocationName;
-        String validCategoryName = null;
         PaginatedQueryList<Item> locationList;
 
         if (category != null) {
-            validLocationName = location.toUpperCase();
-            validCategoryName = capitalizeFirstChar(category);
-
-            if (isEmpty(validLocationName) || isEmpty(validCategoryName)) throw new InvalidAttributeException
+            if (isEmpty(location) || isEmpty(category)) throw new InvalidAttributeException
                     ("Please enter a valid input.");
 
-            locationList = itemDao.findByByLocationAndCategory(validLocationName, validCategoryName);
+            locationList = itemDao.findByByLocationAndCategory(location, category);
         } else {
 
-            validLocationName = location.toUpperCase();
-            locationList = itemDao.findByByLocation(validLocationName);
+            locationList = itemDao.findByByLocation(location);
         }
 
-        if (isEmpty(validLocationName)) throw new InvalidAttributeException
+        if (isEmpty(location)) throw new InvalidAttributeException
                 ("Please enter a valid input.");
 
         if (locationList == null || locationList.isEmpty()) throw new LocationNotFoundException
-                (String.format("Unable to find the list of items in the %s location.", validLocationName));
+                (String.format("Unable to find the list of items in the %s location.", location));
 
         return ItemResult.builder()
                 .withItemList(new ModelConverter().itemListConverter(locationList))

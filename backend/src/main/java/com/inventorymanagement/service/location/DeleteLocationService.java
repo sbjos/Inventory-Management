@@ -25,7 +25,7 @@ public class DeleteLocationService implements RequestHandler<Controller, Locatio
 
     @Override
     public LocationResult handleRequest(Controller input, Context context) {
-        String locationName = input.getLocation().toUpperCase();
+        String locationName = toUpperCase(input.getLocation());
         Location location = locationDao.find(locationName);
 
         if (isEmpty(locationName)) throw new InvalidAttributeException

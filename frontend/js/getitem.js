@@ -1,65 +1,47 @@
-const addAlbumTrackForm = document.querySelector("#add-album-track-form");
-const albumTrackTable = document.querySelector("#album-track-table");
+const getItemForm = document.querySelector("#get-item-form");
+const getItemTable = document.querySelector("#get-item-table");
 const urlParams = new URLSearchParams(window.location.search);
-const id = urlParams.get('id');
+const submitName = document.getElementById("submit-button-name");
+const submitId = document.getElementById("submit-button-id");
 
-addAlbumTrackForm.onsubmit = function(evt) {
-  evt.preventDefault();
-  const asin = document.querySelector("#album-asin").value;
-  const trackNumber = document.querySelector("#track-number").value;
-  const newSong = {
-    "asin": asin,
-    "trackNumber": trackNumber,
-    "queueNext": false
-  }
-  axios.post(`https://svebsuap66.execute-api.us-west-2.amazonaws.com/prod/playlists/${id}/songs`, newSong, {
-    authorization: {
-      'x-api-key': 'K7CHRL6aqt1C6eGJ9EHyFaZCn86G0fyI2sTZKSkW'
-    }
-  })
+submitName.onclick = function(evt) {
+  const itName = document.getElementById("find-by-name").value;
+  console.log("Getting item from inventory...");
+  axios.get('https://z9kbsh8krk.execute-api.us-west-2.amazonaws.com/prod/inventory/name/'+itName+'')
   .then(res => {
     console.log(res);
-    window.location.reload();
-  });
+    populateitem(res.data.item);
+})
 }
 
-window.onload = async function(evt) {
-  evt.preventDefault();
-  console.log("Getting Album Track Data...");
-  axios.get("https://svebsuap66.execute-api.us-west-2.amazonaws.com/prod/playlists/"+id+"/songs", {
-    authorization: {
-      'x-api-key': 'K7CHRL6aqt1C6eGJ9EHyFaZCn86G0fyI2sTZKSkW'
-    }
-  }).then(res => {
+submitId.onclick = function(evt) {
+  const itId = document.getElementById("find-by-id").value;
+  console.log("Getting item from inventory...");
+  axios.get('https://z9kbsh8krk.execute-api.us-west-2.amazonaws.com/prod/inventory/id/'+itId+'')
+  .then(res => {
     console.log(res);
-    if (!res.data) {
-      throw "No data for playlist with id:" + id;
-    }
-
-    if (res.data.songList.length > 0) {
-      populateAlbumTracks(res.data.songList);
-    }
+    populateitem(res.data.itemList);
   })
 }
 
-function populateAlbumTracks(albumTracksData) {
-  let thead = albumTrackTable.createTHead();
-  let tbody = albumTrackTable.createTBody();
+function populateitem(items) {
+  console.log(items);
+  let thead = getItemTable.createTHead();
+  let tbody = getItemTable.createTBody();
   let row = thead.insertRow();
 
-  for (let key in albumTracksData[0]) {
-    let th = document.createElement("th");
+  for (let key in items) {
+    console.log(key);
+    let cell = row.insertCell();
     let text = document.createTextNode(key);
-    th.appendChild(text);
-    row.appendChild(th);
-  }
+    cell.appendChild(text);
+}
 
-  for (let albumTrack of albumTracksData) {
-    let row = tbody.insertRow();
-    for (key in albumTrack) {
+  row = tbody.insertRow();
+
+  for (let key in items) {
       let cell = row.insertCell();
-      let text = document.createTextNode(albumTrack[key]);
+      let text = document.createTextNode(items[key]);
       cell.appendChild(text);
-    }
   }
 }

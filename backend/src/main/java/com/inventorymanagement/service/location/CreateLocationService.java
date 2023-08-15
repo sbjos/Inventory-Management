@@ -25,7 +25,7 @@ public class CreateLocationService implements RequestHandler<Controller, Locatio
 
     @Override
     public LocationResult handleRequest(Controller input, Context context) {
-        String locationName = input.getLocation().toUpperCase();
+        String locationName = toUpperCase(input.getLocation());
         Location existingLocation = locationDao.find(locationName);
 
         if (existingLocation != null) throw new LocationAlreadyExistException

@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link rel="stylesheet" href="styles.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/style.css">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="playlist.js" defer></script>
+    <script src="/js/additem.js" defer=""></script>
     <title>IM - Add Item</title>
   </head>
   <body>
@@ -24,12 +26,12 @@
           </p>
           <p class="form-field">
             <label>Item quantity
-              <input type="number" required class="validated-field" id="quantity" autofocus>
+              <input type="number" required class="validated-field" id="Item-quantity" autofocus>
             </label>
           </p>
           <p class="form-field">
             <label>Item location
-              <input type="text" required class="validated-field" id="location" autofocus>
+              <input type="text" required class="validated-field" id="Item-location" autofocus>
             </label>
           </p>
           <input type="submit" id="add-item">

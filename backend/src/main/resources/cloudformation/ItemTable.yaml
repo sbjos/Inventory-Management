@@ -6,40 +6,46 @@ Resources:
       PointInTimeRecoverySpecification:
         PointInTimeRecoveryEnabled: true
       AttributeDefinitions:
-        - AttributeName: "itemName"
+        - AttributeName: "name"
           AttributeType: "S"
-        - AttributeName: "itemId"
+        - AttributeName: "id"
           AttributeType: "S"
-        - AttributeName: "itemCategory"
+        - AttributeName: "category"
           AttributeType: "S"
         - AttributeName: "availability"
           AttributeType: "S"
-        - AttributeName: "itemLocation"
+        - AttributeName: "location"
           AttributeType: "S"
       KeySchema:
-        - AttributeName: "itemName"
+        - AttributeName: "name"
           KeyType: "HASH"
       BillingMode: PAY_PER_REQUEST
       GlobalSecondaryIndexes:
-        - IndexName: "AvailableIndex"
+        - IndexName: "ID-Index"
+          KeySchema:
+            - AttributeName: "id"
+              KeyType: "HASH"
+          Projection:
+            ProjectionType: ALL
+        - IndexName: "Available-Index"
           KeySchema:
             - AttributeName: "availability"
               KeyType: "HASH"
           Projection:
             ProjectionType: ALL
-        - IndexName: "CategoryIndex"
+        - IndexName: "Category-Index"
           KeySchema:
-            - AttributeName: "itemCategory"
+            - AttributeName: "category"
               KeyType: "HASH"
             - AttributeName: "availability"
               KeyType: "RANGE"
           Projection:
             ProjectionType: ALL
-        - IndexName: "LocationIndex"
+        - IndexName: "Location-Index"
           KeySchema:
-            - AttributeName: "itemLocation"
+            - AttributeName: "location"
               KeyType: "HASH"
-            - AttributeName: "itemCategory"
+            - AttributeName: "category"
               KeyType: "RANGE"
           Projection:
             ProjectionType: ALL

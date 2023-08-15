@@ -14,6 +14,8 @@ public class ServiceUtility {
      * Capitalizes the first letter of each word
      */
     public static String capitalizeFirstChar(String name) {
+        if (name == null) return null;
+
         char[] chars = name.toLowerCase().toCharArray();
         boolean found = false;
 
@@ -28,7 +30,19 @@ public class ServiceUtility {
             }
         }
 
-        return String.valueOf(chars);
+        return String.valueOf(chars)
+                .replace("%20", " ").trim();
+    }
+
+    /**
+     * Capitalizes the all letters in a location
+     */
+    public static String toUpperCase(String name) {
+        if (name == null) return null;
+
+        return name.toUpperCase()
+                .replace("%20", " ")
+                .trim();
     }
 
     public static String generateId() {

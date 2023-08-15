@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link rel="stylesheet" href="styles.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/style.css">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="playlist.js" defer></script>
+    <script src="/js/availability.js" defer=""></script>
     <title>IM - Find by Availability</title>
   </head>
   <body>
@@ -15,12 +17,12 @@
           <p class="form-field">
             <label for="availability">Choose an option:</label>
 
-            <select id="cars">
-              <option value="available">Available</option>
-              <option value="unavailable">Unvailable</option>
+            <select title="selection">
+              <option value="available" type="text" id="find-by-avail">Available</option>
+              <option value="unavailable" type="text" id="find-by-avail">Unvailable</option>
             </select>
           </p>
-          <input type="submit" id="add-album-track">
+          <button type="submit" id="submit-available">Submit</button>
       </form>
     </div>
     <div>

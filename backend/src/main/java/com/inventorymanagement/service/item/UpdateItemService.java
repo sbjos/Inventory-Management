@@ -28,10 +28,10 @@ public class UpdateItemService implements RequestHandler<Controller, ItemResult>
     @Override
     public ItemResult handleRequest(Controller input, Context context) {
         String itemName = capitalizeFirstChar(input.getName());
-        String category = input.getCategory();
+        String category = capitalizeFirstChar(input.getCategory());
         Integer quantity = input.getQuantity();
-        String location = input.getLocation();
-        Item item = null;
+        String location = toUpperCase(input.getLocation());
+        Item item;
 
         item = itemDao.find(itemName);
 
@@ -42,7 +42,7 @@ public class UpdateItemService implements RequestHandler<Controller, ItemResult>
         if (item == null) throw new ItemNotFoundException
                 ("Unable to find this item to update. It may not exist.");
 
-        if (isEmpty(category)) item.setItemCategory(capitalizeFirstChar(item.getItemCategory()));
+        if (isEmpty(category)) item.setItemCategory(item.getItemCategory());
         else item.setItemCategory(category);
 
         if (quantity == null) item.setItemQuantity(item.getItemQuantity());
@@ -51,7 +51,7 @@ public class UpdateItemService implements RequestHandler<Controller, ItemResult>
         if (item.getItemQuantity() > 0) item.setAvailability("Available");
         else item.setAvailability("Unavailable");
 
-        if (isEmpty(location)) item.setItemLocation(capitalizeFirstChar(item.getItemLocation()));
+        if (isEmpty(location)) item.setItemLocation(item.getItemLocation());
         else item.setItemLocation(location);
 
         itemDao.save(item);

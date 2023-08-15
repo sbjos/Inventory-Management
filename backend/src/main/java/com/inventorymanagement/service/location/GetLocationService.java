@@ -26,12 +26,12 @@ public class GetLocationService implements RequestHandler<Controller, LocationRe
     public LocationResult handleRequest(Controller input, Context context) {
         if (input.isAll()) return findAll();
 
-        String location = input.getLocation().toUpperCase();
+        String locationName = toUpperCase(input.getLocation());
 
-        if (isEmpty(location)) throw new InvalidAttributeException
+        if (isEmpty(locationName)) throw new InvalidAttributeException
                 ("Please enter a valid input");
 
-        return find(location);
+        return find(locationName);
     }
 
     private LocationResult find(String locationName) {
