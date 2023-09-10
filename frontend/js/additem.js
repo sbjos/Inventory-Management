@@ -1,8 +1,9 @@
 const addItemForm = document.querySelector("#add-item-form");
-const additemTable = document.querySelector("#add-item-table");
+const additemTable = document.querySelector("#item-table");
 const urlParams = new URLSearchParams(window.location.search);
+const submit = document.getElementById("submit-button");
 
-addItemForm.onsubmit = function(evt) {
+submit.onclick = function(evt) {
   evt.preventDefault();
   const name = document.querySelector("#item-name").value;
   const category = document.querySelector("#Item-category").value;
@@ -19,40 +20,31 @@ addItemForm.onsubmit = function(evt) {
   axios.post('https://z9kbsh8krk.execute-api.us-west-2.amazonaws.com/prod/inventory/add/?a=a', newItem)
   .then(function (response) {
     console.log(response);
-    // window.location.reload();
+    window.location.reload();
   })
   .catch(function (error) {
     console.log(error);
+    populateitem(res.data.item)
   });
-
-  // axios.get('https://z9kbsh8krk.execute-api.us-west-2.amazonaws.com/prod/inventory/name/'+newItem.name+'')
-  // .then(function (response) {
-  //   // handle success
-  //   console.log(response);
-  //   populateitemList(response.data);
-  // })
-  // .catch(function (error) {
-  //   console.log(error);
-  // })
 }
 
-function populateitemList(itemListData) {
+function populateitem(item) {
   let thead = additemTable.createTHead();
   let tbody = additemTable.createTBody();
   let row = thead.insertRow();
   
-  for (let key in items) {
+  for (let key in item) {
     console.log(key);
     let cell = row.insertCell();
     let text = document.createTextNode(key);
     cell.appendChild(text);
-}
+  }
 
   row = tbody.insertRow();
 
-  for (let key in items) {
-      let cell = row.insertCell();
-      let text = document.createTextNode(items[key]);
-      cell.appendChild(text);
+  for (let key in item) {
+    let cell = row.insertCell();
+    let text = document.createTextNode(item[key]);
+    cell.appendChild(text);
   }
 }

@@ -4,33 +4,76 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/nav.css">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/section.css">
+    <link rel="stylesheet" href="/css/box.css">
+    <!-- <link rel="stylesheet" href="/css/table.css"> -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="/js/getitem.js" defer=""></script>
     <title>IM - Find Item</title>
   </head>
+
   <body>
-    <div class="card">
-      <h2>Find an item by name or ID</h2>
-      <form class="card-content" id="get-item-form">
-          <p class="form-field">
-            <label>Item Name
-              <input type="text" id="find-by-name" autofocus>
-            </label>
-          </p>
-          <button type="button" id = "submit-button-name">Submit</button>
-          
-          
-          <p class="form-field">
-            <label>Item ID
-              <input type="text" id="find-by-id">
-            </label>
-          </p>
-          <button type="button" id = "submit-button-id">Submit</button>
+
+    <div class="section1" role="navigation">
+
+      <!-- Header -- page Section 1 -->
+      <header>
+
+        <!-- Home page link and logo -->
+        <h2> <a id="logo" href="home.html">Inventory Management</a></h2>
+
+      </header>
+    </div>
+
+    <!-- page title -->
+    <div class="section2">
+      <div id="title-section">
+        <h2 id="title">Find an item by name or ID</h2>
+      </div>
+      <!-- <p>Add an item to your inventory</p> -->
+    </div>
+
+    <div class="burger">
+
+      <form class="content" id="get-item-form">
+
+        <p class="form-field">
+          <label>Item Name
+            <input type="text" id="find-by-name" autofocus placeholder="Name">
+          </label>
+          <button type="button" class="button" id="submit-button-name">Submit</button>
+        </p>
+
+        <div id="or">- OR -</div>
+
+        <p class="form-field">
+          <label>Item ID
+            <input type="text" id="find-by-id" autofocus placeholder="ID">
+          </label>
+          <button type="button" class="button" id="submit-button-id">Submit</button>
+        </p>
+
       </form>
+
     </div>
-    <table id="get-item-table"></table>
-    <div>
-      <a href="index.html">Homepage</a>
+
+    <div class="section3">
+
+      <table id="item-table">
+        <thead>
+          <tr>
+            <th>Property</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody id="table-body">
+          <!-- Table body will be populated dynamically -->
+        </tbody>
+      </table>
+      
     </div>
+
   </body>
 </html>

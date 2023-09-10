@@ -4,29 +4,57 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/nav.css">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/section.css">
+    <link rel="stylesheet" href="/css/box.css">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="/js/availability.js" defer=""></script>
-    <title>IM - Find by Availability</title>
+    <title>IM - availability</title>
   </head>
-  <body>
-    <table id="availability-table">
-    </table>
-    <div class="card">
-      <h2>find items availability</h2>
-      <form class="card-content" id="find-by-availability-form">
-          <p class="form-field">
-            <label for="availability">Choose an option:</label>
 
-            <select title="selection">
-              <option value="available" type="text" id="find-by-avail">Available</option>
-              <option value="unavailable" type="text" id="find-by-avail">Unvailable</option>
-            </select>
-          </p>
-          <button type="submit" id="submit-available">Submit</button>
+  <body>
+
+    <div class="section1" role="navigation">
+
+      <!-- Header -- page Section 1 -->
+      <header>
+
+        <!-- Home page link and logo -->
+        <h2> <a id="logo" href="home.html">Inventory Management</a></h2>
+        
+      </header>
+    </div>
+
+    <!-- page title -->
+    <div class="section2">
+      <h2 id="title">Find an item by availability</h2>
+      <!-- <p>Add an item to your inventory</p> -->
+    </div>
+
+    <div class="burger">
+
+      <!-- form to add item to inventory -->
+      <form class="content" id="availability-form">
+
+        <p class="form-field">
+          <label>Choose an option:</label>
+          <select title="selection" id="selection-id">
+            <option value="available" type="text" id="find-by-avail">Available</option>
+            <option value="unavailable" type="text" id="find-by-unavail">Unvailable</option>
+          </select>
+        </p>
+
+        <button type="button" class="button" id="submit-button">Submit</button>
+
       </form>
+
     </div>
-    <div>
-      <a href="index.html">Homepage</a>
+
+    <div class="section3">
+
+      <table id="item-table"></table>
+
     </div>
+    
   </body>
-</html>

@@ -4,26 +4,83 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/nav.css">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/section.css">
+    <link rel="stylesheet" href="/css/box.css">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="playlist.js" defer=""></script>
+    <script src="/js/location.js" defer=""></script>
     <title>IM - Find by Location</title>
   </head>
+
   <body>
-    <table id="category-table">
-    </table>
-    <div class="card">
-      <h2>Find items location</h2>
-      <form class="card-content" id="find-by-category-form">
-          <p class="form-field">
-            <label>Location
-              <input type="text" required class="validated-field" id="name" autofocus>
-            </label>
-          </p>
-          <input type="submit" id="add-album-track">
+    <div class="section1" role="navigation">
+
+      <!-- Header -- page Section 1 -->
+      <header>
+
+        <!-- Home page link and logo -->
+        <h2> <a id="logo" href="home.html">Inventory Management</a></h2>
+
+        <!-- <div id="separation-bar"></div>
+          
+          <nav id="top-nav">
+            <ul>
+              <li>
+                <a href="./additem.html">Add an item</a>
+              </li>
+              <li>
+                <a href="./getitem.html">Find an item by name or ID</a>
+              </li>
+              <li>
+                <a href="./getitembyavailability.html">Find an item by availability</a>
+              </li>
+              <li>
+                <a href="./getitembycategory.html">Find an item by category</a>
+              </li>
+              <li>
+                <a href="./getitembylocation.html">Find an item by location</a>
+              </li>
+              <li>
+                <a href="./newpage.html" id="submit">Look up all items</a>
+              </li>
+            </ul>
+          </nav> -->
+
+      </header>
+
+    </div>
+
+    <!-- page title -->
+    <div class="section2">
+      <h2 id="title">Find an item by category</h2>
+      <!-- <p>Add an item to your inventory</p> -->
+    </div>
+
+    <div class="burger">
+      <form class="content" id="location-form">
+        <p class="form-field">
+          <label>Location
+            <input type="text" required class="validated-field" id="find-by-location" autofocus>
+          </label>
+        </p>
+        <p class="form-field">
+          <label>Category
+            <input type="text" class="validated-field" id="find-by-category" autofocus>
+          </label>
+        </p>
+
+        <button type="button" class="button" id="submit-button">Submit</button>
+
       </form>
+
     </div>
-    <div>
-      <a href="index.html">Homepage</a>
+
+    <div class="section3">
+
+      <table id="item-table"></table>
+
     </div>
+
   </body>
 </html>

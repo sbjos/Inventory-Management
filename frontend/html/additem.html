@@ -4,41 +4,71 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/nav.css">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/section.css">
+    <link rel="stylesheet" href="/css/box.css">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="/js/additem.js" defer=""></script>
     <title>IM - Add Item</title>
   </head>
   <body>
-    <table id="add-item-table">
-    </table>
-    <div class="add-item">
-      <h2>Add an item to your inventory</h2>
-      <form class="add-item-content" id="add-item-form">
-          <p class="form-field">
-            <label>Item Name
-              <input type="text" required class="validated-field" id="item-name" autofocus>
-            </label>
-          </p>
-          <p class="form-field">
-            <label>Item category
-              <input type="text" required class="validated-field" id="Item-category" autofocus>
-            </label>
-          </p>
-          <p class="form-field">
-            <label>Item quantity
-              <input type="number" required class="validated-field" id="Item-quantity" autofocus>
-            </label>
-          </p>
-          <p class="form-field">
-            <label>Item location
-              <input type="text" required class="validated-field" id="Item-location" autofocus>
-            </label>
-          </p>
-          <input type="submit" id="add-item">
+
+    <div class="section1" role="navigation">
+
+      <!-- Header -- page Section 1 -->
+      <header>
+
+        <!-- Home page link and logo -->
+        <h2> <a id="logo" href="home.html">Inventory Management</a></h2>
+
+      </header>
+    </div>
+
+    <!-- page title -->
+    <div class="section2">
+
+          <h2 id="title">Add an item to your inventory</h2>
+
+    </div>
+
+    <div class="burger">
+
+      <!-- form to add item to inventory -->
+      <form class="content" id="add-item-form">
+
+        <p class="form-field">
+          <label>Item Name
+            <input type="text" required class="validated-field" id="item-name" autofocus placeholder="Name">
+          </label>
+        </p>
+        <p class="form-field">
+          <label>Item category
+            <input type="text" required class="validated-field" id="Item-category" autofocus placeholder="Category">
+          </label>
+        </p>
+        <p class="form-field">
+          <label>Item quantity
+            <input type="text" required class="validated-field" id="Item-quantity" autofocus placeholder="Quantity">
+          </label>
+        </p>
+        <p class="form-field">
+          <label>Item location
+            <input type="text" required class="validated-field" id="Item-location" autofocus placeholder="Location">
+          </label>
+        </p>
+
+        <button type="button" class="button" id="submit-button">Submit</button>
+
       </form>
+
     </div>
-    <div>
-      <a href="index.html">Homepage</a>
+
+    <div class="section3">
+
+      <table id="item-table"></table>
+
     </div>
+    
   </body>
 </html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <link rel="stylesheet" href="/css/style.css">
+      <link rel="stylesheet" href="/css/nav.css">
+      <link rel="stylesheet" href="/css/reset.css">
+      <link rel="stylesheet" href="/css/section.css">
+      <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+      <script src="/js/home.js" defer=""></script>
+      <title>IM - Inventory Management</title>
+  </head>
+
+  <body>
+
+    <div class="section1" role="navigation">
+
+      <!-- Header -- page Section 1 -->
+      <header>
+        <div id="logo-section">
+
+          <!-- Home page link and logo -->
+          <h2> <a id="logo" href="home.html">Inventory Management</a></h2>
+
+        </div>
+
+        <div id="separation-bar"></div>
+
+          <nav id="top-nav">
+            <ul>
+              <li>
+                <a href="./additem.html">Add an item</a>
+              </li>
+              <li>
+                <a href="./getitem.html">Find an item by name or ID</a>
+              </li>
+              <li>
+                <a href="./getitembyavailability.html">Find an item by availability</a>
+              </li>
+              <li>
+                <a href="./getitembycategory.html">Find an item by category</a>
+              </li>
+              <li>
+                <a href="./getitembylocation.html">Find an item by location</a>
+              </li>
+              <li>
+                <a  id="submit">Look up all items</a>
+              </li>
+            </ul>
+          </nav>
+
+      </header>
+
+    </div>
+
+    <form class="card-content" id="home-form"></form>
+
+    <div class="section3">
+
+      <table class="table" id="item-table"></table>
+
+    </div>
+
+  </body>
+
+</html>

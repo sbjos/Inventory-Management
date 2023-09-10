@@ -30,7 +30,6 @@ public class DeleteItemService implements RequestHandler<Controller, ItemResult>
         if (isEmpty(itemName)) throw new InvalidAttributeException
                 ("Please enter a valid input");
 
-        // SafeGuard
         if (item == null) throw new ItemNotFoundException
                 ("Unable to find this item to delete. It may not exist.");
 
