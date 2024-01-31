@@ -1,26 +1,10 @@
 # Inventory Management Application
 
-## 1. Problem Statement
+## Statement
 
 Inventory Management System is an application that helps keep track of their inventories.
 
-## 2. Top Questions to Resolve in Review
-
-1. Should the ID Number a per item number with a specific prefix or should there be one item number 
-   for all items of the same type?
-
-2. Capability to filter the item list by each of the attribute.
-
-3. Add additional item database or add other DB to create a one-to-many DB relationship where one 
-   database is an item database and others could be related to location, or category.  
-
-4. Able to create pre-defied categories for items. (With admin privilege)
-
-5. Provide account access. User and Admin accounts.
-
-6. Assign a pre-defined location to that item.
-
-## 3. Use Cases
+## Use Cases
 
 U1. Ability to retrieve a list of all items in the inventory.
 
@@ -50,9 +34,9 @@ U13. Ability to delete pre-defined categories.
 
 U14. Ability to delete pre-defined locations.
 
-## 4. Project Scope
+## Project Scope
 
-### 4.1. In Scope
+### In Scope
 
 - Creating items in an inventory
 - Retrieving items in an inventory
@@ -63,13 +47,13 @@ U14. Ability to delete pre-defined locations.
 - Creating pre-defined locations
 - removing pre-defined locations
 
-### 4.2. Out of Scope
+### Out of Scope
 
 - Creating user accounts.
 - Delete a group of items simultaneously.
 
-## 5. Proposed Architecture Overview
 
+## Proposed Architecture Overview
 The following endpoints will allow to create, retrieve, update, and delete items:
 
 - `DeleteCategoryService`
@@ -86,9 +70,9 @@ A web interface will be provided to allow users to interact with the application
 The app uses a DynamoDB table to store data, AWS Lambda functions to handle request, RestAPI to 
 handle user request.
 
-## 6. API
+## API
 
-### 6.1. Public Models
+### Public Models
 ````
 // ItemModel
 
@@ -115,7 +99,7 @@ handle user request.
  private List<Item> itemList;
 ````
 
-### 6.5 CreateItem Endpoint
+### CreateItem Endpoint
 
 - Accepts `POST` requests to `/inventory/add:`
 - Accepts all attributes to create a new item
@@ -125,12 +109,12 @@ handle user request.
 - Inserts the new item ar random order to the list.
 - Returns new item.
 
-### 6.6 UpdateItemService Endpoint
+### UpdateItemService Endpoint
 
 - Accepts `PUT` requests to `/inventory/update:`
 - Accepts an items name to update an item's attribute except the item's name and ID.
 
-### 6.7 GetItemService Endpoint
+### GetItemService Endpoint
 
 #### Find by name
 - Accepts `GET` requests to `/inventory/name/{name}:`
@@ -182,7 +166,7 @@ handle user request.
 - Retrieves all items from a category.
 - Returns the category list.
 
-### 6.8 DeleteItemService Endpoint
+### DeleteItemService Endpoint
 
 - Accepts `DELETE` requests to `/inventory/delete`
 - Accepts name to delete an item.
@@ -190,9 +174,9 @@ handle user request.
 - Deletes the item.
 
 
-## 7. Tables
+## Tables
 
-### 7.1 IM-Item
+### IM-Item
 ````
 itemName // partition key, string 
 id // string
@@ -202,14 +186,11 @@ quantity // number
 location // string
 ````
 
-### 7.1 IM-Category
+### IM-Category
 ````
 category // partition key, string 
 ````
-### 7.1 IM-Location
+### IM-Location
 ````
 location // partition key, string 
 ````
-
-## 8. Pages
-##

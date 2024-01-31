@@ -5,19 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="260e3f49-c090-4332-b3a2-f7fb54cdce76" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/inventorymanagement/utility/ServiceUtility.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/inventorymanagement/utility/ServiceUtility.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/test/java/com/inventorymanagement/test/service/item/GetItemServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/com/inventorymanagement/test/service/item/GetItemServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/html/additem.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/html/additem.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/html/getitem.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/html/getitem.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/html/getitembyavailability.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/html/getitembyavailability.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/html/getitembycategory.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/html/getitembycategory.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/html/getitembylocation.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/html/getitembylocation.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/html/home.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/html/newpage.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/html/newpage.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Documentation/Design_Document.md" beforeDir="false" afterPath="$PROJECT_DIR$/Documentation/Design_Document.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/inventorymanagement/controller/CreateItemController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/inventorymanagement/controller/DeleteItemController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/inventorymanagement/controller/GetItemController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/inventorymanagement/controller/UpdateItemController.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,25 +43,25 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 0
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
   <component name="ProjectId" id="2Stvrgp0tS5ZtMxsKjSMqhIM7Wi" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "lab",
-    "last_opened_file_path": "C:/Users/sebas/BloomTech-Repo/My-Projects/Inventory-Management",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.lookFeel"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;lab&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/sebas/BloomTech-Repo/My-Projects/Inventory-Management&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\sebas\BloomTech-Repo\My-Projects\Inventory-Management" />
