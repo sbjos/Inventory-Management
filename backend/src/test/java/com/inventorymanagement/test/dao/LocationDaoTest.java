@@ -2,7 +2,6 @@ package com.inventorymanagement.test.dao;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedScanList;
-import com.inventorymanagement.configuration.awsglobalsecondaryindex.AwsGsiLocation;
 import com.inventorymanagement.table.Location;
 import com.inventorymanagement.dao.LocationDao;
 import com.inventorymanagement.test.TestHelper;
@@ -19,7 +18,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.when;
 
-// TODO: Review for unnecessary or missing test
 public class LocationDaoTest {
     private final Location DF1 = TestHelper.locationDF1();
     private final Location E4 = TestHelper.locationE4();
@@ -29,13 +27,9 @@ public class LocationDaoTest {
     @Mock
     private DynamoDBMapper dynamoDBMapper;
     @Mock
-    private AwsGsiLocation awsGsiLocation;
-    @Mock
     private PaginatedScanList<Location> paginatedScanList;
 
     @BeforeEach
-    // FIXME: Check what is that openMock "auto-closable" thing is.
-    //  All other test class with @Mock has it.
     public void Setup() {
         MockitoAnnotations.openMocks(this);
     }

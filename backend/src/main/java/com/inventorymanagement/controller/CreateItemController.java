@@ -7,8 +7,6 @@ package com.inventorymanagement.controller;//package com.inventorymanagement.con
 //import java.util.Objects;
 //
 //@RestController
-//// TODO: Is it "@RequestMapping" or "@GetMapping" ??
-////@RequestMapping("api/v1/Inventory-Management", method = {RequestMethod.POST})
 //@RequestMapping("api/v1/Inventory-Management")
 //public class CreateItemController {
 //    private String name;

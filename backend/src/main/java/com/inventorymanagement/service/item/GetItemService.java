@@ -40,10 +40,10 @@ public class GetItemService implements RequestHandler<Controller, ItemResult> {
         if (isEmpty(name)) throw new InvalidAttributeException
                 ("Please enter a valid input.");
 
-        return find(name);
+        return findByName(name);
     }
 
-    private ItemResult find(String name) {
+    private ItemResult findByName(String name) {
         Item item = itemDao.find(name);
 
         if (item == null) throw new ItemNotFoundException
@@ -60,7 +60,7 @@ public class GetItemService implements RequestHandler<Controller, ItemResult> {
         if (isEmpty(itemId)) throw new InvalidAttributeException
                 ("Please enter a valid input.");
 
-        if (item == null) throw new ItemNotFoundException
+        if (item == null || item.isEmpty()) throw new ItemNotFoundException
                 (String.format("Unable to find item ID %s. It may not exist.", itemId));
 
         return ItemResult.builder()
@@ -74,8 +74,8 @@ public class GetItemService implements RequestHandler<Controller, ItemResult> {
         if (isEmpty(available)) throw new InvalidAttributeException
                 ("Please enter a valid input.");
 
-        if (availableList == null) throw new ItemNotFoundException
-                (String.format("Unable to find item ID %s. It may not exist.", available));
+        if (availableList.isEmpty()) throw new ItemNotFoundException
+                (String.format("Unable to find availability for item ID %s.", available));
 
         return ItemResult.builder()
                 .withItemList(new ModelConverter().itemListConverter(availableList))

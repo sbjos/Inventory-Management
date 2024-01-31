@@ -37,7 +37,6 @@ public class CreateItemService implements RequestHandler<Controller, ItemResult>
         String location = input.getLocation().toUpperCase();
         Item existingItem = itemDao.find(name);
 
-        // TODO: Be more specific on the input that is invalid.
         if (isEmpty(name)
                 || quantity == null
                 || isEmpty(category)

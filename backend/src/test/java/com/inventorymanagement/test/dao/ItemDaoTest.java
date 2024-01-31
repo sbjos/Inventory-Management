@@ -40,8 +40,6 @@ public class ItemDaoTest {
     private PaginatedScanList<Item> paginatedScanList;
 
     @BeforeEach
-    // FIXME: Check what is that openMock "auto-closable" thing is.
-    //  All other test class with @Mock has it.
     public void Setup() {
         MockitoAnnotations.openMocks(this);
     }

@@ -8,9 +8,10 @@
     <link rel="stylesheet" href="/css/reset.css">
     <link rel="stylesheet" href="/css/section.css">
     <link rel="stylesheet" href="/css/box.css">
-    <!-- <link rel="stylesheet" href="/css/table.css"> -->
+    <link rel="stylesheet" href="/css/table.css">
+    <link rel="stylesheet" href="/css/getItembox.css">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="/js/getitem.js" defer=""></script>
+    <script type="module" src="/js/getitem.js"></script>
     <title>IM - Find Item</title>
   </head>
 
@@ -22,7 +23,7 @@
       <header>
 
         <!-- Home page link and logo -->
-        <h2> <a id="logo" href="home.html">Inventory Management</a></h2>
+        <h2> <a id="logo" href="index.html">Inventory Management</a></h2>
 
       </header>
     </div>
@@ -39,21 +40,19 @@
 
       <form class="content" id="get-item-form">
 
-        <p class="form-field">
+        <div class="form-field" id="name">
           <label>Item Name
             <input type="text" id="find-by-name" autofocus placeholder="Name">
           </label>
           <button type="button" class="button" id="submit-button-name">Submit</button>
-        </p>
+        </div>
 
-        <div id="or">- OR -</div>
-
-        <p class="form-field">
+        <div class="form-field" id="id">
           <label>Item ID
             <input type="text" id="find-by-id" autofocus placeholder="ID">
           </label>
           <button type="button" class="button" id="submit-button-id">Submit</button>
-        </p>
+        </div>
 
       </form>
 
@@ -61,17 +60,7 @@
 
     <div class="section3">
 
-      <table id="item-table">
-        <thead>
-          <tr>
-            <th>Property</th>
-            <th>Value</th>
-          </tr>
-        </thead>
-        <tbody id="table-body">
-          <!-- Table body will be populated dynamically -->
-        </tbody>
-      </table>
+      <table id="item-table"></table>
       
     </div>
 

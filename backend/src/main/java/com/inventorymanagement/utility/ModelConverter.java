@@ -20,27 +20,27 @@ public class ModelConverter {
                 .build();
     }
 
-    public CategoryModel categoryConverter(Category category) {
-        return CategoryModel.builder()
-                .withCategoryName(category.getCategoryName())
-                .build();
-    }
-
-    public LocationModel locationConverter(Location location) {
-        return LocationModel.builder()
-                .withLocationName(location.getLocationName())
-                .build();
-    }
-
     public ItemListModel itemListConverter(List<Item> item) {
         return ItemListModel.builder()
                 .withItemList(item)
                 .build();
     }
 
+    public CategoryModel categoryConverter(Category category) {
+        return CategoryModel.builder()
+                .withCategoryName(category.getCategoryName())
+                .build();
+    }
+
     public CategoryListModel categoryListConverter(List<Category> category) {
         return CategoryListModel.builder()
                 .withCategoryList(category)
+                .build();
+    }
+
+    public LocationModel locationConverter(Location location) {
+        return LocationModel.builder()
+                .withLocationName(location.getLocationName())
                 .build();
     }
 public LocationListModel locationListConverter(List<Location> location) {

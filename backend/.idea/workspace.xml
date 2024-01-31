@@ -5,44 +5,66 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3ecbdb82-9cea-4e96-a7ed-682a078805e5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/test/TestHelper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/test/dao/CategoryDaoTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/test/dao/ItemDaoTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/test/dao/LocationDaoTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/test/service/category/CreateCategoryServiceTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/test/service/category/DeleteCategoryServiceTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/test/service/category/GetCategoryServiceTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/test/service/item/CreateItemServiceTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/test/service/item/DeleteItemServiceTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/test/service/item/GetItemServiceTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/test/service/item/UpdateItemServiceTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/test/service/location/CreateLocationServiceTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/test/service/location/DeleteLocationServiceTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/test/service/location/GetLocationServiceTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/css/availability.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/css/box.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/css/nav.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/css/reset.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/css/section.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/html/home.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/html/newpage.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/js/category.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/js/home.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/js/location.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/css/buttonsandinput.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/css/getItembox.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/js/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/js/tableFunction.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/configuration/awsglobalsecondaryindex/AwsGsiModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/configuration/awsglobalsecondaryindex/AwsGsiModule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/service/item/DeleteItemService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/service/item/DeleteItemService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/dao/ItemDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/dao/ItemDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/service/item/GetItemService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/service/item/GetItemService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/utility/ModelConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/utility/ModelConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/utility/ServiceUtility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/utility/ServiceUtility.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/API/InventoryManagement-api.json" beforeDir="false" afterPath="$PROJECT_DIR$/Docs/API/InventoryManagement-api.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/API/InventoryManagement-api.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Docs/API/InventoryManagement-api.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Diagrams/CreateCategory.puml" beforeDir="false" afterPath="$PROJECT_DIR$/Docs/Diagrams/CreateCategory.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Diagrams/CreateItem.puml" beforeDir="false" afterPath="$PROJECT_DIR$/Docs/Diagrams/CreateItem.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Diagrams/CreateLocation.puml" beforeDir="false" afterPath="$PROJECT_DIR$/Docs/Diagrams/CreateLocation.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Diagrams/DeleteCategory.puml" beforeDir="false" afterPath="$PROJECT_DIR$/Docs/Diagrams/DeleteCategory.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Diagrams/DeleteItem.puml" beforeDir="false" afterPath="$PROJECT_DIR$/Docs/Diagrams/DeleteItem.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Diagrams/DeleteLocation.puml" beforeDir="false" afterPath="$PROJECT_DIR$/Docs/Diagrams/DeleteLocation.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Diagrams/GetItem.puml" beforeDir="false" afterPath="$PROJECT_DIR$/Docs/Diagrams/GetItem.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Diagrams/UpdateItem.puml" beforeDir="false" afterPath="$PROJECT_DIR$/Docs/Diagrams/UpdateItem.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/cloudformation/CLICreateCategoryTable" beforeDir="false" afterPath="$PROJECT_DIR$/Docs/cloudformation/CLICreateCategoryTable" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/cloudformation/CLICreateItemTable" beforeDir="false" afterPath="$PROJECT_DIR$/Docs/cloudformation/CLICreateItemTable" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/cloudformation/CLILocationTable" beforeDir="false" afterPath="$PROJECT_DIR$/Docs/cloudformation/CLILocationTable" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/cloudformation/CategoryTable.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Docs/cloudformation/CategoryTable.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/cloudformation/InventoryManagement-incomplete.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Docs/cloudformation/InventoryManagement-incomplete.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/cloudformation/ItemTable.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Docs/cloudformation/ItemTable.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/cloudformation/LocationTable.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Docs/cloudformation/LocationTable.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/inventorymanagement/test/service/item/GetItemServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/inventorymanagement/test/service/item/GetItemServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/test/TestHelper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/test/dao/CategoryDaoTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/test/dao/ItemDaoTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/test/dao/LocationDaoTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/test/service/category/CreateCategoryServiceTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/test/service/category/DeleteCategoryServiceTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/test/service/category/GetCategoryServiceTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/test/service/item/CreateItemServiceTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/test/service/item/DeleteItemServiceTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/test/service/item/GetItemServiceTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/test/service/item/UpdateItemServiceTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/test/service/location/CreateLocationServiceTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/test/service/location/DeleteLocationServiceTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/test/service/location/GetLocationServiceTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/css/box.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/css/box.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/css/nav.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/css/nav.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/css/section.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/css/section.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/css/table.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/css/table.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../frontend/html/additem.html" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/html/additem.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../frontend/html/getitem.html" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/html/getitem.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../frontend/html/getitembyavailability.html" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/html/getitembyavailability.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../frontend/html/getitembycategory.html" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/html/getitembycategory.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../frontend/html/getitembylocation.html" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/html/getitembylocation.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/html/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/js/additem.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/js/additem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/html/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/html/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/html/newpage.html" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/html/newpage.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../frontend/js/availability.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/js/availability.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/js/category.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/js/category.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../frontend/js/getitem.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/js/getitem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/js/home.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/js/location.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/js/location.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,12 +84,7 @@
         </task>
         <projects_view>
           <tree_state>
-            <expand>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Inventory-Management" type="f1a62948:ProjectNode" />
-              </path>
-            </expand>
+            <expand />
             <select />
           </tree_state>
         </projects_view>
@@ -77,10 +94,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="UML Sequence" />
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -102,14 +119,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultPlantUmlFileTemplate&quot;: &quot;UML Sequence&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/sebas/BloomTech-Repo/My-Projects/Inventory-Management/backend/src/test/java&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultPlantUmlFileTemplate": "UML Sequence",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "lab",
+    "last_opened_file_path": "C:/Users/sebas/BloomTech-Repo/My-Projects/Inventory-Management",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.inventorymanagement.table" />
@@ -138,8 +159,8 @@
       <recent name="com.inventorymanagement.service.category" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.Tests in 'com.inventorymanagement.test'">
-    <configuration name="GetItemServiceTest.handleRequest_ifAvailabilityIsEmpty_throwsInvalidAttributeException" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+  <component name="RunManager" selected="Gradle.backend [buildZip]">
+    <configuration name="GetItemServiceTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -152,7 +173,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;com.inventorymanagement.test.service.item.GetItemServiceTest.handleRequest_ifAvailabilityIsEmpty_throwsInvalidAttributeException&quot;" />
+            <option value="&quot;com.inventorymanagement.test.service.item.GetItemServiceTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -163,7 +184,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="Tests in 'Inventory-Management.test'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="GetItemServiceTest.handleRequest_findByLowerCaseName_changesFirstLetterToUpperCase" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -175,6 +196,8 @@
         <option name="taskNames">
           <list>
             <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;com.inventorymanagement.test.service.item.GetItemServiceTest.handleRequest_findByLowerCaseName_changesFirstLetterToUpperCase&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -182,7 +205,31 @@
       <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="GetItemServiceTest.handleRequest_findBydId_returnResult" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;com.inventorymanagement.test.service.item.GetItemServiceTest.handleRequest_findBydId_returnResult&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
     <configuration name="Tests in 'com.inventorymanagement.test'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
@@ -199,30 +246,6 @@
             <option value=":test" />
             <option value="--tests" />
             <option value="&quot;com.inventorymanagement.test.*&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
-      <method v="2" />
-    </configuration>
-    <configuration name="UpdateItemServiceTest.handleRequest_withInvalidName_throwsItemNotFoundException" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;com.inventorymanagement.test.service.item.UpdateItemServiceTest.handleRequest_withInvalidName_throwsItemNotFoundException&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -257,11 +280,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.Tests in 'com.inventorymanagement.test'" />
-        <item itemvalue="Gradle.Tests in 'Inventory-Management.test'" />
         <item itemvalue="Gradle.backend [buildZip]" />
-        <item itemvalue="Gradle.UpdateItemServiceTest.handleRequest_withInvalidName_throwsItemNotFoundException" />
-        <item itemvalue="Gradle.GetItemServiceTest.handleRequest_ifAvailabilityIsEmpty_throwsInvalidAttributeException" />
+        <item itemvalue="Gradle.Tests in 'com.inventorymanagement.test'" />
+        <item itemvalue="Gradle.GetItemServiceTest" />
+        <item itemvalue="Gradle.GetItemServiceTest.handleRequest_findBydId_returnResult" />
+        <item itemvalue="Gradle.GetItemServiceTest.handleRequest_findByLowerCaseName_changesFirstLetterToUpperCase" />
       </list>
     </recent_temporary>
   </component>

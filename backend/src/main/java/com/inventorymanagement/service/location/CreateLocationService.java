@@ -14,7 +14,6 @@ import javax.inject.Inject;
 
 import static com.inventorymanagement.utility.ServiceUtility.*;
 
-// TODO: Create test method
 public class CreateLocationService implements RequestHandler<Controller, LocationResult> {
     private final LocationDao locationDao;
 

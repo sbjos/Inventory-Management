@@ -5,173 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="260e3f49-c090-4332-b3a2-f7fb54cdce76" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Documentation/Learned" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/.hintrc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/UNUSED/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/.package-lock.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/asynckit/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/asynckit/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/asynckit/bench.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/asynckit/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/asynckit/lib/abort.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/asynckit/lib/async.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/asynckit/lib/defer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/asynckit/lib/iterate.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/asynckit/lib/readable_asynckit.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/asynckit/lib/readable_parallel.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/asynckit/lib/readable_serial.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/asynckit/lib/readable_serial_ordered.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/asynckit/lib/state.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/asynckit/lib/streamify.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/asynckit/lib/terminator.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/asynckit/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/asynckit/parallel.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/asynckit/serial.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/asynckit/serialOrdered.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/asynckit/stream.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/CHANGELOG.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/MIGRATION_GUIDE.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/SECURITY.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/dist/axios.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/dist/axios.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/dist/axios.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/dist/axios.min.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/dist/browser/axios.cjs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/dist/browser/axios.cjs.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/dist/esm/axios.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/dist/esm/axios.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/dist/esm/axios.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/dist/esm/axios.min.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/dist/node/axios.cjs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/dist/node/axios.cjs.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/index.d.cts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/index.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/adapters/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/adapters/adapters.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/adapters/http.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/adapters/xhr.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/axios.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/cancel/CancelToken.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/cancel/CanceledError.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/cancel/isCancel.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/core/Axios.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/core/AxiosError.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/core/AxiosHeaders.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/core/InterceptorManager.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/core/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/core/buildFullPath.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/core/dispatchRequest.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/core/mergeConfig.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/core/settle.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/core/transformData.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/defaults/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/defaults/transitional.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/env/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/env/classes/FormData.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/env/data.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/helpers/AxiosTransformStream.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/helpers/AxiosURLSearchParams.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/helpers/HttpStatusCode.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/helpers/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/helpers/ZlibHeaderTransformStream.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/helpers/bind.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/helpers/buildURL.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/helpers/callbackify.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/helpers/combineURLs.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/helpers/cookies.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/helpers/deprecatedMethod.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/helpers/formDataToJSON.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/helpers/formDataToStream.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/helpers/fromDataURI.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/helpers/isAbsoluteURL.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/helpers/isAxiosError.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/helpers/isURLSameOrigin.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/helpers/null.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/helpers/parseHeaders.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/helpers/parseProtocol.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/helpers/readBlob.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/helpers/speedometer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/helpers/spread.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/helpers/throttle.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/helpers/toFormData.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/helpers/toURLEncodedForm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/helpers/validator.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/platform/browser/classes/Blob.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/platform/browser/classes/FormData.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/platform/browser/classes/URLSearchParams.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/platform/browser/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/platform/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/platform/node/classes/FormData.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/platform/node/classes/URLSearchParams.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/platform/node/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/lib/utils.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/axios/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/combined-stream/License" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/combined-stream/Readme.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/combined-stream/lib/combined_stream.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/combined-stream/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/combined-stream/yarn.lock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/delayed-stream/.npmignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/delayed-stream/License" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/delayed-stream/Makefile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/delayed-stream/Readme.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/delayed-stream/lib/delayed_stream.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/delayed-stream/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/follow-redirects/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/follow-redirects/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/follow-redirects/debug.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/follow-redirects/http.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/follow-redirects/https.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/follow-redirects/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/follow-redirects/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/form-data/License" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/form-data/README.md.bak" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/form-data/Readme.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/form-data/index.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/form-data/lib/browser.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/form-data/lib/form_data.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/form-data/lib/populate.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/form-data/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/mime-db/HISTORY.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/mime-db/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/mime-db/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/mime-db/db.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/mime-db/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/mime-db/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/mime-types/HISTORY.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/mime-types/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/mime-types/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/mime-types/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/mime-types/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/proxy-from-env/.eslintrc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/proxy-from-env/.travis.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/proxy-from-env/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/proxy-from-env/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/proxy-from-env/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/proxy-from-env/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/node_modules/proxy-from-env/test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/Documentation/Design_Document.md" beforeDir="false" afterPath="$PROJECT_DIR$/Documentation/Design_Document.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/Documentation/Learned" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/Documentation/Rubric.md" beforeDir="false" afterPath="$PROJECT_DIR$/Documentation/Rubric.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/cloudformation/ItemTable.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/cloudformation/ItemTable.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.vscode/launch.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/inventorymanagement/utility/ServiceUtility.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/inventorymanagement/utility/ServiceUtility.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/test/java/com/inventorymanagement/test/service/item/GetItemServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/com/inventorymanagement/test/service/item/GetItemServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/html/additem.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/html/additem.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/html/getitem.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/html/getitem.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/html/getitembyavailability.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/html/getitembyavailability.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/html/getitembycategory.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/html/getitembycategory.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/html/getitembylocation.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/html/getitembylocation.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/html/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/html/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/html/inventorymanagement.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/API/inventorymanagement.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/js/additem.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/js/additem.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/js/getitem.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/js/getitem.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/js/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/html/home.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/html/newpage.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/html/newpage.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -191,17 +37,7 @@
         </task>
         <projects_view>
           <tree_state>
-            <expand>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Inventory-Management" type="f1a62948:ProjectNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Inventory-Management" type="f1a62948:ProjectNode" />
-                <item name="Run Configurations" type="7b0102dc:RunConfigurationsNode" />
-              </path>
-            </expand>
+            <expand />
             <select />
           </tree_state>
         </projects_view>
@@ -214,21 +50,25 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 0
+}]]></component>
   <component name="ProjectId" id="2Stvrgp0tS5ZtMxsKjSMqhIM7Wi" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/sebas/BloomTech-Repo/My-Projects/Inventory-Management&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "lab",
+    "last_opened_file_path": "C:/Users/sebas/BloomTech-Repo/My-Projects/Inventory-Management",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\sebas\BloomTech-Repo\My-Projects\Inventory-Management" />
@@ -269,7 +109,7 @@
       <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
-      <ForceTestExec>true</ForceTestExec>
+      <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
     <configuration name="ItemRepositoryTest.saveItem_returnSavedItem" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
@@ -293,7 +133,7 @@
       <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
-      <ForceTestExec>true</ForceTestExec>
+      <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
     <recent_temporary>

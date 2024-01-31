@@ -22,6 +22,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -77,7 +78,7 @@ public class GetItemServiceTest {
     void handleRequest_findByLowerCaseName_changesFirstLetterToUpperCase() {
         // GIVEN
         controller = Controller.builder()
-                .withName("ramen Noodle").build();
+                .withName("ramen noodle").build();
 
         when(itemDao.find(ramen.getItemName())).thenReturn(ramen);
 
@@ -110,6 +111,7 @@ public class GetItemServiceTest {
         ItemResult result = getItemService.handleRequest(controller, null);
 
         // THEN
+        System.out.println(result.toString());
         assertNotNull(result);
     }
 
