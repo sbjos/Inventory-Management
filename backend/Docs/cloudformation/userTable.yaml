@@ -1,0 +1,26 @@
+Resources:
+  InventoryManagementTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: "IM-User"
+      PointInTimeRecoverySpecification:
+        PointInTimeRecoveryEnabled: true
+      AttributeDefinitions:
+        - AttributeName: "id"
+          AttributeType: "S"
+        - AttributeName: "userName"
+          AttributeType: "S"
+        - AttributeName: "firstName"
+          AttributeType: "S"
+        - AttributeName: "lastName"
+          AttributeType: "S"
+        - AttributeName: "password"
+          AttributeType: "S"
+        - AttributeName: "isActive"
+          AttributeType: "S"
+        - AttributeName: "authority"
+          AttributeType: "S"
+      KeySchema:
+        - AttributeName: "id"
+          KeyType: "HASH"
+      BillingMode: PAY_PER_REQUEST
