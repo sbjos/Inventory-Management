@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/nav.css">
-    <link rel="stylesheet" href="/css/reset.css">
-    <link rel="stylesheet" href="/css/section.css">
-    <link rel="stylesheet" href="/css/box.css">
-    <link rel="stylesheet" href="/css/table.css">
-    <link rel="stylesheet" href="/css/buttonsandinput.css">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/nav.css" />
+    <link rel="stylesheet" href="/css/reset.css" />
+    <link rel="stylesheet" href="/css/section.css" />
+    <link rel="stylesheet" href="/css/box.css" />
+    <link rel="stylesheet" href="/css/table.css" />
+    <link rel="stylesheet" href="/css/buttonsandinput.css" />
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script type="module" src="/js/category.js"></script>
     <title>IM - Find by Category</title>
@@ -17,15 +17,11 @@
 
   <body>
     <div class="section1" role="navigation">
-
       <!-- Header -- page Section 1 -->
       <header>
-
         <!-- Home page link and logo -->
-        <h2> <a id="logo" href="index.html">Inventory Management</a></h2>
-
+        <h2><a id="logo" href="index.html">Inventory Management</a></h2>
       </header>
-
     </div>
 
     <!-- page title -->
@@ -35,35 +31,34 @@
     </div>
 
     <div class="burger">
-
       <form class="content" id="category-form">
-
-          <p class="form-field">
-            <label>Category
-              <input type="text" required class="validated-field" id="find-by-category" autofocus>
-            </label>
-          </p>
-          <p>
-            <label>filter by availability
-              <select title="selection" id="selection-id">
-                <option value="blank" id="blank">Choose an option</option>
-                <option value="available" type="text" id="find-by-avail">Available</option>
-                <option value="unavailable" type="text" id="find-by-unavail">Unvailable</option>
-              </select>
-            </label>
-          </p>
-
-          <button type="button" class="button" id="submit-button">Submit</button>
-
+        <p class="form-field">
+          <label
+            >Category
+            <input
+              type="text"
+              class="validated-field"
+              id="find-by-category"
+              autofocus
+              required
+            />
+          </label>
+        </p>
+        <label>filter by availability</label>
+        <select title="selection" id="selection-id">
+          <option value="blank" id="blank">Choose an option</option>
+          <option value="available" type="text" id="find-by-avail">
+            Available
+          </option>
+          <option value="unavailable" type="text" id="find-by-unavail">
+            Unvailable
+          </option>
+        </select>
+        <button type="button" class="button" id="submit-button">Submit</button>
       </form>
-
     </div>
-
     <div class="section3">
-
       <table id="item-table"></table>
-
     </div>
-    
   </body>
 </html>

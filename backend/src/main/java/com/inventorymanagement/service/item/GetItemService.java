@@ -75,7 +75,7 @@ public class GetItemService implements RequestHandler<Controller, ItemResult> {
                 ("Please enter a valid input.");
 
         if (availableList.isEmpty()) throw new ItemNotFoundException
-                (String.format("Unable to find availability for item ID %s.", available));
+                (String.format("Unable to find items"));
 
         return ItemResult.builder()
                 .withItemList(new ModelConverter().itemListConverter(availableList))
@@ -99,7 +99,7 @@ public class GetItemService implements RequestHandler<Controller, ItemResult> {
                 ("Please enter a valid input.");
 
         if (categoryList == null || categoryList.isEmpty()) throw new CategoryNotFoundException
-                (String.format("Unable to find the list of items with the %s category.", category));
+                (String.format("Unable to find items with %s category.", category));
 
         return ItemResult.builder()
                 .withItemList(new ModelConverter().itemListConverter(categoryList))
@@ -123,7 +123,7 @@ public class GetItemService implements RequestHandler<Controller, ItemResult> {
                 ("Please enter a valid input.");
 
         if (locationList == null || locationList.isEmpty()) throw new LocationNotFoundException
-                (String.format("Unable to find the list of items in the %s location.", location));
+                (String.format("Unable to find items in %s location.", location));
 
         return ItemResult.builder()
                 .withItemList(new ModelConverter().itemListConverter(locationList))
