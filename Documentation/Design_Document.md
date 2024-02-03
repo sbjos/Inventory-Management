@@ -47,12 +47,6 @@ U14. Ability to delete pre-defined locations.
 - Creating pre-defined locations
 - removing pre-defined locations
 
-### Out of Scope
-
-- Creating user accounts.
-- Delete a group of items simultaneously.
-
-
 ## Proposed Architecture Overview
 The following endpoints will allow to create, retrieve, update, and delete items:
 

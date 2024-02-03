@@ -2,6 +2,7 @@ package com.inventorymanagement.test.dao;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedScanList;
+import com.inventorymanagement.configuration.awsglobalsecondaryindex.AwsGsiCategory;
 import com.inventorymanagement.dao.CategoryDao;
 import com.inventorymanagement.table.Category;
 import com.inventorymanagement.test.TestHelper;
@@ -27,6 +28,8 @@ public class CategoryDaoTest {
     private DynamoDBMapper dynamoDBMapper;
     @Mock
     private PaginatedScanList<Category> paginatedScanList;
+    @Mock
+    private AwsGsiCategory awsGsiCategory;
 
     @BeforeEach
     public void Setup() {
@@ -57,6 +60,7 @@ public class CategoryDaoTest {
         when(paginatedScanList.isEmpty()).thenReturn(false);
         when(paginatedScanList.stream()).thenReturn(existingItem.stream());
 
+        when(dynamoDBMapper.scan(Category.class, awsGsiCategory.findAll())).thenReturn(paginatedScanList);
         when(categoryDao.findAll()).thenReturn(paginatedScanList);
 
         // WHEN

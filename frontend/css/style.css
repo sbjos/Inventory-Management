@@ -26,6 +26,10 @@ body {
   min-width: 355px;
 }
 
+#span {
+  font-weight: 500;
+}
+
 /* Footer */
 .footer {
   background-color: white;

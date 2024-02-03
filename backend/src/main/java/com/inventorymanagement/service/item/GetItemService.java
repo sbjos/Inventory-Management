@@ -44,6 +44,9 @@ public class GetItemService implements RequestHandler<Controller, ItemResult> {
     }
 
     private ItemResult findByName(String name) {
+        if (isEmpty(name)) throw new InvalidAttributeException
+                ("Please enter a valid input.");
+
         Item item = itemDao.find(name);
 
         if (item == null) throw new ItemNotFoundException
@@ -55,10 +58,10 @@ public class GetItemService implements RequestHandler<Controller, ItemResult> {
     }
 
     private ItemResult findById(String itemId) {
-        PaginatedQueryList<Item> item = itemDao.findById(itemId);
-
         if (isEmpty(itemId)) throw new InvalidAttributeException
                 ("Please enter a valid input.");
+
+        PaginatedQueryList<Item> item = itemDao.findById(itemId);
 
         if (item == null || item.isEmpty()) throw new ItemNotFoundException
                 (String.format("Unable to find item ID %s. It may not exist.", itemId));
@@ -68,14 +71,13 @@ public class GetItemService implements RequestHandler<Controller, ItemResult> {
                 .build();
     }
 
-    private ItemResult findByByAvailability(String available) {
-        PaginatedQueryList<Item> availableList = itemDao.findByByAvailability(available);
-
-        if (isEmpty(available)) throw new InvalidAttributeException
+    private ItemResult findByByAvailability(String availability) {
+        if (isEmpty(availability)) throw new InvalidAttributeException
                 ("Please enter a valid input.");
 
-        if (availableList.isEmpty()) throw new ItemNotFoundException
-                (String.format("Unable to find items"));
+        PaginatedQueryList<Item> availableList = itemDao.findByByAvailability(availability);
+
+        if (availableList.isEmpty()) throw new ItemNotFoundException("Unable to find list of items");
 
         return ItemResult.builder()
                 .withItemList(new ModelConverter().itemListConverter(availableList))
