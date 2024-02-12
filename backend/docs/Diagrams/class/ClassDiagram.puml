@@ -1,0 +1,153 @@
+@startuml
+
+left to right direction
+skinparam linetype ortho
+
+package configuration {
+    package awsglobalsecondaryindex {
+        class AwsGsiCategory implements AwsGsiModule
+        class AwsGsiItem implements AwsGsiModule
+        class AwsGsiLocation implements AwsGsiModule
+        interface AwsGsiModule
+    }
+    class AwsDynamoDBConfiguration
+    interface InventoryManagementAppComponent
+}
+
+package controller {
+    class Controller
+}
+
+package dao {
+    class CategoryDao implements DaoModule
+    class ItemDao implements DaoModule
+    class LocationDao implements DaoModule
+    Interface DaoModule
+}
+
+package exception {
+    class CategoryAlreadyExistException extends RuntimeException
+    class CategoryNotFoundException extends RuntimeException
+    class InvalidAttributeException extends RuntimeException
+    class ItemAlreadyExistException extends RuntimeException
+    class ItemListNotFoundException extends RuntimeException
+    class ItemNotFoundException extends RuntimeException
+    class LocationAlreadyExistException extends RuntimeException
+    class LocationNotFoundException extends RuntimeException
+}
+
+package handler {
+    package category {
+        class CreateCategoryHandler implements RequestHandler
+        class DeleteCategoryHandler implements RequestHandler
+        class GetCategoryHandler implements RequestHandler
+    }
+
+    package item {
+        class CreateItemHandler implements RequestHandler
+        class DeleteItemHandler implements RequestHandler
+        class GetItemHandler implements RequestHandler
+        class UpdateItemHandler implements RequestHandler
+    }
+
+    package location {
+        class CreateLocationHandler implements RequestHandler
+        class DeleteLocationHandler implements RequestHandler
+        class GetLocationHandler implements RequestHandler
+    }
+}
+
+package model {
+    class CategoryListModel
+    class CategoryModel
+    class ItemListModel
+    class ItemModel
+    class LocationListModel
+    class LocationModel
+}
+
+package result {
+    class CategoryResult
+    class ItemResult
+    class LocationResult
+}
+
+package service {
+    package category {
+        class CreateCategoryService implements RequestHandler
+        class DeleteCategoryService implements RequestHandler
+        class GetCategoryService implements RequestHandler
+    }
+
+    package item {
+        class CreateItemService implements RequestHandler
+        class DeleteItemService implements RequestHandler
+        class GetItemService implements RequestHandler
+        class UpdateItemService implements RequestHandler
+    }
+
+    package location {
+        class CreateLocationService implements RequestHandler
+        class DeleteLocationService implements RequestHandler
+        class GetLocationService implements RequestHandler
+    }
+}
+
+package table {
+    class Category
+    class Item
+    class Location
+}
+
+package utility {
+    class ModelConverter
+    class ServiceUtility
+}
+
+AwsGsiCategory --- ItemDao
+AwsGsiItem -- ItemDao
+AwsGsiLocation -- ItemDao
+AwsDynamoDBConfiguration --- ItemDao
+AwsDynamoDBConfiguration -- CategoryDao
+AwsDynamoDBConfiguration -- LocationDao
+CategoryListModel --- CategoryResult
+CategoryListModel -- ModelConverter
+LocationListModel -- ModelConverter
+ItemListModel -- ModelConverter
+ItemModel -- DeleteItemService
+ItemModel -- ModelConverter
+CategoryResult -- CreateCategoryService
+CategoryResult -- DeleteCategoryService
+CategoryResult -- GetCategoryService
+ItemResult -- CreateItemService
+ItemResult -- DeleteItemService
+ItemResult -- GetItemService
+ItemResult -- UpdateItemServiceItemService
+ItemResult -- ItemModel
+ItemResult -- ItemListModel
+LocationResult -- CreateLocationService
+LocationResult -- DeleteLocationService
+LocationResult -- GetLocationService
+LocationResult -- LocationListModel
+ServiceUtility --- CreateCategoryService
+ServiceUtility --- GetCategoryService
+ServiceUtility --- DeleteCategoryService
+ServiceUtility --- CreateItemService
+ServiceUtility --- GetItemService
+ServiceUtility --- DeleteItemService
+ServiceUtility --- CreateLocationService
+ServiceUtility --- GetLocationService
+ServiceUtility --- DeleteLocationService
+Item -- DeleteItemService
+Item -- CreateItemService
+Item -- GetItemService
+Item -- UpdateItemService
+Item -- ModelConverter
+Category -- CreateCategoryService
+Category -- DeleteCategoryService
+Category -- GetCategoryService
+Location -- CreateLocationService
+Location -- DeleteLocationService
+Location -- GetLocationService
+
+@enduml

@@ -106,7 +106,7 @@ public class Controller {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null ||this.getClass() != o.getClass()) return false;
+        if (o == null || this.getClass() != o.getClass()) return false;
         Controller that = (Controller) o;
         return Objects.equals(name, that.name) && Objects.equals(id, that.id);
     }

@@ -2,7 +2,6 @@ package com.inventorymanagement.dao;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.*;
 import com.inventorymanagement.configuration.awsglobalsecondaryindex.AwsGsiItem;
-import com.inventorymanagement.exception.ItemNotFoundException;
 import com.inventorymanagement.service.item.CreateItemService;
 import com.inventorymanagement.table.Item;
 import org.apache.logging.log4j.LogManager;
