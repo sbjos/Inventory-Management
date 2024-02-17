@@ -7,16 +7,6 @@
     <list default="true" id="3ecbdb82-9cea-4e96-a7ed-682a078805e5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/Diagrams/CreateCategory.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Diagrams/sequence/CreateCategory.puml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/Diagrams/CreateItem.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Diagrams/sequence/CreateItem.puml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/Diagrams/CreateLocation.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Diagrams/sequence/CreateLocation.puml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/Diagrams/DeleteCategory.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Diagrams/sequence/DeleteCategory.puml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/Diagrams/DeleteItem.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Diagrams/sequence/DeleteItem.puml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/Diagrams/DeleteLocation.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Diagrams/sequence/DeleteLocation.puml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/Diagrams/GetItem.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Diagrams/sequence/GetItem.puml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/Diagrams/UpdateItem.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Diagrams/sequence/UpdateItem.puml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/controller/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/dao/ItemDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/inventorymanagement/dao/ItemDao.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,7 +103,7 @@
       <recent name="com.inventorymanagement.service.category" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.backend [buildZip]">
+  <component name="RunManager" selected="Gradle.Tests in 'Inventory-Management.test'">
     <configuration name="CategoryDaoTest.findAll_ReturnsItem" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -232,8 +222,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.backend [buildZip]" />
         <item itemvalue="Gradle.Tests in 'Inventory-Management.test'" />
+        <item itemvalue="Gradle.backend [buildZip]" />
         <item itemvalue="Gradle.CategoryDaoTest.findAll_ReturnsItem" />
         <item itemvalue="Gradle.Tests in 'com.inventorymanagement.test'" />
         <item itemvalue="Gradle.GetItemServiceTest" />
